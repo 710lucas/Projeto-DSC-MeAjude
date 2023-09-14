@@ -25,81 +25,104 @@ public class Campanha {
     private double valorArrecadado = 0;
 
     public Campanha(Usuario criador, String titulo, String descricao, double meta, LocalDateTime dataFinal) throws CriadorInvalidoException, TituloInvalidoException, DescricaoInvalidaException, MetaInvalidaException, DataInvalida {
-        if(criador == null)
-            throw new CriadorInvalidoException("O criador informado não existe");
-        if(titulo.length() > 100)
-            throw new TituloInvalidoException("O titulo da campanha não pode ser mais longo que 100 caracteres");
-        if(descricao.length() > 1000)
-            throw new DescricaoInvalidaException("A descricao não pode conter mais que 1000 caracteres");
-        if(meta <= 0)
-            throw new MetaInvalidaException("O valor da meta atingida é inválido");
-        if(dataFinal == null || dataFinal.isBefore(LocalDateTime.now()) || dataFinal.isEqual(LocalDateTime.now()))
-            throw new DataInvalida("A data informada é inválida");
-        validarString(titulo);
-        validarString(descricao);
-
         this.criador = criador;
         this.titulo = titulo;
         this.descricao = descricao;
         this.meta = meta;
         this.dataFinal = dataFinal;
         this.ativa = true;
-
     }
 
     public Campanha(){
 
     }
 
-    public void adicionarDoacao(Doacao doacao) throws DoacaoInvalidaException {
-        if(doacao == null)
-            throw new DoacaoInvalidaException("A doação informada é invalida");
-        doacoes.add(doacao);
-        valorArrecadado+=doacao.getValorDoado();
+    public long getId() {
+        return id;
     }
 
-    public void changeEstado(boolean estado) throws EstadoInvalidoException {
-        this.ativa = estado;
+    public boolean isAtiva() {
+        return ativa;
     }
 
-    public void changeTitulo(String titulo) throws TituloInvalidoException {
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public double getMeta() {
+        return meta;
+    }
+
+    public LocalDateTime getDataFinal() {
+        return dataFinal;
+    }
+
+    public Usuario getCriador() {
+        return criador;
+    }
+
+    public List<Doacao> getDoacoes() {
+        return doacoes;
+    }
+
+    public double getValorArrecadado() {
+        return valorArrecadado;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setAtiva(boolean ativa) {
+        this.ativa = ativa;
+    }
+
+    public void setTitulo(String titulo) throws TituloInvalidoException {
+        if(titulo == null)
+            throw new TituloInvalidoException("O titulo informado é nulo");
         if(titulo.length() > 100)
-            throw new TituloInvalidoException("O titulo não pode conter mais de 100 caracteres");
-        validarString(titulo);
+            throw new TituloInvalidoException("O titulo não pode conter mais que 100 caracteres");
+        if(titulo.equals("") || titulo.replace(" ", "").equals("") || titulo.length() == 0)
+            throw new TituloInvalidoException("O titulo não pode ser vazio");
         this.titulo = titulo;
     }
 
-    public void changeMeta(double meta) throws MetaInvalidaException{
-        if(meta <= 0)
-            throw new MetaInvalidaException("O valor da meta deve ser maior que 0");
-        this.meta = meta;
-    }
-
-    public void changeDataFinal(LocalDateTime dataFinal) throws DataInvalida {
-        if(dataFinal == null || dataFinal.isBefore(LocalDateTime.now()) || dataFinal.isEqual(LocalDateTime.now()))
-            throw new DataInvalida("A data informada é inválida");
-        this.dataFinal = dataFinal;
-    }
-
-    public void changeDescricao(String descricao) throws TituloInvalidoException, DescricaoInvalidaException {
-        if(descricao.length() > 1-00)
-            throw new TituloInvalidoException("A descrição não pode conter mais de 1000 caracteres");
-        validarString(descricao);
+    public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 
-    private boolean validarString(String valor) throws TituloInvalidoException {
-
-        if(valor == null)
-            throw new TituloInvalidoException("Não foi possivel utilizar o valor informado");
-        else if(valor.contains("<") || valor.contains(">") || valor.contains("\\") || valor.contains("/")) //pensar em regex para fazer essa verificação
-            throw new TituloInvalidoException("O valor contêm caracteres inválidos");
-        else if(valor.length() == 0 || valor.equals("") || valor.replace(" ", "").equals(""))
-            throw new TituloInvalidoException("O valor não pode ser apenas espaços ou vazio");
-
-        return true;
+    public void setMeta(double meta) throws MetaInvalidaException {
+        if(meta <= 0)
+            throw new MetaInvalidaException("O valor da meta não pode ser menor ou igual a zero");
+        this.meta = meta;
     }
 
+    public void setDataFinal(LocalDateTime dataFinal) throws DataInvalida {
+        if(dataFinal == null)
+            throw new DataInvalida("A data informada é nula");
+        this.dataFinal = dataFinal;
+    }
 
+    public void setCriador(Usuario criador) throws CriadorInvalidoException{
+        if(criador == null)
+            throw new CriadorInvalidoException("O criador é nulo");
+        this.criador = criador;
+    }
 
+    public void adicionarDoacao(Doacao doacao) throws DoacaoInvalidaException {
+        if(doacao == null)
+            throw new DoacaoInvalidaException("A doação é inválida");
+        this.doacoes.add(doacao);
+        setValorArrecadado(valorArrecadado+doacao.getValorDoado());
+    }
+
+    public void setValorArrecadado(double valorArrecadado) throws DoacaoInvalidaException {
+        if(valorArrecadado <= this.valorArrecadado || valorArrecadado == 0)
+            throw new DoacaoInvalidaException("O valor arrecadado não pode ser menor que o valor que já foi arrecadado, ou menor que 0");
+        this.valorArrecadado = valorArrecadado;
+    }
 }
