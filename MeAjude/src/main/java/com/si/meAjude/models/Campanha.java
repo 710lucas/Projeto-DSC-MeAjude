@@ -13,7 +13,7 @@ public class Campanha {
     @Id
     private long id;
 
-    private String estado; //Ativa - Encerrada
+    private boolean ativa;
     private String titulo;
     private String descricao;
     private double meta;
@@ -22,6 +22,7 @@ public class Campanha {
     private Usuario criador;
     @OneToMany
     private List<Doacao> doacoes;
+    private double valorArrecadado = 0;
 
     public Campanha(Usuario criador, String titulo, String descricao, double meta, LocalDateTime dataFinal) throws CriadorInvalidoException, TituloInvalidoException, DescricaoInvalidaException, MetaInvalidaException, DataInvalida {
         if(criador == null)
@@ -42,7 +43,7 @@ public class Campanha {
         this.descricao = descricao;
         this.meta = meta;
         this.dataFinal = dataFinal;
-        this.estado = "ativa";
+        this.ativa = true;
 
     }
 
@@ -50,11 +51,15 @@ public class Campanha {
 
     }
 
-    public void changeEstado(String estado) throws EstadoInvalidoException {
-        estado = estado.toLowerCase().trim();
-        if(!estado.equals("ativa") || !estado.equals("encerrada"))
-            throw new EstadoInvalidoException("O estado precisa ser ativa ou encerrada");
-        this.estado = estado;
+    public void adicionarDoacao(Doacao doacao) throws DoacaoInvalidaException {
+        if(doacao == null)
+            throw new DoacaoInvalidaException("A doação informada é invalida");
+        doacoes.add(doacao);
+        valorArrecadado+=doacao.getValorDoado();
+    }
+
+    public void changeEstado(boolean estado) throws EstadoInvalidoException {
+        this.ativa = estado;
     }
 
     public void changeTitulo(String titulo) throws TituloInvalidoException {

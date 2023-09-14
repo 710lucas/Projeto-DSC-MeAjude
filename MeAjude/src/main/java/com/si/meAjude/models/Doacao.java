@@ -9,4 +9,10 @@ public class Doacao {
     @Id
     private long id;
 
+    private double valorDoado;
+
+    public double getValorDoado(){
+        return valorDoado;
+    }
+
 }
