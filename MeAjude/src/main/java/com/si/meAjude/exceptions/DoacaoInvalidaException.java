@@ -1,4 +1,4 @@
-package com.si.meAjude.models;
+package com.si.meAjude.exceptions;
 
 public class DoacaoInvalidaException extends Exception {
     public DoacaoInvalidaException(String s) {
