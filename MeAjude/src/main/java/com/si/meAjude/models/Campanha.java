@@ -91,7 +91,13 @@ public class Campanha {
         this.titulo = titulo;
     }
 
-    public void setDescricao(String descricao) {
+    public void setDescricao(String descricao) throws DescricaoInvalidaException {
+        if(descricao == null)
+            throw new DescricaoInvalidaException("A descricao informada é nula");
+        if(descricao.length() > 1000)
+            throw new DescricaoInvalidaException("A descricao não pode conter mais que 1000 caracteres");
+        if(descricao.equals("") || descricao.replace(" ", "").equals("") || descricao.length() == 0)
+            throw new DescricaoInvalidaException("A descrição não pode ser vazia");
         this.descricao = descricao;
     }
 
