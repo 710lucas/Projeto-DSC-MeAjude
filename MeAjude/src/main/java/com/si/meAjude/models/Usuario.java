@@ -1,7 +1,7 @@
 package com.si.meAjude.models;
 
 
-import com.si.meAjude.models.enums.ClasseEnum;
+import com.si.meAjude.models.enums.EntidadeEnum;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.persistence.*;
@@ -38,6 +38,6 @@ public class Usuario {
     private Documento documento;
 
     @NotNull
-    private ClasseEnum classe;
+    private EntidadeEnum classe;
 
 }

@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Entity
 @Data
-@Table(name = "DOACOES")
+@Table(name = "DOACOES1")
 public class Doacao {
 
     @Id

@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Entity
+@Entity(name = "CAMPANHAS")
 public class Campanha {
 
     @Id
@@ -20,10 +20,13 @@ public class Campanha {
     private String descricao;
     private double meta;
     private LocalDateTime dataFinal;
+
     @ManyToOne
     private Usuario criador;
-    @OneToMany
+
+    @OneToMany(mappedBy = "campanha")
     private List<Doacao> doacoes;
+
     private BigDecimal valorArrecadado = BigDecimal.ZERO;
 
     public Campanha(Usuario criador, String titulo, String descricao, double meta, LocalDateTime dataFinal) throws CriadorInvalidoException, TituloInvalidoException, DescricaoInvalidaException, MetaInvalidaException, DataInvalida {

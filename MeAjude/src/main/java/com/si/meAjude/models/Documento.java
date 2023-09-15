@@ -18,9 +18,10 @@ public class Documento {
 
     @NotBlank
     @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_do_documento")
     private DocumentoEnum documentoEnum;
 
     @NotBlank
-    @Column(length = 14)
+    @Column(name = "conteudo_do_documento", length = 14)
     private String conteudo;
 }
