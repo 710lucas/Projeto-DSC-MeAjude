@@ -3,7 +3,6 @@ package com.si.meAjude.service;
 
 import com.si.meAjude.exceptions.*;
 import com.si.meAjude.models.Campanha;
-import com.si.meAjude.models.DataInvalida;
 import com.si.meAjude.models.Doacao;
 import com.si.meAjude.models.Usuario;
 import com.si.meAjude.repositories.CampanhaRepository;
