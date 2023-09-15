@@ -6,25 +6,31 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
+import lombok.*;
 
 @Entity
 @Data
 @Table(name="usuarios")
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode(of = "id")
 public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(length = 50)
     @NotBlank
+    @Column(length = 50)
     private String nome;
 
     @Email
+    @Column(unique = true)
     private String email;
 
     @NotBlank
+    @Column(length = 13)
     private String celular;
 
     @NotNull
