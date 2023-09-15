@@ -4,6 +4,7 @@ import com.si.meAjude.models.Campanha;
 import com.si.meAjude.models.Doacao;
 import com.si.meAjude.models.Usuario;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class CampanhaDTO {
     private LocalDateTime dataFinal;
     private Usuario criador;
     private List<Doacao> doacoes;
-    private double valorArrecadado = 0;
+    private BigDecimal valorArrecadado = BigDecimal.ZERO;
 
     public CampanhaDTO(Campanha c){
         this.ativa = c.isAtiva();
@@ -33,7 +34,7 @@ public class CampanhaDTO {
 
     }
 
-    public CampanhaDTO(boolean ativa, String titulo, String descricao, double meta, LocalDateTime dataFinal, Usuario criador, List<Doacao> doacoes, double valorArrecadado) {
+    public CampanhaDTO(boolean ativa, String titulo, String descricao, double meta, LocalDateTime dataFinal, Usuario criador, List<Doacao> doacoes, BigDecimal valorArrecadado) {
         this.ativa = ativa;
         this.titulo = titulo;
         this.descricao = descricao;
@@ -100,11 +101,11 @@ public class CampanhaDTO {
         this.doacoes = doacoes;
     }
 
-    public double getValorArrecadado() {
+    public BigDecimal getValorArrecadado() {
         return valorArrecadado;
     }
 
-    public void setValorArrecadado(double valorArrecadado) {
+    public void setValorArrecadado(BigDecimal valorArrecadado) {
         this.valorArrecadado = valorArrecadado;
     }
 }
