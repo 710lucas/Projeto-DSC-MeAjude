@@ -4,6 +4,7 @@ package com.si.meAjude.models;
 import com.si.meAjude.exceptions.*;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class Campanha {
     private Usuario criador;
     @OneToMany
     private List<Doacao> doacoes;
-    private double valorArrecadado = 0;
+    private BigDecimal valorArrecadado = BigDecimal.ZERO;
 
     public Campanha(Usuario criador, String titulo, String descricao, double meta, LocalDateTime dataFinal) throws CriadorInvalidoException, TituloInvalidoException, DescricaoInvalidaException, MetaInvalidaException, DataInvalida {
         this.criador = criador;
@@ -70,7 +71,7 @@ public class Campanha {
         return doacoes;
     }
 
-    public double getValorArrecadado() {
+    public BigDecimal getValorArrecadado() {
         return valorArrecadado;
     }
 
@@ -124,12 +125,13 @@ public class Campanha {
         if(doacao == null)
             throw new DoacaoInvalidaException("A doação é inválida");
         this.doacoes.add(doacao);
-        setValorArrecadado(valorArrecadado+doacao.getValorDoado());
+        valorArrecadado = valorArrecadado.add(doacao.getValorDoado());
     }
 
-    public void setValorArrecadado(double valorArrecadado) throws DoacaoInvalidaException {
-        if(valorArrecadado <= this.valorArrecadado || valorArrecadado == 0)
-            throw new DoacaoInvalidaException("O valor arrecadado não pode ser menor que o valor que já foi arrecadado, ou menor que 0");
+    public void setValorArrecadado(BigDecimal valorArrecadado) throws DoacaoInvalidaException {
+        if (valorArrecadado.compareTo(this.valorArrecadado) <= 0 || valorArrecadado.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new DoacaoInvalidaException("O valor arrecadado não pode ser menor ou igual ao valor que já foi arrecadado, ou menor ou igual a zero");
+        }
         this.valorArrecadado = valorArrecadado;
     }
 }
