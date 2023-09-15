@@ -79,8 +79,16 @@ public class Campanha {
         this.id = id;
     }
 
-    public void setAtiva(boolean ativa) {
+    protected void setAtiva(boolean ativa) {
         this.ativa = ativa;
+    }
+
+    public void ativar(){
+        setAtiva(true);
+    }
+
+    public void desAtivar(){
+        setAtiva(false);
     }
 
     public void setTitulo(String titulo) throws TituloInvalidoException {
