@@ -11,6 +11,7 @@ import java.util.List;
 public class Campanha {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     private boolean ativa;

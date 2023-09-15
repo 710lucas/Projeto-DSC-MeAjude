@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1cafb04e-43ab-4547-b80b-8f0d3053a11e" name="Changes" comment="criação de um simples ExceptionHandler">
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/controllers/CampanhaController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/repositories/CampanhaRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/repositories/DoacaoRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/CampanhaService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/CampanhaDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="1cafb04e-43ab-4547-b80b-8f0d3053a11e" name="Changes" comment="adicionando service e controller simples">
       <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/Campanha.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/Campanha.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -134,7 +128,7 @@
       <workItem from="1694648959773" duration="532000" />
       <workItem from="1694649522355" duration="1174000" />
       <workItem from="1694718713572" duration="3549000" />
-      <workItem from="1694732908200" duration="6077000" />
+      <workItem from="1694732908200" duration="6198000" />
     </task>
     <task id="LOCAL-00001" summary="Commit inicial com config do Spring">
       <option name="closed" value="true" />
@@ -184,7 +178,15 @@
       <option name="project" value="LOCAL" />
       <updated>1694735602977</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="adicionando service e controller simples">
+      <option name="closed" value="true" />
+      <created>1694739164299</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1694739164299</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -197,6 +199,7 @@
     <MESSAGE value="mudando local da DoacaoInvalidaException" />
     <MESSAGE value="refatorando classe Campanha" />
     <MESSAGE value="criação de um simples ExceptionHandler" />
-    <option name="LAST_COMMIT_MESSAGE" value="criação de um simples ExceptionHandler" />
+    <MESSAGE value="adicionando service e controller simples" />
+    <option name="LAST_COMMIT_MESSAGE" value="adicionando service e controller simples" />
   </component>
 </project>
