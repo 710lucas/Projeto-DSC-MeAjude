@@ -29,7 +29,7 @@ public interface CampanhaService{
     public CampanhaDTO mudarDataFinal(LocalDateTime dataFinal, long id) throws DataInvalida;
     public CampanhaDTO mudarCriador(Usuario criador, long id) throws CriadorInvalidoException;
 
-    public CampanhaDTO adicionarDoacao(Doacao doacao, long id) throws DoacaoInvalidaException;
+    public Campanha adicionarDoacao(Doacao doacao, long id) throws DoacaoInvalidaException;
 
     public CampanhaDTO adicionarCampanha(CampanhaDTO dto) throws DataInvalida, TituloInvalidoException, CriadorInvalidoException, DescricaoInvalidaException, MetaInvalidaException;
 
