@@ -138,13 +138,13 @@ public class CampanhaServiceImpl implements CampanhaService {
 
     @Override
     @Transactional
-    public Campanha adicionarDoacao(Doacao doacao, long campanhaId) throws DoacaoInvalidaException {
+    public CampanhaDTO adicionarDoacao(Doacao doacao, long campanhaId) throws DoacaoInvalidaException {
         Campanha campanha = campanhaRepository.findById(campanhaId)
                 .orElseThrow(() -> new DoacaoInvalidaException("Campanha não encontrada"));
         Hibernate.initialize(campanha.getDoacoes());
         campanha.adicionarDoacao(doacao);
         campanhaRepository.save(campanha);
-        return campanha;
+        return new CampanhaDTO(campanha);
     }
 
 

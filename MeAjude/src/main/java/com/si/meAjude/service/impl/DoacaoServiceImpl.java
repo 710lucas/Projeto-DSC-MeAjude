@@ -59,7 +59,7 @@ public class DoacaoServiceImpl implements DoacaoService {
 
 
     public boolean verificarMeta(Campanha campanha, Double valorDoado){
-        Double meta = campanha.getMeta();
+        Double meta = campanha.getMeta().doubleValue();
         if(meta >= valorDoado){
             return false;
         } return true;
