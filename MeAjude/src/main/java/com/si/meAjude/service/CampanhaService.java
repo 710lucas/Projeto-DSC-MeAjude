@@ -38,4 +38,5 @@ public interface CampanhaService{
     ListaCampanhasDTO listarCampanhas(Optional<Long> quantidade, String criterioString) throws CriterioInvalidoException;
 
 
+
 }

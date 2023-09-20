@@ -11,6 +11,8 @@ import com.si.meAjude.service.CampanhaService;
 import com.si.meAjude.service.dtos.CampanhaDTO;
 import com.si.meAjude.service.dtos.ListaCampanhasDTO;
 import jakarta.validation.constraints.NotNull;
+import jakarta.transaction.Transactional;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -134,11 +136,15 @@ public class CampanhaServiceImpl implements CampanhaService {
         return new CampanhaDTO(c);
     }
 
-    public CampanhaDTO adicionarDoacao(Doacao doacao, long id) throws DoacaoInvalidaException {
-        Campanha c = campanhaRepository.findById(id).get();
-        c.adicionarDoacao(doacao);
-        campanhaRepository.save(c);
-        return new CampanhaDTO(c);
+    @Override
+    @Transactional
+    public Campanha adicionarDoacao(Doacao doacao, long campanhaId) throws DoacaoInvalidaException {
+        Campanha campanha = campanhaRepository.findById(campanhaId)
+                .orElseThrow(() -> new DoacaoInvalidaException("Campanha não encontrada"));
+        Hibernate.initialize(campanha.getDoacoes());
+        campanha.adicionarDoacao(doacao);
+        campanhaRepository.save(campanha);
+        return campanha;
     }
 
 
