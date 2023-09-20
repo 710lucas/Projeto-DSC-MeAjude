@@ -4,16 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1cafb04e-43ab-4547-b80b-8f0d3053a11e" name="Changes" comment="Atributos e metodos iniciais da classe campanha&#10;Exceções relacionadas à campanha">
+    <list default="true" id="1cafb04e-43ab-4547-b80b-8f0d3053a11e" name="Changes" comment="adicionando listagem de campanhas baseada em criterios">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/controllers/ControllerExemple.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/Campanha.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/Campanha.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/Doacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/Doacao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/Documento.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/Documento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/Usuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/enums/ClasseEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/enums/EntidadeEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/repositories/RepositoryExemple.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/h2testdb.mv.db" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,13 +15,18 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Enum" />
         <option value="Class" />
-        <option value="Interface" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="1-adicionar-campanhas" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -50,34 +47,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;20&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Sanderson/IdeaProjects/Projeto-DSC-MeAjude&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.42109853&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;66060408f0989f71c7d972b77ad8d040&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "7-criar-rotas-campanhas",
+    "jdk.selected.JAVA_MODULE": "20",
+    "last_opened_file_path": "C:/Users/anderson.soares/IdeaProjects/Projeto-DSC-MeAjude",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.42109853",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "spring.configuration.checksum": "66060408f0989f71c7d972b77ad8d040",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.si.meAjude.service.impl" />
       <recent name="com.si.meAjude.service" />
       <recent name="com.si.meAjude.models" />
     </key>
@@ -92,6 +90,7 @@
   <component name="RunManager" selected="Application.MeAjudeApplication">
     <configuration name="MeAjudeApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.si.meAjude.MeAjudeApplication" />
+      <module name="meAjude" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.si.meAjude.*" />
@@ -209,6 +208,18 @@
     <MESSAGE value="refatorando classe Campanha" />
     <MESSAGE value="criação de um simples ExceptionHandler" />
     <MESSAGE value="adicionando service e controller simples" />
-    <option name="LAST_COMMIT_MESSAGE" value="adicionando service e controller simples" />
+    <MESSAGE value="adicionando listagem de campanhas baseada em criterios" />
+    <option name="LAST_COMMIT_MESSAGE" value="adicionando listagem de campanhas baseada em criterios" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/ListaCampanhasDTO.java</url>
+          <line>52</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

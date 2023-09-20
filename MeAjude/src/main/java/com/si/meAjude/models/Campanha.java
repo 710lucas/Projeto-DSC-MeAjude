@@ -3,13 +3,17 @@ package com.si.meAjude.models;
 
 import com.si.meAjude.exceptions.*;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity(name = "CAMPANHAS")
-public class Campanha {
+@Getter
+public class Campanha{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,18 +22,18 @@ public class Campanha {
     private boolean ativa;
     private String titulo;
     private String descricao;
-    private double meta;
+    private BigDecimal meta;
     private LocalDateTime dataFinal;
-
+    private LocalDateTime dataInicio = LocalDateTime.now();
     @ManyToOne
     private Usuario criador;
 
     @OneToMany(mappedBy = "campanha")
-    private List<Doacao> doacoes;
+    private List<Doacao> doacoes = new ArrayList<>();
 
     private BigDecimal valorArrecadado = BigDecimal.ZERO;
 
-    public Campanha(Usuario criador, String titulo, String descricao, double meta, LocalDateTime dataFinal) throws CriadorInvalidoException, TituloInvalidoException, DescricaoInvalidaException, MetaInvalidaException, DataInvalida {
+    public Campanha(Usuario criador, String titulo, String descricao, BigDecimal meta, LocalDateTime dataFinal){
         this.criador = criador;
         this.titulo = titulo;
         this.descricao = descricao;
@@ -40,42 +44,6 @@ public class Campanha {
 
     public Campanha(){
 
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public boolean isAtiva() {
-        return ativa;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public double getMeta() {
-        return meta;
-    }
-
-    public LocalDateTime getDataFinal() {
-        return dataFinal;
-    }
-
-    public Usuario getCriador() {
-        return criador;
-    }
-
-    public List<Doacao> getDoacoes() {
-        return doacoes;
-    }
-
-    public BigDecimal getValorArrecadado() {
-        return valorArrecadado;
     }
 
     public void setId(long id) {
@@ -99,7 +67,7 @@ public class Campanha {
             throw new TituloInvalidoException("O titulo informado é nulo");
         if(titulo.length() > 100)
             throw new TituloInvalidoException("O titulo não pode conter mais que 100 caracteres");
-        if(titulo.equals("") || titulo.replace(" ", "").equals("") || titulo.length() == 0)
+        if(titulo.replace(" ", "").isEmpty())
             throw new TituloInvalidoException("O titulo não pode ser vazio");
         this.titulo = titulo;
     }
@@ -109,13 +77,13 @@ public class Campanha {
             throw new DescricaoInvalidaException("A descricao informada é nula");
         if(descricao.length() > 1000)
             throw new DescricaoInvalidaException("A descricao não pode conter mais que 1000 caracteres");
-        if(descricao.equals("") || descricao.replace(" ", "").equals("") || descricao.length() == 0)
+        if(descricao.replace(" ", "").isEmpty())
             throw new DescricaoInvalidaException("A descrição não pode ser vazia");
         this.descricao = descricao;
     }
 
-    public void setMeta(double meta) throws MetaInvalidaException {
-        if(meta <= 0)
+    public void setMeta(BigDecimal meta) throws MetaInvalidaException {
+        if(meta.doubleValue() <= 0)
             throw new MetaInvalidaException("O valor da meta não pode ser menor ou igual a zero");
         this.meta = meta;
     }
@@ -145,4 +113,6 @@ public class Campanha {
         }
         this.valorArrecadado = valorArrecadado;
     }
+
 }
+

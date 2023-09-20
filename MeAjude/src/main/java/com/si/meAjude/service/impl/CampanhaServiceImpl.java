@@ -5,15 +5,24 @@ import com.si.meAjude.exceptions.*;
 import com.si.meAjude.models.Campanha;
 import com.si.meAjude.models.Doacao;
 import com.si.meAjude.models.Usuario;
+import com.si.meAjude.models.enums.CriterioEnum;
 import com.si.meAjude.repositories.CampanhaRepository;
 import com.si.meAjude.service.CampanhaService;
 import com.si.meAjude.service.dtos.CampanhaDTO;
+import com.si.meAjude.service.dtos.ListaCampanhasDTO;
+import jakarta.validation.constraints.NotNull;
 import jakarta.transaction.Transactional;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CampanhaServiceImpl implements CampanhaService {
@@ -25,6 +34,30 @@ public class CampanhaServiceImpl implements CampanhaService {
         Campanha campanhaNova = new Campanha(dto.getCriador(), dto.getTitulo(), dto.getDescricao(), dto.getMeta(), dto.getDataFinal());
         campanhaRepository.save(campanhaNova);
         return dto;
+    }
+
+    public ListaCampanhasDTO listarCampanhas(@NotNull Optional<Long> quantidade, String criterioString) throws CriterioInvalidoException {
+
+        CriterioEnum criterio = CriterioEnum.valueOf(criterioString.toUpperCase());
+        if(criterio == null)
+            throw new CriterioInvalidoException("O criterio informado é inválido: "+criterio);
+
+        long quantidadeElementos = quantidade.orElse(campanhaRepository.count());
+        int quantidadePaginas = 1;
+
+        if(quantidadeElementos > Integer.MAX_VALUE)
+            quantidadePaginas = (int)(quantidadeElementos/Integer.MAX_VALUE);
+
+
+        List<Campanha> campanhas = new ArrayList<>();
+
+        for(int i = 0; i<quantidadePaginas; i++){
+            PageRequest paginaAtual= PageRequest.of(i, (int)(quantidadeElementos/quantidadePaginas));
+            Page<Campanha> campanhasPagina = campanhaRepository.findAll(paginaAtual);
+            campanhas.addAll(campanhasPagina.getContent());
+        }
+
+        return new ListaCampanhasDTO(campanhas, criterio);
     }
 
     public CampanhaDTO removerCampanha(long id){
@@ -82,7 +115,7 @@ public class CampanhaServiceImpl implements CampanhaService {
         return new CampanhaDTO(c);
     }
 
-    public CampanhaDTO mudarMeta(double meta, long id) throws MetaInvalidaException {
+    public CampanhaDTO mudarMeta(BigDecimal meta, long id) throws MetaInvalidaException {
         Campanha c = campanhaRepository.findById(id).get();
         c.setMeta(meta);
         campanhaRepository.save(c);
@@ -105,13 +138,14 @@ public class CampanhaServiceImpl implements CampanhaService {
 
     @Override
     @Transactional
-    public Campanha adicionarDoacao(Doacao doacao, long campanhaId) throws DoacaoInvalidaException {
+    public CampanhaDTO adicionarDoacao(Doacao doacao, long campanhaId) throws DoacaoInvalidaException {
         Campanha campanha = campanhaRepository.findById(campanhaId)
                 .orElseThrow(() -> new DoacaoInvalidaException("Campanha não encontrada"));
         Hibernate.initialize(campanha.getDoacoes());
         campanha.adicionarDoacao(doacao);
         campanhaRepository.save(campanha);
-        return campanha;
+        return new CampanhaDTO(campanha);
     }
+
 
 }
