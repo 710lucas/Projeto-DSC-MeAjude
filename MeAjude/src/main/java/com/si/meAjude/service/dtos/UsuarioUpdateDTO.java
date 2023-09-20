@@ -2,27 +2,15 @@ package com.si.meAjude.service.dtos;
 
 import com.si.meAjude.models.Documento;
 import com.si.meAjude.models.Usuario;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Data
-public class UsuarioUpdateDTO{
-    private Long id;
-    private String email;
-    private String nome;
-    private String celular;
-    private String senha;
-//    private Documento documento;
 
-
-    public UsuarioUpdateDTO() {
-    }
+public record UsuarioUpdateDTO(@NotNull Long id, String email, String nome, String celular, String senha, Documento documento){
 
     public UsuarioUpdateDTO(Usuario usuario) {
-        this.email = usuario.getEmail();
-        this.nome = usuario.getNome();
-        this.celular = usuario.getCelular();
-        this.senha = usuario.getSenha();
-//        this.documento = usuario.getDocumento();
+        this(usuario.getId(), usuario.getEmail(), usuario.getNome(), usuario.getCelular(), usuario.getSenha(), usuario.getDocumento());
     }
 
     public Usuario updateUsuario(Usuario usuario){
@@ -30,11 +18,11 @@ public class UsuarioUpdateDTO{
     }
 
     public static Usuario updateUsuario(UsuarioUpdateDTO usuarioUpdateDTO, Usuario usuario){
-        if(usuarioUpdateDTO.getNome()!= null) usuario.setNome(usuarioUpdateDTO.getNome());
-        if(usuarioUpdateDTO.getEmail()!= null) usuario.setEmail(usuarioUpdateDTO.getEmail());
-        if(usuarioUpdateDTO.getCelular() != null) usuario.setCelular(usuarioUpdateDTO.getCelular());
-//        if(usuarioUpdateDTO.getDocumento()!= null) usuario.setDocumento(usuarioUpdateDTO.getDocumento());
-        if(usuarioUpdateDTO.getSenha() != null) usuario.setSenha(usuarioUpdateDTO.getSenha());
+        if(usuarioUpdateDTO.nome()!= null) usuario.setNome(usuarioUpdateDTO.nome());
+        if(usuarioUpdateDTO.email()!= null) usuario.setEmail(usuarioUpdateDTO.email());
+        if(usuarioUpdateDTO.celular() != null) usuario.setCelular(usuarioUpdateDTO.celular());
+        if(usuarioUpdateDTO.documento()!= null) usuario.setDocumento(usuarioUpdateDTO.documento());
+        if(usuarioUpdateDTO.senha() != null) usuario.setSenha(usuarioUpdateDTO.senha());
         return usuario;
     }
 }

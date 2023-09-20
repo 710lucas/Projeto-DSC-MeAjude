@@ -4,6 +4,7 @@ import com.si.meAjude.models.Usuario;
 import com.si.meAjude.service.UsuarioService;
 import com.si.meAjude.service.dtos.UsuarioDTO;
 import com.si.meAjude.service.dtos.UsuarioUpdateDTO;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.web.PageableDefault;
@@ -21,7 +22,7 @@ public class UsuarioController {
     UsuarioService usuarioService;
 
     @PostMapping
-    public ResponseEntity<UsuarioDTO> save(@RequestBody Usuario usuario){
+    public ResponseEntity<UsuarioDTO> save(@RequestBody @Valid Usuario usuario){
         return new ResponseEntity<>(usuarioService.save(usuario), HttpStatus.CREATED);
     }
 
@@ -41,7 +42,7 @@ public class UsuarioController {
     }
 
     @PutMapping
-    public ResponseEntity<UsuarioDTO> update(@RequestBody UsuarioUpdateDTO updateDTO){
+    public ResponseEntity<UsuarioDTO> update(@RequestBody @Valid UsuarioUpdateDTO updateDTO){
         return new ResponseEntity<>(usuarioService.update(updateDTO), HttpStatus.OK);
     }
 

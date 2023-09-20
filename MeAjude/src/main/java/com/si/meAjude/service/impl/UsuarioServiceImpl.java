@@ -42,7 +42,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Transactional
     @Override
     public UsuarioDTO update(UsuarioUpdateDTO usuarioUpdateDTO) {
-        Usuario usuarioLocalizado = usuarioRepository.getById(usuarioUpdateDTO.getId());
+        Usuario usuarioLocalizado = usuarioRepository.getById(usuarioUpdateDTO.id());
         Usuario usuarioAtualizado = usuarioUpdateDTO.updateUsuario(usuarioLocalizado);
         return new UsuarioDTO(usuarioAtualizado);
     }
