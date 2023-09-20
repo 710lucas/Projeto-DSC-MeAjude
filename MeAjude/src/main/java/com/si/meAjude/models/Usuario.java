@@ -44,9 +44,9 @@ public class Usuario {
 
     private boolean deletado;
 
-
+    @Enumerated(EnumType.STRING)
     @NotNull
-    private EntidadeEnum TipoEntidade;
+    private EntidadeEnum tipoEntidade;
 
     protected void setDelatado(boolean truOrFalse){
         this.deletado = truOrFalse;
