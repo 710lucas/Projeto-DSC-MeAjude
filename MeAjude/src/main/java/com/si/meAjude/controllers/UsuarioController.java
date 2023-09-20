@@ -5,10 +5,12 @@ import com.si.meAjude.service.UsuarioService;
 import com.si.meAjude.service.dtos.UsuarioDTO;
 import com.si.meAjude.service.dtos.UsuarioUpdateDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 @RestController
@@ -24,13 +26,13 @@ public class UsuarioController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<UsuarioDTO>> getAllByDeletedFalse(){
-        return new ResponseEntity<>(usuarioService.getAllByDeletedFalse(), HttpStatus.OK);
+    public ResponseEntity<Page<UsuarioDTO>> getAllByDeletedFalse(@PageableDefault(size = 10, sort = {"nome"}) Pageable pageable){
+        return new ResponseEntity<>(usuarioService.getAllByDeletedFalse(pageable), HttpStatus.OK);
     }
 
     @GetMapping("/todos")
-    public ResponseEntity<List<UsuarioDTO>> getAll(){
-        return new ResponseEntity<>(usuarioService.getAll(), HttpStatus.OK);
+    public ResponseEntity<Page<UsuarioDTO>> getAll(@PageableDefault(size = 10, sort = {"nome"}) Pageable pageable){
+        return new ResponseEntity<>(usuarioService.getAll(pageable), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

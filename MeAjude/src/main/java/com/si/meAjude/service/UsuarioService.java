@@ -3,6 +3,8 @@ package com.si.meAjude.service;
 import com.si.meAjude.models.Usuario;
 import com.si.meAjude.service.dtos.UsuarioDTO;
 import com.si.meAjude.service.dtos.UsuarioUpdateDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -12,7 +14,7 @@ public interface UsuarioService{
     public UsuarioDTO save(Usuario object);
 
 
-    public List<UsuarioDTO> getAll();
+    public Page<UsuarioDTO> getAll(Pageable pageable);
 
     public UsuarioDTO getById(Long id);
 
@@ -22,6 +24,6 @@ public interface UsuarioService{
 
     public UsuarioDTO logicDelete(Long id);
 
-    public List<UsuarioDTO> getAllByDeletedFalse();
+    public Page<UsuarioDTO> getAllByDeletedFalse(Pageable pageable);
 
 }
