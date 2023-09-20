@@ -4,8 +4,8 @@ import com.si.meAjude.models.Documento;
 import com.si.meAjude.models.Usuario;
 import com.si.meAjude.models.enums.EntidadeEnum;
 
-public record UsuarioDTO(Long id, String nome, String email, String celular, Documento documento, EntidadeEnum entidade) {
+public record UsuarioDTO(Long id, String nome, String email, String celular, Documento documento, EntidadeEnum entidade, boolean deletado) {
     public UsuarioDTO(Usuario usuario){
-        this(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getCelular(), usuario.getDocumento(), usuario.getTipoEntidade());
+        this(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getCelular(), usuario.getDocumento(), usuario.getTipoEntidade(), usuario.isDeletado());
     }
 }

@@ -44,12 +44,12 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<UsuarioDTO> logicDelete(Long id){
+    public ResponseEntity<UsuarioDTO> logicDelete(@PathVariable Long id){
         return new ResponseEntity<>(usuarioService.logicDelete(id), HttpStatus.OK);
     }
 
     @DeleteMapping("/definitivo/{id}")
-    public ResponseEntity<UsuarioDTO> delete(Long id){
+    public ResponseEntity<UsuarioDTO> delete(@PathVariable Long id){
         return new ResponseEntity<>(usuarioService.delete(id), HttpStatus.OK);
     }
 }

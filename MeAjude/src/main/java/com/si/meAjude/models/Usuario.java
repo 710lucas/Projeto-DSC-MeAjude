@@ -39,14 +39,15 @@ public class Usuario {
     private String senha;
 
     @NotNull
-    @Embedded
-    private Documento documento;
+    @Enumerated(EnumType.STRING)
+    private EntidadeEnum tipoEntidade;
 
     private boolean deletado;
 
-    @Enumerated(EnumType.STRING)
     @NotNull
-    private EntidadeEnum tipoEntidade;
+    @Embedded
+    private Documento documento;
+
 
     protected void setDelatado(boolean truOrFalse){
         this.deletado = truOrFalse;

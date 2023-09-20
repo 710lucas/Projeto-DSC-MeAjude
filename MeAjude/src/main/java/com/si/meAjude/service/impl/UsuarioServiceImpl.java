@@ -5,6 +5,7 @@ import com.si.meAjude.repositories.UsuarioRepository;
 import com.si.meAjude.service.UsuarioService;
 import com.si.meAjude.service.dtos.UsuarioDTO;
 import com.si.meAjude.service.dtos.UsuarioUpdateDTO;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         return new UsuarioDTO(usuarioRepository.getById(id));
     }
 
+    @Transactional
     @Override
     public UsuarioDTO update(UsuarioUpdateDTO usuarioUpdateDTO) {
         Usuario usuarioLocalizado = usuarioRepository.getById(usuarioUpdateDTO.getId());
@@ -46,6 +48,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         return new UsuarioDTO(usuarioLocalizado);
     }
 
+    @Transactional
     @Override
     public UsuarioDTO logicDelete(Long id) {
         Usuario usuarioLocalizado = usuarioRepository.getById(id);
