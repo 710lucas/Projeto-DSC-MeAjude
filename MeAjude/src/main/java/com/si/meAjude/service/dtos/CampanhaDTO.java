@@ -23,6 +23,7 @@ public class CampanhaDTO {
     private Usuario criador;
     private List<Doacao> doacoes;
     private BigDecimal valorArrecadado = BigDecimal.ZERO;
+    private Long id;
 
     public CampanhaDTO(Campanha c){
         this.ativa = c.isAtiva();
@@ -34,6 +35,7 @@ public class CampanhaDTO {
         this.doacoes = c.getDoacoes();
         this.valorArrecadado = c.getValorArrecadado();
         this.dataInicio = c.getDataInicio();
+        this.id = c.getId();
     }
 
     public CampanhaDTO(){
