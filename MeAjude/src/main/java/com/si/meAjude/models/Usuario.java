@@ -2,6 +2,8 @@ package com.si.meAjude.models;
 
 
 import com.si.meAjude.models.enums.EntidadeEnum;
+import com.si.meAjude.service.dtos.UsuarioDTO;
+import com.si.meAjude.service.dtos.UsuarioUpdateDTO;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.persistence.*;
@@ -33,11 +35,28 @@ public class Usuario {
     @Column(length = 13)
     private String celular;
 
+    @NotBlank
+    private String senha;
+
     @NotNull
     @Embedded
     private Documento documento;
 
-    @NotNull
-    private EntidadeEnum classe;
+    private boolean deletado;
 
+
+    @NotNull
+    private EntidadeEnum TipoEntidade;
+
+    protected void setDelatado(boolean truOrFalse){
+        this.deletado = truOrFalse;
+    }
+
+    public void delete(){
+        setDelatado(true);
+    }
+
+    public void restaurar(){
+        setDelatado(false);
+    }
 }
