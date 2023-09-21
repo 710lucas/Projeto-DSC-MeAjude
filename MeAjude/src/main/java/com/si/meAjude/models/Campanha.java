@@ -3,6 +3,10 @@ package com.si.meAjude.models;
 
 import com.si.meAjude.exceptions.*;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 
 import java.math.BigDecimal;
@@ -62,52 +66,36 @@ public class Campanha{
         setAtiva(false);
     }
 
-    public void setTitulo(String titulo) throws TituloInvalidoException {
-        if(titulo == null)
-            throw new TituloInvalidoException("O titulo informado é nulo");
-        if(titulo.length() > 100)
-            throw new TituloInvalidoException("O titulo não pode conter mais que 100 caracteres");
-        if(titulo.replace(" ", "").isEmpty())
-            throw new TituloInvalidoException("O titulo não pode ser vazio");
+    public void setTitulo(@NotNull @NotBlank @NotEmpty @Size(max = 100) String titulo) throws TituloInvalidoException {
         this.titulo = titulo;
     }
 
-    public void setDescricao(String descricao) throws DescricaoInvalidaException {
-        if(descricao == null)
-            throw new DescricaoInvalidaException("A descricao informada é nula");
-        if(descricao.length() > 1000)
-            throw new DescricaoInvalidaException("A descricao não pode conter mais que 1000 caracteres");
-        if(descricao.replace(" ", "").isEmpty())
-            throw new DescricaoInvalidaException("A descrição não pode ser vazia");
+    public void setDescricao(@NotNull @NotBlank @NotEmpty @Size(max = 1000) String descricao) throws DescricaoInvalidaException {
         this.descricao = descricao;
     }
 
-    public void setMeta(BigDecimal meta) throws MetaInvalidaException {
+    public void setMeta(@NotNull BigDecimal meta) throws MetaInvalidaException {
         if(meta.doubleValue() <= 0)
             throw new MetaInvalidaException("O valor da meta não pode ser menor ou igual a zero");
         this.meta = meta;
     }
 
-    public void setDataFinal(LocalDateTime dataFinal) throws DataInvalida {
-        if(dataFinal == null)
-            throw new DataInvalida("A data informada é nula");
+    public void setDataFinal(@NotNull LocalDateTime dataFinal) throws DataInvalida {
+        if(dataFinal.isBefore(LocalDateTime.now()))
+            throw new DataInvalida("A data final não pode ser no passado");
         this.dataFinal = dataFinal;
     }
 
-    public void setCriador(Usuario criador) throws CriadorInvalidoException{
-        if(criador == null)
-            throw new CriadorInvalidoException("O criador é nulo");
+    public void setCriador(@NotNull Usuario criador) throws CriadorInvalidoException{
         this.criador = criador;
     }
 
-    public void adicionarDoacao(Doacao doacao) throws DoacaoInvalidaException {
-        if(doacao == null)
-            throw new DoacaoInvalidaException("A doação é inválida");
+    public void adicionarDoacao(@NotNull Doacao doacao) throws DoacaoInvalidaException {
         this.doacoes.add(doacao);
         valorArrecadado = valorArrecadado.add(doacao.getValorDoado());
     }
 
-    public void setValorArrecadado(BigDecimal valorArrecadado) throws DoacaoInvalidaException {
+    public void setValorArrecadado(@NotNull BigDecimal valorArrecadado) throws DoacaoInvalidaException {
         if (valorArrecadado.compareTo(this.valorArrecadado) <= 0 || valorArrecadado.compareTo(BigDecimal.ZERO) <= 0) {
             throw new DoacaoInvalidaException("O valor arrecadado não pode ser menor ou igual ao valor que já foi arrecadado, ou menor ou igual a zero");
         }
