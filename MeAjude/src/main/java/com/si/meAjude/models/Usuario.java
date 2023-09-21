@@ -29,7 +29,7 @@ public class Usuario {
 
     @Email
     @Column(unique = true)
-    @NotNull
+    @NotBlank
     private String email;
 
     @NotBlank

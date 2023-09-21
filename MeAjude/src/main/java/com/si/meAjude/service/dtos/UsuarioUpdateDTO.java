@@ -18,11 +18,11 @@ public record UsuarioUpdateDTO(@NotNull Long id, String email, String nome, Stri
     }
 
     public static Usuario updateUsuario(UsuarioUpdateDTO usuarioUpdateDTO, Usuario usuario){
-        if(usuarioUpdateDTO.nome()!= null) usuario.setNome(usuarioUpdateDTO.nome());
-        if(usuarioUpdateDTO.email()!= null) usuario.setEmail(usuarioUpdateDTO.email());
-        if(usuarioUpdateDTO.celular() != null) usuario.setCelular(usuarioUpdateDTO.celular());
+        if(usuarioUpdateDTO.nome()!= null && !usuarioUpdateDTO.nome().isBlank()) usuario.setNome(usuarioUpdateDTO.nome());
+        if(usuarioUpdateDTO.email()!= null && !usuarioUpdateDTO.email().isBlank()) usuario.setEmail(usuarioUpdateDTO.email());
+        if(usuarioUpdateDTO.celular() != null && !usuarioUpdateDTO.celular.isBlank()) usuario.setCelular(usuarioUpdateDTO.celular());
         if(usuarioUpdateDTO.documento()!= null) usuario.setDocumento(usuarioUpdateDTO.documento());
-        if(usuarioUpdateDTO.senha() != null) usuario.setSenha(usuarioUpdateDTO.senha());
+        if(usuarioUpdateDTO.senha() != null && !usuarioUpdateDTO.senha().isBlank()) usuario.setSenha(usuarioUpdateDTO.senha());
         return usuario;
     }
 }
