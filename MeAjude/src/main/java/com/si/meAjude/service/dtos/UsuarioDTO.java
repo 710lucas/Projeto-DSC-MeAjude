@@ -1,8 +1,10 @@
 package com.si.meAjude.service.dtos;
 
 import com.si.meAjude.models.Documento;
+import com.si.meAjude.models.DocumentoValidatorFactory;
 import com.si.meAjude.models.Usuario;
-import com.si.meAjude.models.enums.EntidadeEnum;
+import com.si.meAjude.models.enums.EntityType;
+import com.si.meAjude.models.interfaces.DocumentValidator;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -23,7 +25,7 @@ public record UsuarioDTO(
         Documento documento,
 
         @NotBlank
-        EntidadeEnum entidade,
+        EntityType entidade,
 
         boolean deletado
 ) {

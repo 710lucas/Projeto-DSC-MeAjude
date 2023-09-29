@@ -1,6 +1,8 @@
 package com.si.meAjude.service.impl;
 
+import com.si.meAjude.models.DocumentoValidatorFactory;
 import com.si.meAjude.models.Usuario;
+import com.si.meAjude.models.interfaces.DocumentValidator;
 import com.si.meAjude.repositories.UsuarioRepository;
 import com.si.meAjude.service.UsuarioService;
 import com.si.meAjude.service.dtos.UsuarioDTO;
@@ -19,8 +21,13 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private DocumentoValidatorFactory documentoValidatorFactory;
+
     @Override
     public UsuarioDTO save(Usuario usuario) {
+        DocumentValidator documentValidator = documentoValidatorFactory.getValidator(usuario.getDocumento().getDocumentType());
+        usuario.getDocumento().setDocumentValidator(documentValidator);
         return new UsuarioDTO(usuarioRepository.save(usuario));
     }
 

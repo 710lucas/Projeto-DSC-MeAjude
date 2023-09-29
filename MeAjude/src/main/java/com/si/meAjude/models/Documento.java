@@ -1,10 +1,8 @@
 package com.si.meAjude.models;
 
-import com.si.meAjude.models.enums.DocumentoEnum;
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import com.si.meAjude.models.enums.DocumentType;
+import com.si.meAjude.models.interfaces.DocumentValidator;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
@@ -19,9 +17,17 @@ public class Documento {
     @NotBlank
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_do_documento")
-    private DocumentoEnum documentoEnum;
+    private DocumentType documentType;
 
     @NotBlank
     @Column(name = "conteudo_do_documento", length = 14)
     private String conteudo;
+
+    @Transient
+    private DocumentValidator documentValidator;
+
+    public void setDocumentValidator(DocumentValidator documentValidator) {
+        this.documentValidator = documentValidator;
+        documentValidator.validate(conteudo);
+    }
 }
