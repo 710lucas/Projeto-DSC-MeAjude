@@ -1,5 +1,5 @@
 package com.si.meAjude.models.enums;
 
-public enum DocumentoEnum {
+public enum DocumentType {
     CPF, CNPJ
 }

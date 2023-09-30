@@ -1,9 +1,7 @@
 package com.si.meAjude.models;
 
 
-import com.si.meAjude.models.enums.EntidadeEnum;
-import com.si.meAjude.service.dtos.UsuarioDTO;
-import com.si.meAjude.service.dtos.UsuarioUpdateDTO;
+import com.si.meAjude.models.enums.EntityType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.persistence.*;
@@ -38,10 +36,6 @@ public class Usuario {
 
     @NotBlank
     private String senha;
-
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    private EntidadeEnum tipoEntidade;
 
     private boolean deletado;
 
