@@ -1,20 +1,21 @@
 package com.si.meAjude.models;
 
 import com.si.meAjude.models.enums.DocumentType;
+import com.si.meAjude.models.enums.EntityType;
 import com.si.meAjude.models.interfaces.DocumentValidator;
-import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CPFValidator implements DocumentValidator {
 
-    public static boolean isValid(String cpf) {
+    public void throwExceptionIfInvalid(String cpf, EntityType entityType) {
+        if(entityType != EntityType.PESSOA_FISICA) throw new IllegalArgumentException("CPF incompatível para o tipo entidade informado: " + entityType);
         // Remova qualquer formatação do CPF
         cpf = cpf.replaceAll("[^0-9]", "");
 
         // Verifique se o CPF tem 11 dígitos
         if (cpf.length() != 11) {
-            return false;
+            throw new IllegalArgumentException("CPF deve conter 11 dígitos");
         }
 
         // Calcula o primeiro dígito verificador
@@ -38,13 +39,14 @@ public class CPFValidator implements DocumentValidator {
         }
 
         // Verifica se os dígitos calculados são iguais aos dígitos no CPF
-        return Character.getNumericValue(cpf.charAt(9)) == primeiroDigito && Character.getNumericValue(cpf.charAt(10)) == segundoDigito;
+        if (primeiroDigito != Character.getNumericValue(cpf.charAt(9)) || segundoDigito != Character.getNumericValue(cpf.charAt(10))) {
+            throw new IllegalArgumentException("CPF inválido");
+        }
     }
 
     @Override
-    public void validate(String document) {
-        if(!isValid(document))
-            throw new IllegalArgumentException("CPF inválido");
+    public void validate(String document, EntityType entityType) {
+        throwExceptionIfInvalid(document, entityType);
     }
 
     @Override

@@ -12,22 +12,21 @@ import java.util.Set;
 @Component
 public class DocumentoValidatorFactory {
 
-    private Map<DocumentType, DocumentValidator> documentValidators;
+    private Map<DocumentType, DocumentValidator> documentValidators = new HashMap<>();
 
     @Autowired
     public DocumentoValidatorFactory(Set<DocumentValidator> documentValidators) {
         createDocumentValidators(documentValidators);
     }
 
-    public DocumentValidator getValidator(DocumentType documentType) {
-        return documentValidators.get(documentType);
-    }
-
     private void createDocumentValidators(Set<DocumentValidator> documentValidatorsSet) {
-        documentValidators = new HashMap<>();
         documentValidatorsSet.forEach(documentValidator -> {
             documentValidators.put(documentValidator.getDocumentType(), documentValidator);
         });
+    }
+
+    public DocumentValidator getValidator(DocumentType documentType) {
+        return documentValidators.get(documentType);
     }
 
 

@@ -37,10 +37,6 @@ public class Usuario {
     @NotBlank
     private String senha;
 
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    private EntityType tipoEntidade;
-
     private boolean deletado;
 
     @NotNull

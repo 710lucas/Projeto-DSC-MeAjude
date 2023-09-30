@@ -22,14 +22,11 @@ public record UsuarioDTO(
         String celular,
 
         @NotNull
-        Documento documento,
-
-        @NotBlank
-        EntityType entidade,
+        DocumentDTO documentDTO,
 
         boolean deletado
 ) {
     public UsuarioDTO(Usuario usuario){
-        this(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getCelular(), usuario.getDocumento(), usuario.getTipoEntidade(), usuario.isDeletado());
+        this(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getCelular(), new DocumentDTO(usuario.getDocumento()), usuario.isDeletado());
     }
 }
