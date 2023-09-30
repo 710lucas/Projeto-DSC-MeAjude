@@ -24,7 +24,7 @@ public class DocumentoValidatorFactory {
     }
 
     private void createDocumentValidators(Set<DocumentValidator> documentValidatorsSet) {
-        documentValidators = new HashMap<DocumentType, DocumentValidator>();
+        documentValidators = new HashMap<>();
         documentValidatorsSet.forEach(documentValidator -> {
             documentValidators.put(documentValidator.getDocumentType(), documentValidator);
         });
