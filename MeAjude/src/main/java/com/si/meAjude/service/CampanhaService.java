@@ -3,8 +3,8 @@ package com.si.meAjude.service;
 import com.si.meAjude.exceptions.*;
 import com.si.meAjude.models.Doacao;
 import com.si.meAjude.models.Usuario;
-import com.si.meAjude.service.dtos.CampanhaDTO;
-import com.si.meAjude.service.dtos.ListaCampanhasDTO;
+import com.si.meAjude.service.dtos.campanha.CampanhaDTO;
+import com.si.meAjude.service.dtos.campanha.ListaCampanhasDTO;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

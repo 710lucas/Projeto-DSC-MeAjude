@@ -1,7 +1,7 @@
 package com.si.meAjude.models;
 
 import com.si.meAjude.models.enums.DocumentType;
-import com.si.meAjude.models.interfaces.DocumentValidator;
+import com.si.meAjude.models.validators.interfaces.DocumentValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

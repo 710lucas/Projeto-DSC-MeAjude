@@ -1,4 +1,4 @@
-package com.si.meAjude.service.dtos;
+package com.si.meAjude.service.dtos.documento;
 
 import com.si.meAjude.models.Documento;
 import com.si.meAjude.models.enums.DocumentType;

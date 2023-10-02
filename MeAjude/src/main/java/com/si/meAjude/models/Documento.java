@@ -2,7 +2,7 @@ package com.si.meAjude.models;
 
 import com.si.meAjude.models.enums.DocumentType;
 import com.si.meAjude.models.enums.EntityType;
-import com.si.meAjude.models.interfaces.DocumentValidator;
+import com.si.meAjude.models.validators.interfaces.DocumentValidator;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

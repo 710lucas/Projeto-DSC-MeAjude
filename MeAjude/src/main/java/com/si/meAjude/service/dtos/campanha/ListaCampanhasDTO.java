@@ -1,9 +1,10 @@
-package com.si.meAjude.service.dtos;
+package com.si.meAjude.service.dtos.campanha;
 
 import com.si.meAjude.models.Campanha;
 import com.si.meAjude.models.comparators.DataComparator;
 import com.si.meAjude.models.comparators.TituloComparator;
 import com.si.meAjude.models.enums.CriterioEnum;
+import com.si.meAjude.service.dtos.campanha.CampanhaDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

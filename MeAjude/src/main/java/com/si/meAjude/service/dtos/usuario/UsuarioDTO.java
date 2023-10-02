@@ -1,10 +1,7 @@
-package com.si.meAjude.service.dtos;
+package com.si.meAjude.service.dtos.usuario;
 
-import com.si.meAjude.models.Documento;
-import com.si.meAjude.models.DocumentoValidatorFactory;
 import com.si.meAjude.models.Usuario;
-import com.si.meAjude.models.enums.EntityType;
-import com.si.meAjude.models.interfaces.DocumentValidator;
+import com.si.meAjude.service.dtos.documento.DocumentDTO;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

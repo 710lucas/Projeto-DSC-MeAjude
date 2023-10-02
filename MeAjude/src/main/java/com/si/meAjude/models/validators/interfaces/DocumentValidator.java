@@ -1,4 +1,4 @@
-package com.si.meAjude.models.interfaces;
+package com.si.meAjude.models.validators.interfaces;
 
 import com.si.meAjude.models.enums.DocumentType;
 import com.si.meAjude.models.enums.EntityType;

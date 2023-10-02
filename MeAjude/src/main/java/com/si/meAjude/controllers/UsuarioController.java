@@ -2,8 +2,8 @@ package com.si.meAjude.controllers;
 
 import com.si.meAjude.models.Usuario;
 import com.si.meAjude.service.UsuarioService;
-import com.si.meAjude.service.dtos.UsuarioDTO;
-import com.si.meAjude.service.dtos.UsuarioUpdateDTO;
+import com.si.meAjude.service.dtos.usuario.UsuarioDTO;
+import com.si.meAjude.service.dtos.usuario.UsuarioUpdateDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
-import java.util.List;
 
 @RestController
 @RequestMapping("/usuarios")

@@ -1,23 +1,17 @@
 package com.si.meAjude.service.impl;
 
-import com.si.meAjude.exceptions.DoacaoInvalidaException;
-import com.si.meAjude.exceptions.MetaInvalidaException;
-import com.si.meAjude.models.Campanha;
 import com.si.meAjude.models.Doacao;
-import com.si.meAjude.models.Usuario;
-import com.si.meAjude.repositories.CampanhaRepository;
 import com.si.meAjude.repositories.DoacaoRepository;
-import com.si.meAjude.repositories.UsuarioRepository;
 import com.si.meAjude.service.DoacaoService;
-import com.si.meAjude.service.dtos.DoacaoDTO;
+import com.si.meAjude.service.dtos.doacao.DoacaoDTO;
+import com.si.meAjude.service.dtos.doacao.DoacaoUpdateDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.util.List;
 
 
 @AllArgsConstructor
@@ -25,63 +19,49 @@ import java.time.LocalDate;
 public class DoacaoServiceImpl implements DoacaoService {
     @Autowired
     private DoacaoRepository doacaoRepository;
-    @Autowired
-    private CampanhaRepository campanhaRepository;
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-
-    @Autowired
-    private CampanhaServiceImpl campanhaService;
-
-
 
     @Override
-    public Doacao saveDoacao(DoacaoDTO doacaoDTO) throws MetaInvalidaException {
-        Usuario usuario = usuarioRepository.findById(doacaoDTO.UserId())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario não encontrado para esse ID:" + doacaoDTO.UserId()));
-        Campanha campanha = campanhaRepository.findById(doacaoDTO.CampanhaId())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Campanha não encontrada para esse ID:" + doacaoDTO.CampanhaId()));
-        if (verificarMeta(campanha,doacaoDTO.valorDoado())){
-            throw new MetaInvalidaException("Meta da campanha já batida, que tal doar para outra Campanha ??");
-        } else {
-            Doacao doacao = new Doacao(usuario,campanha,LocalDate.now(),new BigDecimal(doacaoDTO.valorDoado()));
-            try {
-                campanhaService.adicionarDoacao(doacao,doacaoDTO.CampanhaId());
-                doacaoRepository.save(doacao);
-            }catch (DoacaoInvalidaException doacaoInvalidaException){
-                doacaoInvalidaException.getMessage();
-            }
-            return doacao;
-        }
-
-    }
-
-
-
-    public boolean verificarMeta(Campanha campanha, Double valorDoado){
-        Double meta = campanha.getMeta().doubleValue();
-        if(meta >= valorDoado){
-            return false;
-        } return true;
+    public DoacaoDTO save(Doacao doacao) {
+        return new DoacaoDTO(doacaoRepository.save(doacao));
     }
 
     @Override
-    public Doacao buscarDoacao(Long id) throws ResponseStatusException {
+    public DoacaoDTO getById(Long id) {
+        return new DoacaoDTO(doacaoRepository.getById(id));
+    }
+
+    @Override
+    public Page<DoacaoDTO> getAll(Pageable page) {
         return null;
     }
 
     @Override
-    public Doacao buscarDoacaoPelaData(String data) throws ResponseStatusException {
+    public DoacaoDTO update(DoacaoUpdateDTO doacaoUpdate) {
         return null;
     }
 
     @Override
-    public Doacao buscarDoacaoPelaCampanha(String data) throws ResponseStatusException {
+    public DoacaoDTO logicDelete(Long id) {
         return null;
     }
 
     @Override
-    public Doacao buscarDoacaoPelaUsuario(String data) throws ResponseStatusException {
+    public DoacaoDTO delete(Long id) {
+        return null;
+    }
+
+    @Override
+    public Page<DoacaoDTO> getByData(Pageable page, String data) {
+        return null;
+    }
+
+    @Override
+    public Page<DoacaoDTO> getByUserId(Pageable page, Long id) {
+        return null;
+    }
+
+    @Override
+    public Page<DoacaoDTO> getByCampanhaId(Pageable page, Long id) {
         return null;
     }
 }

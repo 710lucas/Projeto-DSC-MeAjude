@@ -1,10 +1,8 @@
-package com.si.meAjude.service.dtos;
+package com.si.meAjude.service.dtos.usuario;
 
 import com.si.meAjude.models.Documento;
 import com.si.meAjude.models.Usuario;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
 
 
 public record UsuarioUpdateDTO(@NotNull Long id, String email, String nome, String celular, String senha, Documento documento){

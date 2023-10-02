@@ -2,18 +2,23 @@ package com.si.meAjude.service;
 
 
 
-import com.si.meAjude.exceptions.DoacaoInvalidaException;
-import com.si.meAjude.exceptions.MetaInvalidaException;
 import com.si.meAjude.models.Doacao;
-import com.si.meAjude.service.dtos.DoacaoDTO;
-import org.springframework.web.server.ResponseStatusException;
+import com.si.meAjude.service.dtos.doacao.DoacaoDTO;
+import com.si.meAjude.service.dtos.doacao.DoacaoUpdateDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 
 public interface DoacaoService {
-    public Doacao saveDoacao (DoacaoDTO doacaoDTO) throws DoacaoInvalidaException, MetaInvalidaException;
-    public Doacao buscarDoacao(Long id) throws ResponseStatusException;
-    public  Doacao buscarDoacaoPelaData(String data) throws ResponseStatusException;
-    public  Doacao buscarDoacaoPelaCampanha(String data) throws ResponseStatusException;
-    public  Doacao buscarDoacaoPelaUsuario(String data) throws ResponseStatusException;
-
+     DoacaoDTO save (Doacao doacao);
+     DoacaoDTO getById(Long id);
+     Page<DoacaoDTO> getAll(Pageable page);
+     DoacaoDTO update(DoacaoUpdateDTO doacaoUpdate);
+     DoacaoDTO logicDelete(Long id);
+     DoacaoDTO delete(Long id);
+     Page<DoacaoDTO> getByData(Pageable page, String data);
+     Page<DoacaoDTO> getByUserId(Pageable page, Long id);
+     Page<DoacaoDTO> getByCampanhaId(Pageable page, Long id);
 }

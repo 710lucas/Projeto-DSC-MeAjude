@@ -1,8 +1,8 @@
-package com.si.meAjude.models;
+package com.si.meAjude.models.validators;
 
 import com.si.meAjude.models.enums.DocumentType;
 import com.si.meAjude.models.enums.EntityType;
-import com.si.meAjude.models.interfaces.DocumentValidator;
+import com.si.meAjude.models.validators.interfaces.DocumentValidator;
 import org.springframework.stereotype.Component;
 
 @Component
