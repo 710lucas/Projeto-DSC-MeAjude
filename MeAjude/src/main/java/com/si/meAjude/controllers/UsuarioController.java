@@ -4,6 +4,7 @@ import com.si.meAjude.service.UsuarioService;
 import com.si.meAjude.service.dtos.usuario.UsuarioDTO;
 import com.si.meAjude.service.dtos.usuario.UsuarioSaveDTO;
 import com.si.meAjude.service.dtos.usuario.UsuarioUpdateDTO;
+import com.si.meAjude.util.PageableUtil;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,15 +26,24 @@ public class UsuarioController {
         return new ResponseEntity<>(usuarioService.save(usuario), HttpStatus.CREATED);
     }
 
-    @GetMapping()
-    public ResponseEntity<Page<UsuarioDTO>> getAllByDeletedFalse(@PageableDefault(size = 10, sort = {"nome"}) Pageable pageable){
-        return new ResponseEntity<>(usuarioService.getAllByDeletedFalse(pageable), HttpStatus.OK);
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public Page<UsuarioDTO> getAllByDeletadoFalse(
+            @PageableDefault(size = 10) Pageable page,
+            @RequestParam(name = "sortField", required = false, defaultValue = "nome") String sortField,
+            @RequestParam(name = "sortDirection", required = false, defaultValue = "asc") String sortDirection){
+        return usuarioService.getAllByDeletedFalse(PageableUtil.getPageableWithSort(page, sortField, sortDirection));
     }
 
     @GetMapping("/todos")
-    public ResponseEntity<Page<UsuarioDTO>> getAll(@PageableDefault(size = 10, sort = {"nome"}) Pageable pageable){
-        return new ResponseEntity<>(usuarioService.getAll(pageable), HttpStatus.OK);
+    @ResponseStatus(HttpStatus.OK)
+    public Page<UsuarioDTO> getAll(
+            @PageableDefault(size = 10) Pageable page,
+            @RequestParam(name = "sortField", required = false, defaultValue = "nome") String sortField,
+            @RequestParam(name = "sortDirection", required = false, defaultValue = "asc") String sortDirection) {
+    return usuarioService.getAll(PageableUtil.getPageableWithSort(page, sortField, sortDirection));
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<UsuarioDTO> getById(@PathVariable Long id){
