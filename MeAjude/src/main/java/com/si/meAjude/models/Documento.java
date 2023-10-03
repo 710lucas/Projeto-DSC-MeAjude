@@ -33,8 +33,8 @@ public class Documento {
     private DocumentValidator documentValidator;
 
     public void setDocumentValidator(DocumentValidator documentValidator) {
-        this.documentValidator = documentValidator;
         documentValidator.validate(conteudo, tipoEntidade);
+        this.documentValidator = documentValidator;
     }
 
 }

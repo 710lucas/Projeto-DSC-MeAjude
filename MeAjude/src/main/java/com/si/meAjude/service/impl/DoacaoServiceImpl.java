@@ -16,7 +16,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 
-@AllArgsConstructor
 @Service
 public class DoacaoServiceImpl implements DoacaoService {
     @Autowired

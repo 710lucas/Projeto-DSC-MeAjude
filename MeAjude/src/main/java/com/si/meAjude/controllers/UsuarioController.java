@@ -1,8 +1,8 @@
 package com.si.meAjude.controllers;
 
-import com.si.meAjude.models.Usuario;
 import com.si.meAjude.service.UsuarioService;
 import com.si.meAjude.service.dtos.usuario.UsuarioDTO;
+import com.si.meAjude.service.dtos.usuario.UsuarioSaveDTO;
 import com.si.meAjude.service.dtos.usuario.UsuarioUpdateDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class UsuarioController {
     UsuarioService usuarioService;
 
     @PostMapping
-    public ResponseEntity<UsuarioDTO> save(@RequestBody @Valid Usuario usuario){
+    public ResponseEntity<UsuarioDTO> save(@RequestBody @Valid UsuarioSaveDTO usuario){
         return new ResponseEntity<>(usuarioService.save(usuario), HttpStatus.CREATED);
     }
 

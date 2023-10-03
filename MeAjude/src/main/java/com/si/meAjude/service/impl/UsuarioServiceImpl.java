@@ -6,6 +6,7 @@ import com.si.meAjude.models.validators.interfaces.DocumentValidator;
 import com.si.meAjude.repositories.UsuarioRepository;
 import com.si.meAjude.service.UsuarioService;
 import com.si.meAjude.service.dtos.usuario.UsuarioDTO;
+import com.si.meAjude.service.dtos.usuario.UsuarioSaveDTO;
 import com.si.meAjude.service.dtos.usuario.UsuarioUpdateDTO;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,9 @@ public class UsuarioServiceImpl implements UsuarioService {
     private DocumentoValidatorFactory documentoValidatorFactory;
 
     @Override
-    public UsuarioDTO save(Usuario usuario) {
-        DocumentValidator documentValidator = documentoValidatorFactory.getValidator(usuario.getDocumento().getDocumentType());
+    public UsuarioDTO save(UsuarioSaveDTO dto) {
+        DocumentValidator documentValidator = documentoValidatorFactory.getValidator(dto.documentoDTO().tipoDocumento());
+        Usuario usuario = dto.toUsuario();
         usuario.getDocumento().setDocumentValidator(documentValidator);
         return new UsuarioDTO(usuarioRepository.save(usuario));
     }
@@ -46,9 +48,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Transactional
     @Override
-    public UsuarioDTO update(UsuarioUpdateDTO usuarioUpdateDTO) {
-        Usuario usuarioLocalizado = usuarioRepository.getById(usuarioUpdateDTO.id());
-        Usuario usuarioAtualizado = usuarioUpdateDTO.updateUsuario(usuarioLocalizado);
+    public UsuarioDTO update(UsuarioUpdateDTO updateDto) {
+        Usuario usuarioLocalizado = usuarioRepository.getById(updateDto.id());
+        Usuario usuarioAtualizado = updateDto.updateUsuario(usuarioLocalizado);
         return new UsuarioDTO(usuarioAtualizado);
     }
 

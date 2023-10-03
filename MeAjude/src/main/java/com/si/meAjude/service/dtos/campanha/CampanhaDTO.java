@@ -1,10 +1,8 @@
 package com.si.meAjude.service.dtos.campanha;
 
 import com.si.meAjude.models.Campanha;
-import com.si.meAjude.models.Doacao;
-import com.si.meAjude.models.Usuario;
 import com.si.meAjude.service.dtos.doacao.DoacaoDTO;
-import com.si.meAjude.service.dtos.usuario.UsuarioDTO;
+import com.si.meAjude.service.dtos.usuario.UsuarioSaveDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,7 +20,7 @@ public record CampanhaDTO(
          BigDecimal meta,
          LocalDateTime dataInicio,
          LocalDateTime dataFinal,
-         UsuarioDTO criador,
+         UsuarioSaveDTO criador,
          List<DoacaoDTO> doacoes,
          BigDecimal valorArrecadado
 ){
@@ -35,7 +33,7 @@ public record CampanhaDTO(
             campanha.getMeta(),
             campanha.getDataInicio(),
             campanha.getDataFinal(),
-            new UsuarioDTO(campanha.getCriador()),
+            new UsuarioSaveDTO(campanha.getCriador()),
             DoacaoDTO.doacaoToDTO(campanha.getDoacoes()),
             campanha.getValorArrecadado()
             );
