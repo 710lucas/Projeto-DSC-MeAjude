@@ -2,7 +2,9 @@ package com.si.meAjude.service.dtos.doacao;
 
 import com.si.meAjude.models.Campanha;
 import com.si.meAjude.models.Doacao;
+import com.si.meAjude.models.Usuario;
 import com.si.meAjude.service.dtos.campanha.CampanhaDTO;
+import com.si.meAjude.service.dtos.usuario.UsuarioUpdateDTO;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

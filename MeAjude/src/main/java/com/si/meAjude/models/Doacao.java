@@ -37,4 +37,16 @@ public class Doacao {
     private BigDecimal valorDoado;
 
     private boolean deletado;
+
+    private void setDeletado(boolean deletado){
+        this.deletado = deletado;
+    }
+
+    public void delete(){
+        this.deletado = true;
+    }
+
+    public void backUp(){
+        this.deletado = false;
+    }
 }

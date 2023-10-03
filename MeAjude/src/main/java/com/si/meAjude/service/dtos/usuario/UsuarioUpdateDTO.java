@@ -15,7 +15,7 @@ public record UsuarioUpdateDTO(@NotNull Long id, String email, String nome, Stri
         return updateUsuario(this, usuario);
     }
 
-    public static Usuario updateUsuario(UsuarioUpdateDTO usuarioUpdateDTO, Usuario usuario){
+    private Usuario updateUsuario(UsuarioUpdateDTO usuarioUpdateDTO, Usuario usuario){
         if(usuarioUpdateDTO.nome()!= null && !usuarioUpdateDTO.nome().isBlank()) usuario.setNome(usuarioUpdateDTO.nome());
         if(usuarioUpdateDTO.email()!= null && !usuarioUpdateDTO.email().isBlank()) usuario.setEmail(usuarioUpdateDTO.email());
         if(usuarioUpdateDTO.celular() != null && !usuarioUpdateDTO.celular.isBlank()) usuario.setCelular(usuarioUpdateDTO.celular());
