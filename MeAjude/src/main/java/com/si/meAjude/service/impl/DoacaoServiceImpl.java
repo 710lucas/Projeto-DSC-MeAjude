@@ -72,14 +72,14 @@ public class DoacaoServiceImpl implements DoacaoService {
         return doacaoRepository.findAll(page).map(DoacaoDTO::new);
     }
 
-    @Override
-    public Page<DoacaoDTO> getAllByDeletadoFalse(Pageable page) {
-        return doacaoRepository.findAllByDeletadoFalse(page).map(DoacaoDTO::new);
+   @Override
+     public Page<DoacaoDTO> getAllByDeletadoFalse(Pageable page) {
+      return doacaoRepository.findAllByDeletadoFalse(page).map(DoacaoDTO::new);
     }
 
     @Override
     public Page<DoacaoDTO> getByUserId(Pageable page, Long id) {
-        return doacaoRepository.findAllByUserId(page, id).map(DoacaoDTO::new);
+        return doacaoRepository.findAllByUsuario_Id(page, id).map(DoacaoDTO::new);
     }
 
     @Override
@@ -94,7 +94,7 @@ public class DoacaoServiceImpl implements DoacaoService {
 
     @Override
     public Page<DoacaoDTO> getByDataAndUserId(Pageable page, LocalDate data, Long id) {
-        return doacaoRepository.findAllByDataAndUserId(page, data, id).map(DoacaoDTO::new);
+        return doacaoRepository.findAllByDataAndUsuario_Id(page, data, id).map(DoacaoDTO::new);
     }
 
     @Override
@@ -104,7 +104,7 @@ public class DoacaoServiceImpl implements DoacaoService {
 
     @Override
     public Page<DoacaoDTO> getByDataAndUserIdAndCampanhaId(Pageable page, LocalDate data, Long usuarioId, Long campanhaId) {
-        return doacaoRepository. findAllByDataAndUserIdAndCampanhaId(page, data, usuarioId, campanhaId).map(DoacaoDTO::new);
+        return doacaoRepository. findAllByDataAndUsuario_IdAndCampanha_Id(page, data, usuarioId, campanhaId).map(DoacaoDTO::new);
     }
 
     @Override

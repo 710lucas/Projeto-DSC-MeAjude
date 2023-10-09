@@ -15,10 +15,10 @@ public interface DoacaoRepository extends JpaRepository<Doacao, Long> {
     Page<Doacao> findAllByDeletadoFalse(Pageable page);
     Page<Doacao> findAll(Pageable page);
     Page<Doacao> findAllByData(Pageable page, LocalDate date);
-    Page<Doacao> findAllByUserId(Pageable page, Long id);
+    Page<Doacao> findAllByUsuario_Id(Pageable page, Long userId);
     Page<Doacao> findAllByCampanhaId(Pageable page, Long id);
     Page<Doacao> findAllByUsuarioIdAndCampanhaId(Pageable page, Long userId, Long campanhaId);
-    Page<Doacao> findAllByDataAndUserId(Pageable page, LocalDate date, Long id);
+    Page<Doacao> findAllByDataAndUsuario_Id(Pageable pageable, LocalDate data, Long userId);
     Page<Doacao> findAllByDataAndCampanhaId(Pageable page, LocalDate date, Long id);
-    Page<Doacao> findAllByDataAndUserIdAndCampanhaId(Pageable page, LocalDate date, Long userId, Long campanhaId);
+    Page<Doacao> findAllByDataAndUsuario_IdAndCampanha_Id(Pageable page, LocalDate date, Long userId, Long campanhaId);
 }
