@@ -7,9 +7,7 @@ import com.si.meAjude.service.dtos.doacao.DoacaoUpdateDTO;
 import com.si.meAjude.util.PageableUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -66,7 +64,7 @@ public class DoacaoController {
         return doacaoService.getAll(page);
     }
 
-    @GetMapping
+    @GetMapping("/all-not-deleted")
     @ResponseStatus(HttpStatus.OK)
     public Page<DoacaoDTO> getAllByDeletadoFalse(
             @PageableDefault(size = 10) Pageable page,
@@ -78,7 +76,7 @@ public class DoacaoController {
         return doacaoService.getAllByDeletadoFalse(page);
     }
 
-    @GetMapping
+    @GetMapping("/user/{ID}")
     @ResponseStatus(HttpStatus.OK)
     public Page<DoacaoDTO> getByUserId(
             @PageableDefault(size = 10) Pageable page,
@@ -90,7 +88,7 @@ public class DoacaoController {
         return doacaoService.getByUserId(page, id);
     }
 
-    @GetMapping
+    @GetMapping("/data/{data}")
     @ResponseStatus(HttpStatus.OK)
     public Page<DoacaoDTO> getByData(
             @PageableDefault(size = 10) Pageable page,
@@ -102,7 +100,8 @@ public class DoacaoController {
         return doacaoService.getByData(page, data);
     }
 
-    @GetMapping
+
+    @GetMapping("/campanha/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Page<DoacaoDTO> getByCampanhaId(
             @PageableDefault(size = 10) Pageable page,
@@ -114,7 +113,7 @@ public class DoacaoController {
         return doacaoService.getByCampanhaId(page, id);
     }
 
-    @GetMapping
+    @GetMapping("/user-data/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Page<DoacaoDTO> getByDataAndUserId(
             @PageableDefault(size = 10) Pageable page,
@@ -127,7 +126,7 @@ public class DoacaoController {
         return doacaoService.getByDataAndUserId(page, data, id);
     }
 
-    @GetMapping
+    @GetMapping("/by-data-and-campanha")
     @ResponseStatus(HttpStatus.OK)
     public Page<DoacaoDTO> getByDataAndCampanhaId(
             @PageableDefault(size = 10) Pageable page,
@@ -140,7 +139,7 @@ public class DoacaoController {
         return doacaoService.getByDataAndCampanhaId(page, data, id);
     }
 
-    @GetMapping
+    @GetMapping("/data-usuario-campanha")
     @ResponseStatus(HttpStatus.OK)
     public Page<DoacaoDTO> getByDataAndUserIdAndCampanhaId(
             @PageableDefault(size = 10) Pageable page,
@@ -154,7 +153,7 @@ public class DoacaoController {
         return doacaoService.getByDataAndUserIdAndCampanhaId(page, data, usuarioId, campanhaId);
     }
 
-    @GetMapping
+    @GetMapping("/usuario-campanha")
     @ResponseStatus(HttpStatus.OK)
     public Page<DoacaoDTO> getByUsuarioAndCampanhaId(
             @PageableDefault(size = 10) Pageable page,
