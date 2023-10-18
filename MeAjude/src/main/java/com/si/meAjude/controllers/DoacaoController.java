@@ -4,6 +4,7 @@ import com.si.meAjude.service.DoacaoService;
 import com.si.meAjude.service.dtos.doacao.DoacaoDTO;
 import com.si.meAjude.service.dtos.doacao.DoacaoSaveDTO;
 import com.si.meAjude.util.PageableUtil;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,7 +21,7 @@ public class DoacaoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public DoacaoDTO saveDoacao(@RequestBody DoacaoSaveDTO dto) {
+    public DoacaoDTO saveDoacao(@RequestBody @Valid DoacaoSaveDTO dto) {
         return doacaoService.save(dto);
     }
 
@@ -40,11 +41,5 @@ public class DoacaoController {
 
         page = PageableUtil.getPageableWithSort(page, sortField, sortDirection);
         return doacaoService.getAll(page);
-    }
-
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public DoacaoDTO logicDelete(@PathVariable Long id) {
-        return doacaoService.logicDelete(id);
     }
 }

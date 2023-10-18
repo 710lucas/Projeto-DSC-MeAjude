@@ -2,6 +2,7 @@ package com.si.meAjude.service.dtos.usuario;
 
 import com.si.meAjude.models.Usuario;
 import com.si.meAjude.service.dtos.documento.DocumentoDTO;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

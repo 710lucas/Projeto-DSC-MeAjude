@@ -12,5 +12,4 @@ public interface DoacaoService {
      DoacaoDTO save (DoacaoSaveDTO doacao);
      DoacaoDTO getById(Long id);
      Page<DoacaoDTO> getAll(Pageable page);
-     DoacaoDTO logicDelete(Long id);
 }

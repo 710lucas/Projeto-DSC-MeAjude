@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DoacaoServiceImpl implements DoacaoService {
+
     @Autowired
     private DoacaoRepository doacaoRepository;
 
@@ -44,12 +45,5 @@ public class DoacaoServiceImpl implements DoacaoService {
     @Override
     public Page<DoacaoDTO> getAll(Pageable page) {
         return doacaoRepository.findAll(page).map(DoacaoDTO::new);
-    }
-
-    @Override
-    public DoacaoDTO logicDelete(Long id) {
-        Doacao doacao = doacaoRepository.getById(id);
-        doacao.delete();
-        return new DoacaoDTO(doacaoRepository.save(doacao));
     }
 }
