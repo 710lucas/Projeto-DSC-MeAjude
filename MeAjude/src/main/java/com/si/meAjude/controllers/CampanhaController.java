@@ -73,36 +73,5 @@ public class CampanhaController {
 
 
 
-//    @Autowired
-//    CampanhaService campanhaService;
-//
-//    @PostMapping
-//    public ResponseEntity<CampanhaDTO> addCampanha(@RequestBody CampanhaDTO dto) throws DataInvalida, TituloInvalidoException, CriadorInvalidoException, DescricaoInvalidaException, MetaInvalidaException {
-//        return ResponseEntity.ok(campanhaService.adicionarCampanha(dto));
-//    }
-//
-//    @GetMapping("/{id}")
-//    public ResponseEntity<CampanhaDTO> getCampanha(@PathVariable long id){
-//        return ResponseEntity.ok(campanhaService.getCampanha(id));
-//    }
-//
-//    @PutMapping("/mudar/{tipo}/{id}")
-//    public ResponseEntity<CampanhaDTO> mudarCampanha(@PathVariable("tipo") String tipo, @PathVariable("id") long id, @RequestBody CampanhaDTO dto) throws Exception {
-//        return ResponseEntity.ok(campanhaService.mudar(tipo, dto, id));
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<CampanhaDTO> deletarCampanha(@PathVariable long id){
-//        return ResponseEntity.ok(campanhaService.removerCampanha(id));
-//    }
-//
-//    @GetMapping("/listar/{criterio}")
-//    public ResponseEntity<ListaCampanhasDTO> getCampanhasAtivas(@PathVariable(value = "criterio") String criterioString) throws CriterioInvalidoException {
-//        return ResponseEntity.ok(campanhaService.listarCampanhas(Optional.empty(), criterioString));
-//    }
-//    @GetMapping("/listar/{criterio}/{tamanho}")
-//    public ResponseEntity<ListaCampanhasDTO> getCampanhasAtivasTamanho(@PathVariable("tamanho") long tamanho, @PathVariable(value = "criterio") String criterioString) throws CriterioInvalidoException {
-//        return ResponseEntity.ok(campanhaService.listarCampanhas(Optional.of(tamanho), criterioString));
-//    }
 
 }
