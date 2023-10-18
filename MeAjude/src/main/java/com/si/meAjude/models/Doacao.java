@@ -2,6 +2,7 @@ package com.si.meAjude.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -29,26 +30,13 @@ public class Doacao {
     @ManyToOne
     @JoinColumn(name = "campanha_id")
     @NotNull
-    @JsonBackReference
+//    @JsonBackReference
     private Campanha campanha;
 
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate data;
 
     @NotNull
+    @Min(value = 1)
     private BigDecimal valorDoado;
-
-    private boolean deletado;
-
-    private void setDeletado(boolean deletado){
-        this.deletado = deletado;
-    }
-
-    public void delete(){
-        this.deletado = true;
-    }
-
-    public void backUp(){
-        this.deletado = false;
-    }
 }

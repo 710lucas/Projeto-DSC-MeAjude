@@ -12,7 +12,6 @@ import java.util.List;
 
 @Repository
 public interface DoacaoRepository extends JpaRepository<Doacao, Long> {
-    Page<Doacao> findAllByDeletadoFalse(Pageable page);
     Page<Doacao> findAll(Pageable page);
     Page<Doacao> findAllByData(Pageable page, LocalDate date);
     Page<Doacao> findAllByUsuario_Id(Pageable page, Long userId);

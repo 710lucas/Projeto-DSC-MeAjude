@@ -51,7 +51,7 @@ public class Campanha{
 
 
     public void adicionarDoacao(Doacao doacao) throws DoacaoInvalidaException {
-        if(doacao == null || doacao.isDeletado())
+        if(doacao == null)
             throw new DoacaoInvalidaException("A doaçao informada é inválida");
         doacoes.add(doacao);
     }
