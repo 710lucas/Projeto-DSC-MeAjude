@@ -16,10 +16,10 @@ public record UsuarioSaveDTO(
         String email,
 
         @NotBlank
-        String senha,
+        String celular,
 
         @NotBlank
-        String celular,
+        String senha,
 
         @NotNull
         DocumentoDTO documentoDTO
@@ -32,6 +32,7 @@ public record UsuarioSaveDTO(
     public Usuario toUsuario(){
         Usuario usuario = new Usuario();
         usuario.setNome(nome);
+        usuario.setSenha(senha);
         usuario.setEmail(email);
         usuario.setCelular(celular);
         usuario.setDocumento(documentoDTO.toDocumento());
