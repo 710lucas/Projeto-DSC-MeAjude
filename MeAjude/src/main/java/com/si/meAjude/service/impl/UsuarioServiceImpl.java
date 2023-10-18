@@ -1,13 +1,16 @@
 package com.si.meAjude.service.impl;
 
-import com.si.meAjude.models.DocumentoValidatorFactory;
 import com.si.meAjude.models.Usuario;
+import com.si.meAjude.models.enums.DocumentType;
+import com.si.meAjude.models.validators.CNPJValidator;
+import com.si.meAjude.models.validators.CPFValidator;
 import com.si.meAjude.models.validators.interfaces.DocumentValidator;
 import com.si.meAjude.repositories.UsuarioRepository;
 import com.si.meAjude.service.UsuarioService;
 import com.si.meAjude.service.dtos.usuario.UsuarioDTO;
 import com.si.meAjude.service.dtos.usuario.UsuarioSaveDTO;
 import com.si.meAjude.service.dtos.usuario.UsuarioUpdateDTO;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,36 +23,34 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
-    @Autowired
-    private DocumentoValidatorFactory documentoValidatorFactory;
-
     @Override
     public UsuarioDTO save(UsuarioSaveDTO dto) {
-        DocumentValidator documentValidator = documentoValidatorFactory.getValidator(dto.documentoDTO().tipoDocumento());
+        DocumentValidator documentValidator = getValidator(dto.documentoDTO().tipoDocumento());
         Usuario usuario = dto.toUsuario();
         usuario.getDocumento().setAndValidateDocument(documentValidator);
         return new UsuarioDTO(usuarioRepository.save(usuario));
     }
 
-    @Override
-    public Page<UsuarioDTO> getAll(Pageable pageable) {
-        return usuarioRepository.findAll(pageable).map(UsuarioDTO::new);
+    private DocumentValidator getValidator(DocumentType documentType){
+       if(documentType == DocumentType.CPF) return new CPFValidator();
+       else if(documentType == DocumentType.CNPJ) return new CNPJValidator();
+       else throw new IllegalArgumentException("Tipo de documento inválido");
     }
 
     @Override
-    public Page<UsuarioDTO> getAllByDeletedFalse(Pageable pageable) {
+    public Page<UsuarioDTO> getAll(Pageable pageable) {
         return usuarioRepository.findAllByDeletadoFalse(pageable).map(UsuarioDTO::new);
     }
 
     @Override
     public UsuarioDTO getById(Long id) {
-        return new UsuarioDTO(usuarioRepository.getById(id));
+        return new UsuarioDTO(getUsuario(id));
     }
 
     @Transactional
     @Override
     public UsuarioDTO update(UsuarioUpdateDTO updateDto) {
-        Usuario usuarioLocalizado = usuarioRepository.getById(updateDto.id());
+        Usuario usuarioLocalizado = getUsuario(updateDto.id());
         Usuario usuarioAtualizado = updateUsuario(updateDto, usuarioLocalizado);
         return new UsuarioDTO(usuarioAtualizado);
     }
@@ -58,24 +59,22 @@ public class UsuarioServiceImpl implements UsuarioService {
         if(usuarioUpdateDTO.nome()!= null && !usuarioUpdateDTO.nome().isBlank()) usuario.setNome(usuarioUpdateDTO.nome());
         if(usuarioUpdateDTO.email()!= null && !usuarioUpdateDTO.email().isBlank()) usuario.setEmail(usuarioUpdateDTO.email());
         if(usuarioUpdateDTO.celular() != null && !usuarioUpdateDTO.celular().isBlank()) usuario.setCelular(usuarioUpdateDTO.celular());
-        if(usuarioUpdateDTO.documentoDTO()!= null) usuario.setDocumento(usuarioUpdateDTO.documentoDTO().toDocumento());
         if(usuarioUpdateDTO.senha() != null && !usuarioUpdateDTO.senha().isBlank()) usuario.setSenha(usuarioUpdateDTO.senha());
         return usuario;
-    }
-
-    @Override
-    public UsuarioDTO delete(Long id) {
-        Usuario usuarioLocalizado = usuarioRepository.getById(id);
-        usuarioRepository.delete(usuarioLocalizado);
-        return new UsuarioDTO(usuarioLocalizado);
     }
 
     @Transactional
     @Override
     public UsuarioDTO logicDelete(Long id) {
-        Usuario usuarioLocalizado = usuarioRepository.getById(id);
+        Usuario usuarioLocalizado = getUsuario(id);
         usuarioLocalizado.delete();
         return new UsuarioDTO(usuarioLocalizado);
+    }
+
+    private Usuario getUsuario(Long id){
+        Usuario usuario = usuarioRepository.getById(id);
+        if(usuario.isDeletado()) throw new EntityNotFoundException("Unable to find com.si.meAjude.models.Usuario with id "+ id);
+        return usuario;
     }
 
 }

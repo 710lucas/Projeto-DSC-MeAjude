@@ -10,10 +10,9 @@ public record UsuarioUpdateDTO(
         String email,
         String nome,
         String celular,
-        String senha,
-        DocumentoDTO documentoDTO){
+        String senha){
 
     public UsuarioUpdateDTO(Usuario usuario) {
-        this(usuario.getId(), usuario.getEmail(), usuario.getNome(), usuario.getCelular(), usuario.getSenha(), new DocumentoDTO(usuario.getDocumento()));
+        this(usuario.getId(), usuario.getEmail(), usuario.getNome(), usuario.getCelular(), usuario.getSenha());
     }
 }

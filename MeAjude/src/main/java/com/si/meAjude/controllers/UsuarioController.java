@@ -26,28 +26,18 @@ public class UsuarioController {
         return new ResponseEntity<>(usuarioService.save(usuario), HttpStatus.CREATED);
     }
 
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public Page<UsuarioDTO> getAllByDeletadoFalse(
-            @PageableDefault(size = 10) Pageable page,
-            @RequestParam(name = "sortField", required = false, defaultValue = "nome") String sortField,
-            @RequestParam(name = "sortDirection", required = false, defaultValue = "asc") String sortDirection){
-        return usuarioService.getAllByDeletedFalse(PageableUtil.getPageableWithSort(page, sortField, sortDirection));
+    @GetMapping("/{id}")
+    public ResponseEntity<UsuarioDTO> getById(@PathVariable Long id){
+        return new ResponseEntity<>(usuarioService.getById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/todos")
+    @GetMapping()
     @ResponseStatus(HttpStatus.OK)
     public Page<UsuarioDTO> getAll(
             @PageableDefault(size = 10) Pageable page,
             @RequestParam(name = "sortField", required = false, defaultValue = "nome") String sortField,
             @RequestParam(name = "sortDirection", required = false, defaultValue = "asc") String sortDirection) {
     return usuarioService.getAll(PageableUtil.getPageableWithSort(page, sortField, sortDirection));
-    }
-
-
-    @GetMapping("/{id}")
-    public ResponseEntity<UsuarioDTO> getById(@PathVariable Long id){
-        return new ResponseEntity<>(usuarioService.getById(id), HttpStatus.OK);
     }
 
     @PutMapping
@@ -60,8 +50,4 @@ public class UsuarioController {
         return new ResponseEntity<>(usuarioService.logicDelete(id), HttpStatus.OK);
     }
 
-    @DeleteMapping("/definitivo/{id}")
-    public ResponseEntity<UsuarioDTO> delete(@PathVariable Long id){
-        return new ResponseEntity<>(usuarioService.delete(id), HttpStatus.OK);
-    }
 }

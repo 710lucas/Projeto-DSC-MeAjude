@@ -15,11 +15,7 @@ public interface UsuarioService{
 
     public Page<UsuarioDTO> getAll(Pageable pageable);
 
-    public Page<UsuarioDTO> getAllByDeletedFalse(Pageable pageable);
-
     public UsuarioDTO update(UsuarioUpdateDTO updateDto);
-
-    public UsuarioDTO delete(Long id);
 
     public UsuarioDTO logicDelete(Long id);
 

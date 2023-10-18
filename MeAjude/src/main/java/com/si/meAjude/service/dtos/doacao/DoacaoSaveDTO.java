@@ -10,6 +10,6 @@ public record DoacaoSaveDTO(
         Long usuarioId,
         Long campanhaId,
         LocalDate data,
-        @Min(value = 1, message = "Valor da doação deve ser maior que 0")
+        @Min(value = 1, message = "Valor da doação deve ser maior ou igual a 1")
         BigDecimal valorDoado) {
 }
