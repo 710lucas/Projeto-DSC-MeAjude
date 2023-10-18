@@ -16,7 +16,6 @@ public interface CampanhaService{
 
     CampanhaDTO removerCampanha(long id);
 
-    CampanhaDTO mudar(String tipo, CampanhaDTO dto, long id) throws Exception;
 
     CampanhaDTO getCampanha(Long id);
 
@@ -29,13 +28,11 @@ public interface CampanhaService{
     CampanhaDTO mudarMeta(BigDecimal meta, long id) throws MetaInvalidaException;
 
     CampanhaDTO mudarDataFinal(LocalDateTime dataFinal, long id) throws DataInvalida;
-    CampanhaDTO mudarCriador(Usuario criador, long id) throws CriadorInvalidoException;
-
-    CampanhaDTO adicionarDoacao(Doacao doacao, long id) throws DoacaoInvalidaException;
+    CampanhaDTO mudarCriador(long criador_id, long id) throws CriadorInvalidoException;
 
     CampanhaDTO adicionarCampanha(CampanhaDTO dto) throws DataInvalida, TituloInvalidoException, CriadorInvalidoException, DescricaoInvalidaException, MetaInvalidaException;
 
-    ListaCampanhasDTO listarCampanhas(Optional<Long> quantidade, String criterioString) throws CriterioInvalidoException;
+    ListaCampanhasDTO listarCampanhas(Optional<Long> quantidade, Optional<String> criterioString) throws CriterioInvalidoException;
 
 
 
