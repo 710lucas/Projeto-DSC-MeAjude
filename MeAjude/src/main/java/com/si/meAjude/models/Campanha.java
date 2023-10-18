@@ -36,7 +36,7 @@ public class Campanha{
     private BigDecimal meta;
     @Future
     private LocalDateTime dataFinal;
-    @FutureOrPresent
+//    @FutureOrPresent
     private LocalDateTime dataInicio = LocalDateTime.now();
     @ManyToOne
     @NotNull
