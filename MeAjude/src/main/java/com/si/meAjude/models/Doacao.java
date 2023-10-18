@@ -1,5 +1,6 @@
 package com.si.meAjude.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -28,6 +29,7 @@ public class Doacao {
     @ManyToOne
     @JoinColumn(name = "campanha_id")
     @NotNull
+    @JsonBackReference
     private Campanha campanha;
 
     @DateTimeFormat(pattern = "dd/MM/yyyy")
