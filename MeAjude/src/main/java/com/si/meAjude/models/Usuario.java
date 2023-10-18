@@ -31,7 +31,7 @@ public class Usuario {
     private String email;
 
     @NotBlank
-    @Column(length = 13)
+    @Column(length = 13, unique = true)
     private String celular;
 
     @NotBlank

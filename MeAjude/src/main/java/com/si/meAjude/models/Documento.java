@@ -12,7 +12,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Embeddable
-@EqualsAndHashCode(of = {"conteudo", "documentoEnum"})
+@EqualsAndHashCode(of = {"conteudo", "tipoEntidade"})
 @ToString
 public class Documento {
 
@@ -32,9 +32,16 @@ public class Documento {
     @Transient
     private DocumentValidator documentValidator;
 
+    public void setAndValidateDocument(DocumentValidator documentValidator) {
+        setDocumentValidator(documentValidator);
+        validateDocument();
+    }
+
     public void setDocumentValidator(DocumentValidator documentValidator) {
-        documentValidator.validate(conteudo, tipoEntidade);
         this.documentValidator = documentValidator;
     }
 
+    public void validateDocument() {
+        documentValidator.validate(conteudo, tipoEntidade);
+    }
 }

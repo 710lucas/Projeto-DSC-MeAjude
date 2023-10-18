@@ -27,7 +27,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     public UsuarioDTO save(UsuarioSaveDTO dto) {
         DocumentValidator documentValidator = documentoValidatorFactory.getValidator(dto.documentoDTO().tipoDocumento());
         Usuario usuario = dto.toUsuario();
-        usuario.getDocumento().setDocumentValidator(documentValidator);
+        usuario.getDocumento().setAndValidateDocument(documentValidator);
         return new UsuarioDTO(usuarioRepository.save(usuario));
     }
 
