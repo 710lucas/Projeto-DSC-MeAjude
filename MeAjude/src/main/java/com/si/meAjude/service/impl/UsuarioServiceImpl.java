@@ -50,8 +50,17 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public UsuarioDTO update(UsuarioUpdateDTO updateDto) {
         Usuario usuarioLocalizado = usuarioRepository.getById(updateDto.id());
-        Usuario usuarioAtualizado = updateDto.updateUsuario(usuarioLocalizado);
+        Usuario usuarioAtualizado = updateUsuario(updateDto, usuarioLocalizado);
         return new UsuarioDTO(usuarioAtualizado);
+    }
+
+    private Usuario updateUsuario(UsuarioUpdateDTO usuarioUpdateDTO, Usuario usuario){
+        if(usuarioUpdateDTO.nome()!= null && !usuarioUpdateDTO.nome().isBlank()) usuario.setNome(usuarioUpdateDTO.nome());
+        if(usuarioUpdateDTO.email()!= null && !usuarioUpdateDTO.email().isBlank()) usuario.setEmail(usuarioUpdateDTO.email());
+        if(usuarioUpdateDTO.celular() != null && !usuarioUpdateDTO.celular().isBlank()) usuario.setCelular(usuarioUpdateDTO.celular());
+        if(usuarioUpdateDTO.documentoDTO()!= null) usuario.setDocumento(usuarioUpdateDTO.documentoDTO().toDocumento());
+        if(usuarioUpdateDTO.senha() != null && !usuarioUpdateDTO.senha().isBlank()) usuario.setSenha(usuarioUpdateDTO.senha());
+        return usuario;
     }
 
     @Override
