@@ -20,7 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
-public class Campanha{
+public class Campaign {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,24 +40,24 @@ public class Campanha{
     private LocalDateTime dataInicio = LocalDateTime.now();
     @ManyToOne
     @NotNull
-    private Usuario criador;
+    private User criador;
 
     @OneToMany(mappedBy = "campanha")
-    private List<Doacao> doacoes = new ArrayList<>();
+    private List<Donation> doacoes = new ArrayList<>();
 
     private BigDecimal valorArrecadado = BigDecimal.ZERO;
     @NotNull
     private boolean deletado;
 
 
-    public void adicionarDoacao(Doacao doacao) throws DoacaoInvalidaException {
-        if(doacao == null)
+    public void adicionarDoacao(Donation donation) throws DoacaoInvalidaException {
+        if(donation == null)
             throw new DoacaoInvalidaException("A doaçao informada é inválida");
-        doacoes.add(doacao);
+        doacoes.add(donation);
     }
 
-    public Doacao getDoacao(Long id) throws DoacaoInvalidaException {
-        for(Doacao d : doacoes)
+    public Donation getDoacao(Long id) throws DoacaoInvalidaException {
+        for(Donation d : doacoes)
             if(d.getId() == id) return d;
         throw new DoacaoInvalidaException("O id " + id + " é inválido");
     }

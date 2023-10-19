@@ -1,9 +1,9 @@
 package com.si.meAjude.controllers;
 
-import com.si.meAjude.service.UsuarioService;
-import com.si.meAjude.service.dtos.usuario.UsuarioDTO;
-import com.si.meAjude.service.dtos.usuario.UsuarioSaveDTO;
-import com.si.meAjude.service.dtos.usuario.UsuarioUpdateDTO;
+import com.si.meAjude.service.UserSerivce;
+import com.si.meAjude.service.dtos.usuario.UserDTO;
+import com.si.meAjude.service.dtos.usuario.UserSaveDTO;
+import com.si.meAjude.service.dtos.usuario.UserUpdateDTO;
 import com.si.meAjude.util.PageableUtil;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,35 +19,35 @@ import org.springframework.data.domain.Pageable;
 public class UsuarioController {
 
     @Autowired
-    UsuarioService usuarioService;
+    UserSerivce userSerivce;
 
     @PostMapping
-    public ResponseEntity<UsuarioDTO> save(@RequestBody @Valid UsuarioSaveDTO usuario){
-        return new ResponseEntity<>(usuarioService.save(usuario), HttpStatus.CREATED);
+    public ResponseEntity<UserDTO> save(@RequestBody @Valid UserSaveDTO usuario){
+        return new ResponseEntity<>(userSerivce.save(usuario), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UsuarioDTO> getById(@PathVariable Long id){
-        return new ResponseEntity<>(usuarioService.getById(id), HttpStatus.OK);
+    public ResponseEntity<UserDTO> getById(@PathVariable Long id){
+        return new ResponseEntity<>(userSerivce.getById(id), HttpStatus.OK);
     }
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public Page<UsuarioDTO> getAll(
+    public Page<UserDTO> getAll(
             @PageableDefault(size = 10) Pageable page,
-            @RequestParam(name = "sortField", required = false, defaultValue = "nome") String sortField,
+            @RequestParam(name = "sortField", required = false, defaultValue = "name") String sortField,
             @RequestParam(name = "sortDirection", required = false, defaultValue = "asc") String sortDirection) {
-    return usuarioService.getAll(PageableUtil.getPageableWithSort(page, sortField, sortDirection));
+    return userSerivce.getAll(PageableUtil.getPageableWithSort(page, sortField, sortDirection));
     }
 
     @PutMapping
-    public ResponseEntity<UsuarioDTO> update(@RequestBody @Valid UsuarioUpdateDTO updateDTO){
-        return new ResponseEntity<>(usuarioService.update(updateDTO), HttpStatus.OK);
+    public ResponseEntity<UserDTO> update(@RequestBody @Valid UserUpdateDTO updateDTO){
+        return new ResponseEntity<>(userSerivce.update(updateDTO), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<UsuarioDTO> logicDelete(@PathVariable Long id){
-        return new ResponseEntity<>(usuarioService.logicDelete(id), HttpStatus.OK);
+    public ResponseEntity<UserDTO> logicDelete(@PathVariable Long id){
+        return new ResponseEntity<>(userSerivce.logicDelete(id), HttpStatus.OK);
     }
 
 }

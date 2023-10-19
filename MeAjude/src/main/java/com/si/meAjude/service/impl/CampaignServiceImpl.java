@@ -2,20 +2,15 @@ package com.si.meAjude.service.impl;
 
 
 import com.si.meAjude.exceptions.*;
-import com.si.meAjude.models.Campanha;
-import com.si.meAjude.models.Doacao;
-import com.si.meAjude.models.Usuario;
+import com.si.meAjude.models.Campaign;
+import com.si.meAjude.models.User;
 import com.si.meAjude.models.enums.CriterioEnum;
-import com.si.meAjude.repositories.CampanhaRepository;
-import com.si.meAjude.repositories.DoacaoRepository;
-import com.si.meAjude.repositories.UsuarioRepository;
-import com.si.meAjude.service.CampanhaService;
+import com.si.meAjude.repositories.CampaignRepository;
+import com.si.meAjude.repositories.DonationRepository;
+import com.si.meAjude.repositories.UserRepository;
+import com.si.meAjude.service.CampaignService;
 import com.si.meAjude.service.dtos.campanha.CampanhaDTO;
 import com.si.meAjude.service.dtos.campanha.ListaCampanhasDTO;
-import com.si.meAjude.service.dtos.doacao.DoacaoDTO;
-import jakarta.validation.constraints.NotNull;
-import jakarta.transaction.Transactional;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,57 +23,57 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CampanhaServiceImpl implements CampanhaService{
+public class CampaignServiceImpl implements CampaignService {
 
     @Autowired
-    private CampanhaRepository campanhaRepository;
+    private CampaignRepository campaignRepository;
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    private DoacaoRepository doacaoRepository;
+    private DonationRepository donationRepository;
 
     public CampanhaDTO save(CampanhaDTO campanhaDTO){
-        Campanha campanha = new Campanha();
-        campanha.setCriador(usuarioRepository.getById(campanhaDTO.criadorId()));
-        campanha.setAtiva(campanhaDTO.ativa());
-        campanha.setTitulo(campanhaDTO.titulo());
-        campanha.setDescricao(campanhaDTO.descricao());
-        campanha.setDeletado(campanhaDTO.deletado());
-        campanha.setMeta(campanhaDTO.meta());
-        campanha.setDataFinal(campanhaDTO.dataFinal());
-        campanha.setDataInicio((campanhaDTO.dataInicio()));
-        campanha.setDoacoes(campanhaDTO.doacoes());
-        campanha.setValorArrecadado(campanhaDTO.valorArrecadado());
-        campanha.setDeletado(campanhaDTO.deletado());
-        return new CampanhaDTO(campanhaRepository.save(campanha));
+        Campaign campaign = new Campaign();
+        campaign.setCriador(userRepository.getById(campanhaDTO.criadorId()));
+        campaign.setAtiva(campanhaDTO.ativa());
+        campaign.setTitulo(campanhaDTO.titulo());
+        campaign.setDescricao(campanhaDTO.descricao());
+        campaign.setDeletado(campanhaDTO.deletado());
+        campaign.setMeta(campanhaDTO.meta());
+        campaign.setDataFinal(campanhaDTO.dataFinal());
+        campaign.setDataInicio((campanhaDTO.dataInicio()));
+        campaign.setDoacoes(campanhaDTO.doacoes());
+        campaign.setValorArrecadado(campanhaDTO.valorArrecadado());
+        campaign.setDeletado(campanhaDTO.deletado());
+        return new CampanhaDTO(campaignRepository.save(campaign));
     }
 
     @Override
     public CampanhaDTO removerCampanha(long id) {
-        Campanha c = campanhaRepository.getById(id);
+        Campaign c = campaignRepository.getById(id);
         if(c == null)
             throw new RuntimeException("Campanha com id: "+id+" não existe");
         c.setDeletado(true);
-        campanhaRepository.save(c);
+        campaignRepository.save(c);
         return new CampanhaDTO(c);
     }
 
     @Override
     public CampanhaDTO getCampanha(Long id) {
-        if(!campanhaRepository.existsById(id))
+        if(!campaignRepository.existsById(id))
             throw new RuntimeException("Campanha de id: "+id+" não existe");
-        return new CampanhaDTO(campanhaRepository.getById(id));
+        return new CampanhaDTO(campaignRepository.getById(id));
     }
 
     @Override
     public CampanhaDTO mudarEstado(boolean estado, long id) {
-        if(!campanhaRepository.existsById(id))
+        if(!campaignRepository.existsById(id))
             throw new RuntimeException("Campanha de id: "+id+" não existe");
-        Campanha c = campanhaRepository.getById(id);
+        Campaign c = campaignRepository.getById(id);
         c.setAtiva(estado);
-        campanhaRepository.save(c);
+        campaignRepository.save(c);
         return new CampanhaDTO(c);
     }
 
@@ -87,11 +82,11 @@ public class CampanhaServiceImpl implements CampanhaService{
     public CampanhaDTO mudarTitulo(String titulo, long id) throws TituloInvalidoException {
         if(titulo.length() > 100 || titulo.trim().isEmpty())
             throw new TituloInvalidoException("Titulo informado é inválido");
-        else if(!campanhaRepository.existsById(id))
+        else if(!campaignRepository.existsById(id))
             throw new TituloInvalidoException("Campanha de id: "+id+" não existe");
-        Campanha c = campanhaRepository.getById(id);
+        Campaign c = campaignRepository.getById(id);
         c.setTitulo(titulo);
-        campanhaRepository.save(c);
+        campaignRepository.save(c);
         return new CampanhaDTO(c);
     }
 
@@ -99,11 +94,11 @@ public class CampanhaServiceImpl implements CampanhaService{
     public CampanhaDTO mudarDescricao(String descricao, long id) throws DescricaoInvalidaException {
         if(descricao.length() > 1000)
             throw new DescricaoInvalidaException("A descrição informada é inválida");
-        else if(!campanhaRepository.existsById(id))
+        else if(!campaignRepository.existsById(id))
             throw new RuntimeException("Campanha de id: "+id+" não existe");
-        Campanha c = campanhaRepository.getById(id);
+        Campaign c = campaignRepository.getById(id);
         c.setDescricao(descricao);
-        campanhaRepository.save(c);
+        campaignRepository.save(c);
         return new CampanhaDTO(c);
     }
 
@@ -111,36 +106,36 @@ public class CampanhaServiceImpl implements CampanhaService{
     public CampanhaDTO mudarMeta(BigDecimal meta, long id) throws MetaInvalidaException {
         if(meta.doubleValue() <= 0)
             throw new MetaInvalidaException("O valod não pode ser menor ou igual a zero");
-        else if(!campanhaRepository.existsById(id))
+        else if(!campaignRepository.existsById(id))
             throw new RuntimeException("Campanha de id: "+id+" não existe");
-        Campanha c = campanhaRepository.getById(id);
+        Campaign c = campaignRepository.getById(id);
         c.setMeta(meta);
-        campanhaRepository.save(c);
+        campaignRepository.save(c);
         return new CampanhaDTO(c);
     }
 
     @Override
     public CampanhaDTO mudarDataFinal(LocalDateTime dataFinal, long id) throws DataInvalida {
-        if(!campanhaRepository.existsById(id))
+        if(!campaignRepository.existsById(id))
             throw new RuntimeException("Campanha de id: "+id+" não existe");
-        Campanha c = campanhaRepository.getById(id);
+        Campaign c = campaignRepository.getById(id);
         if(dataFinal.isBefore(c.getDataInicio()) || dataFinal.isEqual(c.getDataInicio()))
             throw new DataInvalida("A data informada deve ser depois da data de inicio da campanha");
         c.setDataFinal(dataFinal);
-        campanhaRepository.save(c);
+        campaignRepository.save(c);
         return new CampanhaDTO(c);
     }
 
     @Override
     public CampanhaDTO mudarCriador(long criadorId, long id) throws CriadorInvalidoException {
-        if(!campanhaRepository.existsById(id))
+        if(!campaignRepository.existsById(id))
             throw new RuntimeException("Campanha de id: "+id+" não existe");
-        Campanha c = campanhaRepository.getById(id);
-        Usuario criador = usuarioRepository.getById(criadorId);
-        if(criador == null || criador.isDeletado())
+        Campaign c = campaignRepository.getById(id);
+        User criador = userRepository.getById(criadorId);
+        if(criador == null || criador.isDeleted())
             throw new CriadorInvalidoException("O criador informado é inválido");
         c.setCriador(criador);
-        campanhaRepository.save(c);
+        campaignRepository.save(c);
         return new CampanhaDTO(c);
     }
 
@@ -156,20 +151,20 @@ public class CampanhaServiceImpl implements CampanhaService{
 
         CriterioEnum criterio = criterioString.map(s -> CriterioEnum.valueOf(s.toUpperCase())).orElse(CriterioEnum.ATIVAS_DATA);
 
-        long quantidadeElementos = quantidade.orElse(campanhaRepository.count());
-        if(quantidadeElementos == -1) quantidadeElementos = campanhaRepository.count();
+        long quantidadeElementos = quantidade.orElse(campaignRepository.count());
+        if(quantidadeElementos == -1) quantidadeElementos = campaignRepository.count();
         int quantidadePaginas = 1;
         if(quantidadeElementos > Integer.MAX_VALUE) quantidadePaginas = (int)(quantidadeElementos/Integer.MAX_VALUE);
 
-        List<Campanha> campanhas = new ArrayList<>();
+        List<Campaign> campaigns = new ArrayList<>();
 
         for(int i = 0; i<quantidadePaginas; i++){
             PageRequest paginaAtual = PageRequest.of(i, (int)(quantidadeElementos/quantidadePaginas));
-            Page<Campanha> campanhasPagina = campanhaRepository.findAll(paginaAtual);
-            campanhas.addAll(campanhasPagina.getContent());
+            Page<Campaign> campanhasPagina = campaignRepository.findAll(paginaAtual);
+            campaigns.addAll(campanhasPagina.getContent());
         }
 
-        return new ListaCampanhasDTO(campanhas, criterio);
+        return new ListaCampanhasDTO(campaigns, criterio);
     }
 
 

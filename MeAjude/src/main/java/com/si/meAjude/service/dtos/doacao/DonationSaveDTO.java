@@ -1,13 +1,12 @@
 package com.si.meAjude.service.dtos.doacao;
 
-import com.si.meAjude.models.Doacao;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public record DoacaoSaveDTO(
+public record DonationSaveDTO(
         @NotNull
         Long usuarioId,
         @NotNull

@@ -1,64 +1,65 @@
 package com.si.meAjude.models.validators;
 
 import com.si.meAjude.models.enums.DocumentType;
-import com.si.meAjude.models.enums.EntityType;
+import com.si.meAjude.models.enums.DocumentEntityType;
 import com.si.meAjude.models.validators.interfaces.DocumentValidator;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CNPJValidator implements DocumentValidator {
 
-    public static void throwExceptionIfInvalido(String cnpj, EntityType entityType) {
-        if (entityType == EntityType.PESSOA_FISICA) {
-            throw new IllegalArgumentException("CNPJ incompátivel para o tipo entidade informado: " + entityType);
+    public static void throwExceptionIfInvalid(String cnpj, DocumentEntityType documentEntityType) {
+        if (documentEntityType == DocumentEntityType.INDIVIDUAL) {
+            throw new IllegalArgumentException("CNPJ is incompatible with the specified entity type: " + documentEntityType);
         }
-        // Remova qualquer formatação do CNPJ
+
+        // Remove any formatting from the CNPJ
         cnpj = cnpj.replaceAll("[^0-9]", "");
 
-        // Verifique se o CNPJ tem 14 dígitos
+        // Check if the CNPJ has 14 digits
         if (cnpj.length() != 14) {
-            throw new IllegalArgumentException("CNPJ deve conter 14 dígitos");
+            throw new IllegalArgumentException("CNPJ must contain 14 digits");
         }
 
-        // Calcula o primeiro dígito verificador
-        int soma = 0;
-        int peso = 2;
+        // Calculate the first verification digit
+        int sum = 0;
+        int weight = 2;
         for (int i = 11; i >= 0; i--) {
-            soma += Character.getNumericValue(cnpj.charAt(i)) * peso;
-            peso++;
-            if (peso == 10) {
-                peso = 2;
+            sum += Character.getNumericValue(cnpj.charAt(i)) * weight;
+            weight++;
+            if (weight == 10) {
+                weight = 2;
             }
         }
-        int primeiroDigito = 11 - (soma % 11);
-        if (primeiroDigito >= 10) {
-            primeiroDigito = 0;
+        int firstDigit = 11 - (sum % 11);
+        if (firstDigit >= 10) {
+            firstDigit = 0;
         }
 
-        // Calcula o segundo dígito verificador
-        soma = 0;
-        peso = 2;
+        // Calculate the second verification digit
+        sum = 0;
+        weight = 2;
         for (int i = 12; i >= 0; i--) {
-            soma += Character.getNumericValue(cnpj.charAt(i)) * peso;
-            peso++;
-            if (peso == 10) {
-                peso = 2;
+            sum += Character.getNumericValue(cnpj.charAt(i)) * weight;
+            weight++;
+            if (weight == 10) {
+                weight = 2;
             }
         }
-        int segundoDigito = 11 - (soma % 11);
-        if (segundoDigito >= 10) {
-            segundoDigito = 0;
+        int secondDigit = 11 - (sum % 11);
+        if (secondDigit >= 10) {
+            secondDigit = 0;
         }
 
-        // Verifica se os dígitos calculados são iguais aos dígitos no CNPJ
-        if (primeiroDigito != Character.getNumericValue(cnpj.charAt(12)) || segundoDigito != Character.getNumericValue(cnpj.charAt(13))) {
-            throw new IllegalArgumentException("CNPJ inválido");
+        // Check if the calculated digits match the digits in the CNPJ
+        if (firstDigit != Character.getNumericValue(cnpj.charAt(12)) || secondDigit != Character.getNumericValue(cnpj.charAt(13))) {
+            throw new IllegalArgumentException("Invalid CNPJ");
         }
     }
 
     @Override
-    public void validate(String document, EntityType entityType) {
-        throwExceptionIfInvalido(document, entityType);
+    public void validate(String document, DocumentEntityType documentEntityType) {
+        throwExceptionIfInvalid(document, documentEntityType);
     }
 
     @Override

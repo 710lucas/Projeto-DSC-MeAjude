@@ -1,7 +1,7 @@
 package com.si.meAjude.models;
 
 import com.si.meAjude.models.enums.DocumentType;
-import com.si.meAjude.models.enums.EntityType;
+import com.si.meAjude.models.enums.DocumentEntityType;
 import com.si.meAjude.models.validators.interfaces.DocumentValidator;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -12,22 +12,23 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Embeddable
-@EqualsAndHashCode(of = {"conteudo", "tipoEntidade"})
+@EqualsAndHashCode(of = {"content", "documentEntityType"})
 @ToString
-public class Documento {
+public class Document {
 
     @NotBlank
     @Enumerated(EnumType.STRING)
-    @Column(name = "CPF_ou_CNPJ")
+    @Column(name = "CPF_or_CNPJ")
     private DocumentType documentType;
 
     @NotBlank
-    @Column(name = "conteudo_documento", unique = true)
-    private String conteudo;
+    @Column(name = "document_content", unique = true)
+    private String content;
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    private EntityType tipoEntidade;
+    @Column(name = "individual_or_legalType")
+    private DocumentEntityType documentEntityType;
 
     @Transient
     private DocumentValidator documentValidator;
@@ -42,6 +43,6 @@ public class Documento {
     }
 
     public void validateDocument() {
-        documentValidator.validate(conteudo, tipoEntidade);
+        documentValidator.validate(content, documentEntityType);
     }
 }
