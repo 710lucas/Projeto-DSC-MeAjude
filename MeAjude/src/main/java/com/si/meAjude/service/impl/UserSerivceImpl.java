@@ -25,7 +25,7 @@ public class UserSerivceImpl implements UserSerivce {
 
     @Override
     public UserDTO save(UserSaveDTO dto) {
-        DocumentValidator documentValidator = getValidator(dto.documentDTO().tipoDocumento());
+        DocumentValidator documentValidator = getValidator(dto.documentDTO().documentType());
         User user = dto.toUsuario();
         user.getDocument().setAndValidateDocument(documentValidator);
         return new UserDTO(userRepository.save(user));
@@ -34,7 +34,7 @@ public class UserSerivceImpl implements UserSerivce {
     private DocumentValidator getValidator(DocumentType documentType){
        if(documentType == DocumentType.CPF) return new CPFValidator();
        else if(documentType == DocumentType.CNPJ) return new CNPJValidator();
-       else throw new IllegalArgumentException("Tipo de documento inválido");
+       else throw new IllegalArgumentException("Invalid document type");
     }
 
     @Override
@@ -50,16 +50,16 @@ public class UserSerivceImpl implements UserSerivce {
     @Transactional
     @Override
     public UserDTO update(UserUpdateDTO updateDto) {
-        User userLocalizado = getUsuario(updateDto.id());
-        User userAtualizado = updateUsuario(updateDto, userLocalizado);
-        return new UserDTO(userAtualizado);
+        User userLocated = getUsuario(updateDto.id());
+        User userUpdated = updateUsuario(updateDto, userLocated);
+        return new UserDTO(userUpdated);
     }
 
     private User updateUsuario(UserUpdateDTO userUpdateDTO, User user){
-        if(userUpdateDTO.nome()!= null && !userUpdateDTO.nome().isBlank()) user.setName(userUpdateDTO.nome());
+        if(userUpdateDTO.name()!= null && !userUpdateDTO.name().isBlank()) user.setName(userUpdateDTO.name());
         if(userUpdateDTO.email()!= null && !userUpdateDTO.email().isBlank()) user.setEmail(userUpdateDTO.email());
-        if(userUpdateDTO.celular() != null && !userUpdateDTO.celular().isBlank()) user.setPhone(userUpdateDTO.celular());
-        if(userUpdateDTO.senha() != null && !userUpdateDTO.senha().isBlank()) user.setPassword(userUpdateDTO.senha());
+        if(userUpdateDTO.phone() != null && !userUpdateDTO.phone().isBlank()) user.setPhone(userUpdateDTO.phone());
+        if(userUpdateDTO.password() != null && !userUpdateDTO.password().isBlank()) user.setPassword(userUpdateDTO.password());
         return user;
     }
 

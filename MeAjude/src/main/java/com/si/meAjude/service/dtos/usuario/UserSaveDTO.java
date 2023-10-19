@@ -10,16 +10,16 @@ import jakarta.validation.constraints.NotNull;
 public record UserSaveDTO(
 
         @NotBlank
-        String nome,
+        String name,
 
         @Email
         String email,
 
         @NotBlank
-        String celular,
+        String phone,
 
         @NotBlank
-        String senha,
+        String password,
 
         @NotNull
         DocumentDTO documentDTO
@@ -31,10 +31,10 @@ public record UserSaveDTO(
 
     public User toUsuario(){
         User user = new User();
-        user.setName(nome);
-        user.setPassword(senha);
+        user.setName(name);
+        user.setPassword(password);
         user.setEmail(email);
-        user.setPhone(celular);
+        user.setPhone(phone);
         user.setDocument(documentDTO.toDocumento());
         return user;
     }

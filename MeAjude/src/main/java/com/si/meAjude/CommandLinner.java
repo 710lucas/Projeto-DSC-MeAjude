@@ -43,7 +43,7 @@ public class CommandLinner implements CommandLineRunner {
         campaign.setDataFinal(LocalDate.now().plus(1, ChronoUnit.DAYS).atStartOfDay());
 
 
-        userRepository.save(userTest);
-        campaignRepository.save(campaign);
+//        userRepository.save(userTest);
+//        campaignRepository.save(campaign);
     }
 }

@@ -6,11 +6,11 @@ import com.si.meAjude.models.enums.DocumentEntityType;
 
 public record DocumentDTO(
 
-        DocumentType tipoDocumento,
+        DocumentType documentType,
 
-        String conteudo,
+        String content,
 
-        DocumentEntityType tipoEntidade
+        DocumentEntityType documentEntityType
 
 ) {
     public DocumentDTO(Document document){
@@ -19,9 +19,9 @@ public record DocumentDTO(
 
     public Document toDocumento(){
         Document document = new Document();
-        document.setDocumentType(tipoDocumento());
-        document.setContent(conteudo());
-        document.setDocumentEntityType(tipoEntidade());
+        document.setDocumentType(documentType());
+        document.setContent(content());
+        document.setDocumentEntityType(documentEntityType());
         return document;
     }
 }
