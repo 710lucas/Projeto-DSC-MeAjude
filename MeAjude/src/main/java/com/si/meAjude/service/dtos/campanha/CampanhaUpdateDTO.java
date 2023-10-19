@@ -1,6 +1,5 @@
 package com.si.meAjude.service.dtos.campanha;
 
-import com.si.meAjude.models.Usuario;
 import jakarta.annotation.Nullable;
 
 import java.math.BigDecimal;

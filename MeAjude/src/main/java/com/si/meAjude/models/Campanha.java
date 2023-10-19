@@ -37,27 +37,27 @@ public class Campanha{
     @Future
     private LocalDateTime dataFinal;
     @FutureOrPresent
-    private LocalDateTime dataInicio = LocalDateTime.now();
+    private LocalDateTime dataInicio = LocalDateTime.now().plusMinutes(1);
     @ManyToOne
     @NotNull
-    private Usuario criador;
+    private User criador;
 
-    @OneToMany(mappedBy = "campanha")
-    private List<Doacao> doacoes = new ArrayList<>();
+    @OneToMany(mappedBy = "campaign")
+    private List<Donation> doacoes = new ArrayList<>();
 
     private BigDecimal valorArrecadado = BigDecimal.ZERO;
     @NotNull
     private boolean deletado;
 
 
-    public void adicionarDoacao(Doacao doacao) throws DoacaoInvalidaException {
-        if(doacao == null || doacao.isDeletado())
+    public void adicionarDoacao(Donation doacao) throws DoacaoInvalidaException {
+        if(doacao == null)
             throw new DoacaoInvalidaException("A doaçao informada é inválida");
         doacoes.add(doacao);
     }
 
-    public Doacao getDoacao(Long id) throws DoacaoInvalidaException {
-        for(Doacao d : doacoes)
+    public Donation getDoacao(Long id) throws DoacaoInvalidaException {
+        for(Donation d : doacoes)
             if(d.getId() == id) return d;
         throw new DoacaoInvalidaException("O id " + id + " é inválido");
     }

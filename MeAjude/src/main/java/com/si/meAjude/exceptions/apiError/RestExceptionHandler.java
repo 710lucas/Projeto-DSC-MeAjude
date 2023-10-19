@@ -1,6 +1,7 @@
 package com.si.meAjude.exceptions.apiError;
 
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
@@ -54,4 +57,42 @@ public class RestExceptionHandler {
                 .build();
         return new ResponseEntity<>(apiError, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ApiError> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
+        String errorMessage = ex.getRootCause().getMessage(); // Obtém a mensagem raiz da exceção
+
+        if (errorMessage.contains("Unique index or primary key violation")) {
+            // Usando expressão regular para extrair o valor
+            Pattern pattern = Pattern.compile("'(.*?)'");
+            Matcher matcher = pattern.matcher(errorMessage);
+
+            String violatedValue = "";
+            if (matcher.find()) {
+                violatedValue = matcher.group(1);
+            }
+
+            String customErrorMessage = "Erro de violação de chave única: Pelo valor '" + violatedValue;
+
+            ApiError apiError = ApiError
+                    .builder()
+                    .timestamp(LocalDateTime.now())
+                    .code(HttpStatus.CONFLICT.value())
+                    .status(HttpStatus.CONFLICT.name())
+                    .errors(List.of(customErrorMessage))
+                    .build();
+            return new ResponseEntity<>(apiError, HttpStatus.CONFLICT);
+        }
+
+        // Se a mensagem não corresponder ao padrão esperado, trate de outra forma ou forneça uma mensagem genérica.
+        ApiError apiError = ApiError
+                .builder()
+                .timestamp(LocalDateTime.now())
+                .code(HttpStatus.CONFLICT.value())
+                .status(HttpStatus.CONFLICT.name())
+                .errors(List.of("Erro de violação de chave única não especificado."))
+                .build();
+        return new ResponseEntity<>(apiError, HttpStatus.CONFLICT);
+    }
+
 }

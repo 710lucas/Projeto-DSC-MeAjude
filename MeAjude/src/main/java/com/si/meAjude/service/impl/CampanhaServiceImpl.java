@@ -3,20 +3,15 @@ package com.si.meAjude.service.impl;
 
 import com.si.meAjude.exceptions.*;
 import com.si.meAjude.models.Campanha;
-import com.si.meAjude.models.Doacao;
-import com.si.meAjude.models.Usuario;
+import com.si.meAjude.models.User;
 import com.si.meAjude.models.enums.CriterioEnum;
 import com.si.meAjude.repositories.CampanhaRepository;
-import com.si.meAjude.repositories.DoacaoRepository;
-import com.si.meAjude.repositories.UsuarioRepository;
+import com.si.meAjude.repositories.DonationRepository;
+import com.si.meAjude.repositories.UserRepository;
 import com.si.meAjude.service.CampanhaService;
 import com.si.meAjude.service.dtos.campanha.CampanhaDTO;
 import com.si.meAjude.service.dtos.campanha.CampanhaUpdateDTO;
 import com.si.meAjude.service.dtos.campanha.ListaCampanhasDTO;
-import com.si.meAjude.service.dtos.doacao.DoacaoDTO;
-import jakarta.validation.constraints.NotNull;
-import jakarta.transaction.Transactional;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -35,10 +30,10 @@ public class CampanhaServiceImpl implements CampanhaService{
     private CampanhaRepository campanhaRepository;
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UserRepository usuarioRepository;
 
     @Autowired
-    private DoacaoRepository doacaoRepository;
+    private DonationRepository doacaoRepository;
 
     public CampanhaDTO save(CampanhaDTO campanhaDTO){
         Campanha campanha = new Campanha();
@@ -155,8 +150,8 @@ public class CampanhaServiceImpl implements CampanhaService{
         if(!campanhaRepository.existsById(id))
             throw new RuntimeException("Campanha de id: "+id+" não existe");
         Campanha c = campanhaRepository.getById(id);
-        Usuario criador = usuarioRepository.getById(criadorId);
-        if(criador == null || criador.isDeletado())
+        User criador = usuarioRepository.getById(criadorId);
+        if(criador == null || criador.isDeleted())
             throw new CriadorInvalidoException("O criador informado é inválido");
         c.setCriador(criador);
         campanhaRepository.save(c);

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
-public interface CampanhaService{
+public interface CampaignService {
 
     CampanhaDTO removerCampanha(long id);
 
