@@ -16,6 +16,7 @@ import lombok.*;
 @ToString
 public class Document {
 
+    @NotNull
     @NotBlank
     @Enumerated(EnumType.STRING)
     @Column(name = "CPF_or_CNPJ")
@@ -25,7 +26,6 @@ public class Document {
     @Column(name = "document_content", unique = true)
     private String content;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "individual_or_legalType")
     private DocumentEntityType documentEntityType;
@@ -43,6 +43,9 @@ public class Document {
     }
 
     public void validateDocument() {
+        if(documentType == null) throw new IllegalArgumentException("Document type cannot be null");
+        if(content == null) throw new IllegalArgumentException("Document content cannot be null");
+        if(documentEntityType == null) throw new IllegalArgumentException("Document entity type cannot be null");
         documentValidator.validate(content, documentEntityType);
     }
 }

@@ -6,12 +6,11 @@ import jakarta.validation.constraints.NotNull;
 
 public record UserUpdateDTO(
         @NotNull Long id,
-        String email,
         String name,
         String phone,
         String password){
 
     public UserUpdateDTO(User user) {
-        this(user.getId(), user.getEmail(), user.getName(), user.getPhone(), user.getPassword());
+        this(user.getId(), user.getName(), user.getPhone(), user.getPassword());
     }
 }

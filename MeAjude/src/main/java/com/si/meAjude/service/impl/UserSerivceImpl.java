@@ -26,7 +26,7 @@ public class UserSerivceImpl implements UserSerivce {
     @Override
     public UserDTO save(UserSaveDTO dto) {
         DocumentValidator documentValidator = getValidator(dto.documentDTO().documentType());
-        User user = dto.toUsuario();
+        User user = dto.toUser();
         user.getDocument().setAndValidateDocument(documentValidator);
         return new UserDTO(userRepository.save(user));
     }
@@ -34,7 +34,7 @@ public class UserSerivceImpl implements UserSerivce {
     private DocumentValidator getValidator(DocumentType documentType){
        if(documentType == DocumentType.CPF) return new CPFValidator();
        else if(documentType == DocumentType.CNPJ) return new CNPJValidator();
-       else throw new IllegalArgumentException("Invalid document type");
+       else throw new IllegalArgumentException("Invalid document type: '"+ documentType + "'");
     }
 
     @Override
@@ -57,7 +57,6 @@ public class UserSerivceImpl implements UserSerivce {
 
     private User updateUsuario(UserUpdateDTO userUpdateDTO, User user){
         if(userUpdateDTO.name()!= null && !userUpdateDTO.name().isBlank()) user.setName(userUpdateDTO.name());
-        if(userUpdateDTO.email()!= null && !userUpdateDTO.email().isBlank()) user.setEmail(userUpdateDTO.email());
         if(userUpdateDTO.phone() != null && !userUpdateDTO.phone().isBlank()) user.setPhone(userUpdateDTO.phone());
         if(userUpdateDTO.password() != null && !userUpdateDTO.password().isBlank()) user.setPassword(userUpdateDTO.password());
         return user;
@@ -73,7 +72,7 @@ public class UserSerivceImpl implements UserSerivce {
 
     private User getUsuario(Long id){
         User user = userRepository.getById(id);
-        if(user.isDeleted()) throw new EntityNotFoundException("Unable to find com.si.meAjude.models.Usuario with id "+ id);
+        if(user.isDeleted()) throw new EntityNotFoundException("Unable to find User with id "+ id);
         return user;
     }
 

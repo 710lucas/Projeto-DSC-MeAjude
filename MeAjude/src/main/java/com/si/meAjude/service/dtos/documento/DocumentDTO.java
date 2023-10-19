@@ -17,7 +17,7 @@ public record DocumentDTO(
         this(document.getDocumentType(), document.getContent(), document.getDocumentEntityType());
     }
 
-    public Document toDocumento(){
+    public Document toDocument(){
         Document document = new Document();
         document.setDocumentType(documentType());
         document.setContent(content());

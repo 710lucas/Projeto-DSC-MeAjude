@@ -29,13 +29,13 @@ public record UserSaveDTO(
         this(user.getName(), user.getEmail(), user.getPassword(), user.getPhone(), new DocumentDTO(user.getDocument()));
     }
 
-    public User toUsuario(){
+    public User toUser(){
         User user = new User();
         user.setName(name);
         user.setPassword(password);
         user.setEmail(email);
         user.setPhone(phone);
-        user.setDocument(documentDTO.toDocumento());
+        user.setDocument(documentDTO.toDocument());
         return user;
     }
 
