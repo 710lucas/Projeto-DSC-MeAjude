@@ -26,7 +26,7 @@ public class DonationController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public DonationDTO saveDoacao(@RequestBody @Valid DonationSaveDTO dto) {
+    public DonationDTO saveDonation(@RequestBody @Valid DonationSaveDTO dto) {
         return donationService.save(dto);
     }
 

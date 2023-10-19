@@ -4,7 +4,7 @@ import com.si.meAjude.models.Donation;
 import com.si.meAjude.models.searchers.donation.DonationSearcherFactory;
 import com.si.meAjude.models.searchers.donation.DonationSearchContent;
 import com.si.meAjude.models.searchers.donation.DonationSearcher;
-import com.si.meAjude.repositories.CampaignRepository;
+import com.si.meAjude.repositories.CampanhaRepository;
 import com.si.meAjude.repositories.DonationRepository;
 import com.si.meAjude.repositories.UserRepository;
 import com.si.meAjude.service.DonationService;
@@ -25,7 +25,7 @@ public class DonationServiceImpl implements DonationService {
     private DonationRepository donationRepository;
 
     @Autowired
-    private CampaignRepository campaignRepository;
+    private CampanhaRepository campaignRepository;
 
     @Autowired
     DonationSearcherFactory donationSearcherFactory;
@@ -34,8 +34,8 @@ public class DonationServiceImpl implements DonationService {
     private UserRepository userRepository;
 
     @Override
-    public DonationDTO save(DonationSaveDTO doacaoDTO) {
-        Donation donation = doacaoDTO.toDonation(campaignRepository, userRepository);
+    public DonationDTO save(DonationSaveDTO donationDTO) {
+        Donation donation = donationDTO.toDonation(campaignRepository, userRepository);
         return new DonationDTO(donationRepository.save(donation));
     }
 
