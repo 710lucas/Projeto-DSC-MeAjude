@@ -11,12 +11,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public record DonationDTO(
+        Long donationId,
         Long userId,
         Long campaignId,
         @JsonFormat(pattern = "dd/MM/yyyy")
         LocalDate date,
         BigDecimal value) {
     public DonationDTO(Donation donation){
-        this(donation.getUser().getId(), donation.getCampaign().getId(), donation.getDate(), donation.getDonationValue());
+        this(donation.getId(), donation.getUser().getId(), donation.getCampaign().getId(), donation.getDate(), donation.getDonationValue());
     }
 }
