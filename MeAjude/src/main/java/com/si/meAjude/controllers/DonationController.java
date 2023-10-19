@@ -13,8 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/doacoes")
-public class DoacaoController {
+@RequestMapping("/donations")
+public class DonationController {
 
     @Autowired
     DonationService donationService;
@@ -31,13 +31,12 @@ public class DoacaoController {
         return donationService.getById(id);
     }
 
-    @GetMapping()
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public Page<DonationDTO> getAll(
             @PageableDefault(size = 10) Pageable page,
             @RequestParam(name = "sortField", required = false, defaultValue = "date") String sortField,
-            @RequestParam(name = "sortDirection", required = false, defaultValue = "asc") String sortDirection,
-            @RequestParam(name = "id") Long id) {
+            @RequestParam(name = "sortDirection", required = false, defaultValue = "asc") String sortDirection) {
 
         page = PageableUtil.getPageableWithSort(page, sortField, sortDirection);
         return donationService.getAll(page);

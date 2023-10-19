@@ -28,12 +28,8 @@ public class DonationServiceImpl implements DonationService {
     private UserRepository userRepository;
 
     @Override
-    public DonationDTO save(DonationSaveDTO doacaoDTO) {
-        Donation donation = new Donation();
-        donation.setCampaign(campaignRepository.getById(doacaoDTO.campanhaId()));
-        donation.setUser(userRepository.getById(doacaoDTO.usuarioId()));
-        donation.setDate(doacaoDTO.data());
-        donation.setDonationValue(doacaoDTO.valorDoado());
+    public DonationDTO save(DonationSaveDTO donationDTO) {
+        Donation donation = donationDTO.toDonation(campaignRepository, userRepository);
         return new DonationDTO(donationRepository.save(donation));
     }
 

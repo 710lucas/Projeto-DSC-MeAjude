@@ -56,7 +56,7 @@ public class CampanhaController {
         return ResponseEntity.ok(campaignService.mudarMeta(campanha.meta(), campanha.id()));
     }
 
-    @PatchMapping("/data-final")
+    @PatchMapping("/date-final")
     public ResponseEntity<CampanhaDTO> setDataFinal(@RequestBody CampanhaUpdateDTO campanha) throws DataInvalida {
         return ResponseEntity.ok(campaignService.mudarDataFinal(campanha.dataFinal(), campanha.id()));
     }

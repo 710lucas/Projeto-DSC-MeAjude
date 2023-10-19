@@ -1,21 +1,22 @@
 package com.si.meAjude.service.dtos.doacao;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.si.meAjude.models.Donation;
-import com.si.meAjude.service.dtos.campanha.CampanhaDTO;
-import com.si.meAjude.service.dtos.usuario.UserDTO;
+import com.si.meAjude.repositories.CampaignRepository;
+import com.si.meAjude.repositories.UserRepository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public record DonationDTO(UserDTO userDTO, @JsonBackReference CampanhaDTO campanhaDTO, LocalDate data, BigDecimal valorDoado) {
+public record DonationDTO(
+        Long userId,
+        Long campaignId,
+        @JsonFormat(pattern = "dd/MM/yyyy")
+        LocalDate date,
+        BigDecimal value) {
     public DonationDTO(Donation donation){
-        this(new UserDTO(donation.getUser()), new CampanhaDTO(donation.getCampaign()), donation.getDate(), donation.getDonationValue());
-    }
-
-    public static List<DonationDTO> doacaoToDTO(List<Donation> donationList){
-        return donationList.stream().map(DonationDTO::new).collect(Collectors.toList());
+        this(donation.getUser().getId(), donation.getCampaign().getId(), donation.getDate(), donation.getDonationValue());
     }
 }

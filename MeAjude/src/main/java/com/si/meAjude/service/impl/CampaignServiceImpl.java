@@ -120,7 +120,7 @@ public class CampaignServiceImpl implements CampaignService {
             throw new RuntimeException("Campanha de id: "+id+" não existe");
         Campaign c = campaignRepository.getById(id);
         if(dataFinal.isBefore(c.getDataInicio()) || dataFinal.isEqual(c.getDataInicio()))
-            throw new DataInvalida("A data informada deve ser depois da data de inicio da campanha");
+            throw new DataInvalida("A date informada deve ser depois da date de inicio da campanha");
         c.setDataFinal(dataFinal);
         campaignRepository.save(c);
         return new CampanhaDTO(c);

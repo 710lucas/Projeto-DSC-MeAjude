@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
 
 @RestController
-@RequestMapping("/usuarios")
-public class UsuarioController {
+@RequestMapping("/users")
+public class UserController {
 
     @Autowired
     UserSerivce userSerivce;

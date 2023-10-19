@@ -1,5 +1,9 @@
 package com.si.meAjude.service.dtos.doacao;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.si.meAjude.models.Donation;
+import com.si.meAjude.repositories.CampaignRepository;
+import com.si.meAjude.repositories.UserRepository;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
@@ -8,12 +12,22 @@ import java.time.LocalDate;
 
 public record DonationSaveDTO(
         @NotNull
-        Long usuarioId,
+        Long userId,
         @NotNull
-        Long campanhaId,
+        Long campaignId,
         @NotNull
-        LocalDate data,
+        @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
+        LocalDate date,
         @NotNull
         @Min(value = 1)
-        BigDecimal valorDoado) {
+        BigDecimal value) {
+
+        public Donation toDonation(CampaignRepository campaignRepository, UserRepository userRepository){
+                Donation donation = new Donation();
+                donation.setCampaign(campaignRepository.getById(campaignId));
+                donation.setUser(userRepository.getById(userId));
+                donation.setDate(date);
+                donation.setDonationValue(value);
+                return donation;
+        }
 }
