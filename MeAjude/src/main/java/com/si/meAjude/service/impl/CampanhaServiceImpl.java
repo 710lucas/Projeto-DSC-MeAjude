@@ -11,7 +11,6 @@ import com.si.meAjude.repositories.DoacaoRepository;
 import com.si.meAjude.repositories.UsuarioRepository;
 import com.si.meAjude.service.CampanhaService;
 import com.si.meAjude.service.dtos.campanha.CampanhaDTO;
-import com.si.meAjude.service.dtos.campanha.CampanhaUpdateDTO;
 import com.si.meAjude.service.dtos.campanha.ListaCampanhasDTO;
 import com.si.meAjude.service.dtos.doacao.DoacaoDTO;
 import jakarta.validation.constraints.NotNull;
@@ -57,23 +56,6 @@ public class CampanhaServiceImpl implements CampanhaService{
     }
 
     @Override
-    public CampanhaDTO update(CampanhaUpdateDTO campanhaDTO) throws DataInvalida, MetaInvalidaException, DescricaoInvalidaException, TituloInvalidoException {
-
-        if(campanhaDTO.id() == null)
-            throw new RuntimeException("Id informado ao mudar classe é inválido");
-
-        Campanha c = campanhaRepository.getById(campanhaDTO.id());
-
-        if(campanhaDTO.ativa() != null && campanhaDTO.ativa() != c.isAtiva()) mudarEstado(campanhaDTO.ativa(), campanhaDTO.id());
-        if(campanhaDTO.dataFinal() != null && !campanhaDTO.dataFinal().equals(c.getDataFinal())) mudarDataFinal(campanhaDTO.dataFinal(), campanhaDTO.id());
-        if(campanhaDTO.meta() != null && !campanhaDTO.meta().equals(c.getMeta())) mudarMeta(campanhaDTO.meta(), campanhaDTO.id());
-        if(campanhaDTO.descricao() != null && !campanhaDTO.descricao().equals(c.getDescricao())) mudarDescricao(campanhaDTO.descricao(), campanhaDTO.id());
-        if(campanhaDTO.titulo() != null && !campanhaDTO.titulo().equals(c.getTitulo())) mudarTitulo(campanhaDTO.titulo(), campanhaDTO.id());
-
-        return new CampanhaDTO(c);
-    }
-
-    @Override
     public CampanhaDTO removerCampanha(long id) {
         Campanha c = campanhaRepository.getById(id);
         if(c == null)
@@ -92,7 +74,6 @@ public class CampanhaServiceImpl implements CampanhaService{
 
     @Override
     public CampanhaDTO mudarEstado(boolean estado, long id) {
-        System.out.printf("Setando estado de id: "+id+" para "+estado);
         if(!campanhaRepository.existsById(id))
             throw new RuntimeException("Campanha de id: "+id+" não existe");
         Campanha c = campanhaRepository.getById(id);

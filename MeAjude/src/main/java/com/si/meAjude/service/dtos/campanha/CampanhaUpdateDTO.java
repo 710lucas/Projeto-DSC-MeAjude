@@ -1,25 +1,17 @@
 package com.si.meAjude.service.dtos.campanha;
 
 import com.si.meAjude.models.Usuario;
-import jakarta.annotation.Nullable;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public record CampanhaUpdateDTO (
-    @Nullable
     Long id,
-    @Nullable
     String titulo,
     BigDecimal meta,
-    @Nullable
-    Boolean ativa,
-    @Nullable
+    boolean ativa,
     String descricao,
-    @Nullable
     LocalDateTime dataInicio,
-    @Nullable
     LocalDateTime dataFinal,
-    @Nullable
     Long criadorId
 ){}

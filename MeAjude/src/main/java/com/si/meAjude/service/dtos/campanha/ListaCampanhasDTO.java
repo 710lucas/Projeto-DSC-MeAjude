@@ -31,8 +31,6 @@ public class ListaCampanhasDTO {
     public ListaCampanhasDTO(List<Campanha> campanhas, CriterioEnum criterio){
         List<CampanhaGetDTO> newCampanhas = new ArrayList<>();
         for(Campanha c : campanhas) {
-            if(c.isDeletado())
-                continue;
             switch (criterio){
                 case ATIVAS_DATA, ATIVAS_TITULO -> {
                     if(c.isAtiva())

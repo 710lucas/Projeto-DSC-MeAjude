@@ -4,7 +4,6 @@ import com.si.meAjude.exceptions.*;
 import com.si.meAjude.models.Doacao;
 import com.si.meAjude.models.Usuario;
 import com.si.meAjude.service.dtos.campanha.CampanhaDTO;
-import com.si.meAjude.service.dtos.campanha.CampanhaUpdateDTO;
 import com.si.meAjude.service.dtos.campanha.ListaCampanhasDTO;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +16,6 @@ public interface CampanhaService{
 
     CampanhaDTO removerCampanha(long id);
 
-    CampanhaDTO update(CampanhaUpdateDTO campanha) throws DataInvalida, MetaInvalidaException, DescricaoInvalidaException, TituloInvalidoException;
 
     CampanhaDTO getCampanha(Long id);
 
