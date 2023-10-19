@@ -34,7 +34,7 @@ public class Donation {
     @ManyToOne
     @JoinColumn
     @NotNull
-    private Campaign campaign;
+    private Campanha campaign;
 
     @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
     @JsonDeserialize(using = LocalDateDeserializer.class)

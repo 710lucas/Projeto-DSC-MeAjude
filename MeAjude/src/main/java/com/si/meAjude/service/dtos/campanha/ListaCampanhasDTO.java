@@ -1,9 +1,10 @@
 package com.si.meAjude.service.dtos.campanha;
 
-import com.si.meAjude.models.Campaign;
+import com.si.meAjude.models.Campanha;
 import com.si.meAjude.models.comparators.DataComparator;
 import com.si.meAjude.models.comparators.TituloComparator;
 import com.si.meAjude.models.enums.CriterioEnum;
+import com.si.meAjude.service.dtos.campanha.CampanhaDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,9 +28,11 @@ public class ListaCampanhasDTO {
         this.campanhas.add(campanha);
     }
 
-    public ListaCampanhasDTO(List<Campaign> campaigns, CriterioEnum criterio){
+    public ListaCampanhasDTO(List<Campanha> campanhas, CriterioEnum criterio){
         List<CampanhaGetDTO> newCampanhas = new ArrayList<>();
-        for(Campaign c : campaigns) {
+        for(Campanha c : campanhas) {
+            if(c.isDeletado())
+                continue;
             switch (criterio){
                 case ATIVAS_DATA, ATIVAS_TITULO -> {
                     if(c.isAtiva())

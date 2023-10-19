@@ -2,13 +2,11 @@ package com.si.meAjude.service.dtos.doacao;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.si.meAjude.models.Donation;
-import com.si.meAjude.repositories.CampaignRepository;
+import com.si.meAjude.repositories.CampanhaRepository;
 import com.si.meAjude.repositories.UserRepository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public record DonationDTO(
         Long donationId,

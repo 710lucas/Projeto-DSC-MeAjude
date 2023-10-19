@@ -20,7 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
-public class Campaign {
+public class Campanha{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,8 +36,8 @@ public class Campaign {
     private BigDecimal meta;
     @Future
     private LocalDateTime dataFinal;
-//    @FutureOrPresent
-    private LocalDateTime dataInicio = LocalDateTime.now();
+    @FutureOrPresent
+    private LocalDateTime dataInicio = LocalDateTime.now().plusMinutes(1);
     @ManyToOne
     @NotNull
     private User criador;
@@ -50,10 +50,10 @@ public class Campaign {
     private boolean deletado;
 
 
-    public void adicionarDoacao(Donation donation) throws DoacaoInvalidaException {
-        if(donation == null)
+    public void adicionarDoacao(Donation doacao) throws DoacaoInvalidaException {
+        if(doacao == null)
             throw new DoacaoInvalidaException("A doaçao informada é inválida");
-        doacoes.add(donation);
+        doacoes.add(doacao);
     }
 
     public Donation getDoacao(Long id) throws DoacaoInvalidaException {
