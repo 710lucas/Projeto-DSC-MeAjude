@@ -1,7 +1,7 @@
 package com.si.meAjude.service.impl;
 
 import com.si.meAjude.models.Donation;
-import com.si.meAjude.repositories.CampaignRepository;
+import com.si.meAjude.repositories.CampanhaRepository;
 import com.si.meAjude.repositories.DonationRepository;
 import com.si.meAjude.repositories.UserRepository;
 import com.si.meAjude.service.DonationService;
@@ -22,7 +22,7 @@ public class DonationServiceImpl implements DonationService {
     private DonationRepository donationRepository;
 
     @Autowired
-    private CampaignRepository campaignRepository;
+    private CampanhaRepository campaignRepository;
 
     @Autowired
     private UserRepository userRepository;
