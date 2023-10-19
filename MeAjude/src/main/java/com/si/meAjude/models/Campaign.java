@@ -42,7 +42,7 @@ public class Campaign {
     @NotNull
     private User criador;
 
-    @OneToMany(mappedBy = "campanha")
+    @OneToMany(mappedBy = "campaign")
     private List<Donation> doacoes = new ArrayList<>();
 
     private BigDecimal valorArrecadado = BigDecimal.ZERO;

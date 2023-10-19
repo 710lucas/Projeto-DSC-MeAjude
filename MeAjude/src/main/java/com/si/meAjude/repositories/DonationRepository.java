@@ -20,9 +20,9 @@ public interface DonationRepository extends JpaRepository<Donation, Long> {
 
     Page<Donation> findAllByUserIdAndCampaignId(Pageable page, Long userId, Long campanhaId);
 
-    Page<Donation> findAllByDataAndUserId(Pageable pageable, LocalDate data, Long userId);
+    Page<Donation> findAllByDateAndUserId(Pageable pageable, LocalDate data, Long userId);
 
     Page<Donation> findAllByDateAndCampaignId(Pageable page, LocalDate date, Long id);
 
-    Page<Donation> findAllByDataAndUserIdAndCampaignId(Pageable page, LocalDate date, Long userId, Long campaignId);
+    Page<Donation> findAllByDateAndUserIdAndCampaignId(Pageable page, LocalDate date, Long userId, Long campaignId);
 }
