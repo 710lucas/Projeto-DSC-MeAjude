@@ -37,34 +37,11 @@ public class CampanhaController {
         return ResponseEntity.ok(campanhaService.getCampanha(Long.parseLong(id)));
     }
 
-    @PatchMapping("/ativa")
-    public ResponseEntity<CampanhaDTO> setAtiva(@RequestBody CampanhaUpdateDTO campanha){
-        return ResponseEntity.ok(campanhaService.mudarEstado(campanha.ativa(), campanha.id()));
+    @PutMapping()
+    public ResponseEntity<CampanhaDTO> modificar(@RequestBody CampanhaUpdateDTO campanha) throws DataInvalida, TituloInvalidoException, DescricaoInvalidaException, MetaInvalidaException {
+        return ResponseEntity.ok(campanhaService.update(campanha));
     }
 
-    @PatchMapping("/titulo")
-    public ResponseEntity<CampanhaDTO> modificarTitulo(@RequestBody CampanhaUpdateDTO campanha) throws TituloInvalidoException {
-        return ResponseEntity.ok(campanhaService.mudarTitulo(campanha.titulo(), campanha.id()));
-    }
-
-    @PatchMapping("/descricao")
-    public ResponseEntity<CampanhaDTO> setDescricao(@RequestBody CampanhaUpdateDTO campanha) throws DescricaoInvalidaException {
-        return ResponseEntity.ok(campanhaService.mudarDescricao(campanha.descricao(), campanha.id()));
-    }
-
-    @PatchMapping("/meta")
-    public ResponseEntity<CampanhaDTO> setMeta(@RequestBody CampanhaUpdateDTO campanha) throws MetaInvalidaException {
-        return ResponseEntity.ok(campanhaService.mudarMeta(campanha.meta(), campanha.id()));
-    }
-
-    @PatchMapping("/data-final")
-    public ResponseEntity<CampanhaDTO> setDataFinal(@RequestBody CampanhaUpdateDTO campanha) throws DataInvalida {
-        return ResponseEntity.ok(campanhaService.mudarDataFinal(campanha.dataFinal(), campanha.id()));
-    }
-    @PatchMapping("/criador")
-    public ResponseEntity<CampanhaDTO> setCriador(@RequestBody CampanhaUpdateDTO campanha) throws CriadorInvalidoException {
-        return ResponseEntity.ok(campanhaService.mudarCriador(campanha.criadorId(), campanha.id()));
-    }
 
     @GetMapping()
     public ResponseEntity<ListaCampanhasDTO> listar(@RequestParam(name = "quantidade", required = false, defaultValue = "-1") String quantidade, @RequestParam(name = "criterio", required = false) String criterio) throws DoacaoInvalidaException, CriterioInvalidoException {
