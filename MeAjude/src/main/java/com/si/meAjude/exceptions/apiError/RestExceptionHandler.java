@@ -90,7 +90,7 @@ public class RestExceptionHandler {
                 .timestamp(LocalDateTime.now())
                 .code(HttpStatus.CONFLICT.value())
                 .status(HttpStatus.CONFLICT.name())
-                .errors(List.of("Erro de violação de chave única não especificado."))
+                .errors(List.of("Erro de violação de chave única não especificado.", ex.getMessage()))
                 .build();
         return new ResponseEntity<>(apiError, HttpStatus.CONFLICT);
     }

@@ -42,7 +42,8 @@ public class CommandLinner implements CommandLineRunner {
         campaign.setDescricao("Campanha de teste");
         campaign.setDataFinal(LocalDate.now().plus(1, ChronoUnit.DAYS).atStartOfDay());
 
-        userRepository.save(userTest);
-        campaignRepository.save(campaign);
+        //descomentar caso queira persistir os dados teste
+//        userRepository.save(userTest);
+//        campaignRepository.save(campaign);
     }
 }
