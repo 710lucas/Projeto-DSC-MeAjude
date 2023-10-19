@@ -1,8 +1,8 @@
 package com.si.meAjude.controllers;
 
-import com.si.meAjude.service.DoacaoService;
-import com.si.meAjude.service.dtos.doacao.DoacaoDTO;
-import com.si.meAjude.service.dtos.doacao.DoacaoSaveDTO;
+import com.si.meAjude.service.DonationService;
+import com.si.meAjude.service.dtos.doacao.DonationDTO;
+import com.si.meAjude.service.dtos.doacao.DonationSaveDTO;
 import com.si.meAjude.util.PageableUtil;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,29 +17,29 @@ import org.springframework.web.bind.annotation.*;
 public class DoacaoController {
 
     @Autowired
-    DoacaoService doacaoService;
+    DonationService donationService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public DoacaoDTO saveDoacao(@RequestBody @Valid DoacaoSaveDTO dto) {
-        return doacaoService.save(dto);
+    public DonationDTO saveDoacao(@RequestBody @Valid DonationSaveDTO dto) {
+        return donationService.save(dto);
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public DoacaoDTO getById(@PathVariable Long id) {
-        return doacaoService.getById(id);
+    public DonationDTO getById(@PathVariable Long id) {
+        return donationService.getById(id);
     }
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public Page<DoacaoDTO> getAll(
+    public Page<DonationDTO> getAll(
             @PageableDefault(size = 10) Pageable page,
-            @RequestParam(name = "sortField", required = false, defaultValue = "data") String sortField,
+            @RequestParam(name = "sortField", required = false, defaultValue = "date") String sortField,
             @RequestParam(name = "sortDirection", required = false, defaultValue = "asc") String sortDirection,
             @RequestParam(name = "id") Long id) {
 
         page = PageableUtil.getPageableWithSort(page, sortField, sortDirection);
-        return doacaoService.getAll(page);
+        return donationService.getAll(page);
     }
 }

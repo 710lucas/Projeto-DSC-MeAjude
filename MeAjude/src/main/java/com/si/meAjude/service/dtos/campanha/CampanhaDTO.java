@@ -1,20 +1,11 @@
 package com.si.meAjude.service.dtos.campanha;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.si.meAjude.models.Campanha;
-import com.si.meAjude.models.Doacao;
-import com.si.meAjude.service.dtos.doacao.DoacaoDTO;
-import com.si.meAjude.service.dtos.usuario.UsuarioSaveDTO;
-import jakarta.annotation.Nullable;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.si.meAjude.models.Campaign;
+import com.si.meAjude.models.Donation;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -29,14 +20,14 @@ public record CampanhaDTO(
          boolean deletado,
          Long criadorId,
          @JsonManagedReference
-         List<Doacao> doacoes,
+         List<Donation> doacoes,
          BigDecimal valorArrecadado
 ){
 
-    public CampanhaDTO(Campanha campanha){
-        this(campanha.isAtiva(),campanha.getTitulo(), campanha.getDescricao(), campanha.getMeta(),
-                campanha.getDataInicio(), campanha.getDataFinal(), campanha.isDeletado(),
-                campanha.getCriador().getId(), campanha.getDoacoes(), campanha.getValorArrecadado());
+    public CampanhaDTO(Campaign campaign){
+        this(campaign.isAtiva(), campaign.getTitulo(), campaign.getDescricao(), campaign.getMeta(),
+                campaign.getDataInicio(), campaign.getDataFinal(), campaign.isDeletado(),
+                campaign.getCriador().getId(), campaign.getDoacoes(), campaign.getValorArrecadado());
     }
 
 

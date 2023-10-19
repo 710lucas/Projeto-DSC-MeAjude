@@ -1,6 +1,5 @@
 package com.si.meAjude.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -12,31 +11,31 @@ import java.time.LocalDate;
 
 @Entity
 @Data
-@Table(name = "DOACOES")
+@Table(name = "donations")
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Doacao {
+public class Donation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn
     @NotNull
-    private Usuario usuario;
+    private User user;
 
     @ManyToOne
-    @JoinColumn(name = "campanha_id")
+    @JoinColumn
     @NotNull
 //    @JsonBackReference
-    private Campanha campanha;
+    private Campaign campaign;
 
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private LocalDate data;
+    private LocalDate date;
 
     @NotNull
     @Min(value = 1)
-    private BigDecimal valorDoado;
+    private BigDecimal donationValue;
 }
