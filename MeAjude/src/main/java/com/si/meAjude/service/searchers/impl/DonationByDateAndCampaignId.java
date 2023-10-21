@@ -1,9 +1,9 @@
-package com.si.meAjude.service.searcher.donation.impl;
+package com.si.meAjude.service.searchers.impl;
 
 import com.si.meAjude.models.Donation;
-import com.si.meAjude.service.searcher.donation.DonationSearchContent;
-import com.si.meAjude.service.searcher.donation.DonationSearchCriterion;
-import com.si.meAjude.service.searcher.donation.DonationSearcher;
+import com.si.meAjude.service.searchers.dtos.DonationSearchContent;
+import com.si.meAjude.service.searchers.enums.DonationSearchCriterion;
+import com.si.meAjude.service.searchers.DonationSearcher;
 import com.si.meAjude.repositories.DonationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

@@ -2,7 +2,7 @@ package com.si.meAjude.service;
 
 
 
-import com.si.meAjude.service.searcher.donation.DonationSearchContent;
+import com.si.meAjude.service.searchers.dtos.DonationSearchContent;
 import com.si.meAjude.service.dtos.doacao.DonationDTO;
 import com.si.meAjude.service.dtos.doacao.DonationSaveDTO;
 import org.springframework.data.domain.Page;

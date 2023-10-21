@@ -1,8 +1,8 @@
 package com.si.meAjude.controllers;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.si.meAjude.service.searcher.donation.DonationSearchContent;
-import com.si.meAjude.service.searcher.donation.DonationSearchCriterion;
+import com.si.meAjude.service.searchers.dtos.DonationSearchContent;
+import com.si.meAjude.service.searchers.enums.DonationSearchCriterion;
 import com.si.meAjude.service.DonationService;
 import com.si.meAjude.service.dtos.doacao.DonationDTO;
 import com.si.meAjude.service.dtos.doacao.DonationSaveDTO;

@@ -1,5 +1,7 @@
-package com.si.meAjude.service.searcher.donation;
+package com.si.meAjude.service.searchers.factorys;
 
+import com.si.meAjude.service.searchers.DonationSearcher;
+import com.si.meAjude.service.searchers.enums.DonationSearchCriterion;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;

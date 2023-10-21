@@ -1,9 +1,9 @@
 package com.si.meAjude.service.impl;
 
 import com.si.meAjude.models.Donation;
-import com.si.meAjude.service.searcher.donation.DonationSearcherFactory;
-import com.si.meAjude.service.searcher.donation.DonationSearchContent;
-import com.si.meAjude.service.searcher.donation.DonationSearcher;
+import com.si.meAjude.service.searchers.factorys.DonationSearcherFactory;
+import com.si.meAjude.service.searchers.dtos.DonationSearchContent;
+import com.si.meAjude.service.searchers.DonationSearcher;
 import com.si.meAjude.repositories.CampanhaRepository;
 import com.si.meAjude.repositories.DonationRepository;
 import com.si.meAjude.repositories.UserRepository;
