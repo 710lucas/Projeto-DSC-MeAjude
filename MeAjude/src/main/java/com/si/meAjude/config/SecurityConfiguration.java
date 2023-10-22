@@ -48,6 +48,7 @@ public class SecurityConfiguration {
         return httpSecurity.csrf(csrf -> csrf.disable() ) // Desativa a proteção contra CSRF
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Configura a política de criação de sessão como stateless
                 .authorizeHttpRequests(authorize -> authorize.requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_REQUIRED).permitAll()
+                        .requestMatchers("/h2-console/*").permitAll()
                         .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_REQUIRED).authenticated()
                         .requestMatchers(ENDPOINTS_ADMIN).hasRole("ADMINISTRATOR") // Repare que não é necessário colocar "ROLE" antes do nome, como fizemos na definição das roles
                         .requestMatchers(ENDPOINTS_CUSTOMER).hasRole("CUSTOMER")
