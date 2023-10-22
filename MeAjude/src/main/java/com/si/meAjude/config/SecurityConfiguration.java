@@ -26,7 +26,7 @@ public class SecurityConfiguration {
     public static final  String [] ENDPOINT_WITH_AUTHENTICATION_NOT_REQUIRED = {
         "/users/login",
         "/users",
-         "/h2-console"
+        "/h2-console"
     };
 
     // Endpoints que só podem ser acessador por usuários com permissão de cliente
@@ -47,15 +47,15 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity.csrf(csrf -> csrf.disable() ) // Desativa a proteção contra CSRF
+        return httpSecurity.csrf(csrf -> csrf.disable()) // Desativa a proteção contra CSRF
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Configura a política de criação de sessão como stateless
-                .authorizeHttpRequests(authorize -> authorize.requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_REQUIRED).permitAll()
-                        .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll() // Permite o acesso aos recursos estáticos (ex: CSS, JS, imagens, etc.)
-                        .requestMatchers(ENDPOINT_WITH_AUTHENTICATION_NOT_REQUIRED).permitAll() // Permite o acesso aos endpoints que não requerem autenticação
-                        .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_REQUIRED).authenticated()
-                        .requestMatchers(ENDPOINTS_ADMIN).hasRole("ADMINISTRATOR") // Repare que não é necessário colocar "ROLE" antes do nome, como fizemos na definição das roles
-                        .anyRequest().permitAll()) // Qualquer outra requisição não permitida
-                .addFilterBefore(userAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .authorizeHttpRequests(authorize -> authorize
+                .requestMatchers(ENDPOINT_WITH_AUTHENTICATION_NOT_REQUIRED).permitAll()
+                .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_REQUIRED).authenticated()
+                .requestMatchers(ENDPOINTS_ADMIN).hasRole("ADMINISTRATOR") // Repare que não é necessário colocar "ROLE" antes do nome, como fizemos na definição das roles
+                .requestMatchers(ENDPOINTS_CUSTOMER).hasRole("CUSTOMER")
+                .anyRequest().denyAll())
+                .addFilterBefore(userAuthenticationFilter, UsernamePasswordAuthenticationFilter.class) // Adiciona o filtro de autenticação de usuário que criamos, antes do filtro de segurança padrão do Spring Security
                 .build();
     }
 
