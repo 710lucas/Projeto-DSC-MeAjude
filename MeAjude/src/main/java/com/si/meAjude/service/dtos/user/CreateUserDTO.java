@@ -1,4 +1,6 @@
 package com.si.meAjude.service.dtos.user;
 
-public record CreateUserDTO(String email, String password, String Role) {
+import com.si.meAjude.models.enums.RoleName;
+
+public record CreateUserDTO(String email, String password, RoleName role) {
 }

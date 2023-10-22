@@ -21,7 +21,7 @@ public class JwtTokenServiceImpl implements JwtTokenService {
     private static final String ISSUER = "meAjude";
 
     @Override
-    public String generateToken(User user) {
+    public String generateToken(UserDetailsImpl user) {
         try {
             // Define o algoritmo HMAC SHA256 para criar a assinatura do token passando a chave secreta definida
             Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY);

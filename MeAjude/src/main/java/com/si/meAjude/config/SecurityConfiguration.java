@@ -26,7 +26,7 @@ public class SecurityConfiguration {
     public static final  String [] ENDPOINT_WITH_AUTHENTICATION_NOT_REQUIRED = {
         "/users/login",
         "/users",
-         "h2-console/**"
+         "/h2-console"
     };
 
     // Endpoints que só podem ser acessador por usuários com permissão de cliente

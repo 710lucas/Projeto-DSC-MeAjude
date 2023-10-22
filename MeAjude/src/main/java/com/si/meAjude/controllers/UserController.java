@@ -1,8 +1,13 @@
 package com.si.meAjude.controllers;
 
+import com.si.meAjude.service.dtos.JtwToken.RecoveryJwtDTO;
+import com.si.meAjude.service.dtos.user.CreateUserDTO;
+import com.si.meAjude.service.dtos.user.LoginUserDTO;
+import com.si.meAjude.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
@@ -12,13 +17,13 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/login")
-    public ResponseEntity<RecoveryJwtTokenDto> authenticateUser(@RequestBody LoginUserDto loginUserDto) {
-        RecoveryJwtTokenDto token = userService.authenticateUser(loginUserDto);
+    public ResponseEntity<RecoveryJwtDTO> authenticateUser(@RequestBody LoginUserDTO loginUserDto) {
+        RecoveryJwtDTO token = userService.authenticateUser(loginUserDto);
         return new ResponseEntity<>(token, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Void> createUser(@RequestBody CreateUserDto createUserDto) {
+    public ResponseEntity<Void> createUser(@RequestBody CreateUserDTO createUserDto) {
         userService.createUser(createUserDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

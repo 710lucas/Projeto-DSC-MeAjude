@@ -4,6 +4,7 @@ import com.si.meAjude.models.Donor;
 import com.si.meAjude.models.User;
 import com.si.meAjude.repositories.UserRepository;
 import com.si.meAjude.service.impl.JwtTokenServiceImpl;
+import com.si.meAjude.service.impl.UserDetailsImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -35,9 +36,10 @@ public class UserAuthenticationFilter extends OncePerRequestFilter {
             if (token != null) {
                 String subject = jwtTokenService.getSubjectFromToken(token); // Obtém o assunto (neste caso, o nome de usuário) do token
                 User user = userRepository.findByEmail(subject).get(); // Busca o usuário pelo email (que é o assunto do token)
+                UserDetailsImpl userDetails = new UserDetailsImpl(user);
                 // Cria um objeto de autenticação do Spring Security
                 Authentication authentication =
-                        new UsernamePasswordAuthenticationToken(user.getUsername(), null, user.getAuthorities());
+                        new UsernamePasswordAuthenticationToken(userDetails.getUsername(), null, userDetails.getAuthorities());
                 // Define o objeto de autenticação no contexto de segurança do Spring Security
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             } else {
