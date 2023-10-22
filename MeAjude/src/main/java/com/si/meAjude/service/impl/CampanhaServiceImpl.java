@@ -3,11 +3,11 @@ package com.si.meAjude.service.impl;
 
 import com.si.meAjude.exceptions.*;
 import com.si.meAjude.models.Campanha;
-import com.si.meAjude.models.User;
+import com.si.meAjude.models.Donor;
 import com.si.meAjude.models.enums.CriterioEnum;
 import com.si.meAjude.repositories.CampanhaRepository;
 import com.si.meAjude.repositories.DonationRepository;
-import com.si.meAjude.repositories.UserRepository;
+import com.si.meAjude.repositories.DonorRepository;
 import com.si.meAjude.service.CampanhaService;
 import com.si.meAjude.service.dtos.campanha.CampanhaDTO;
 import com.si.meAjude.service.dtos.campanha.CampanhaUpdateDTO;
@@ -30,14 +30,14 @@ public class CampanhaServiceImpl implements CampanhaService{
     private CampanhaRepository campanhaRepository;
 
     @Autowired
-    private UserRepository usuarioRepository;
+    private DonorRepository donorRepository;
 
     @Autowired
     private DonationRepository doacaoRepository;
 
     public CampanhaDTO save(CampanhaDTO campanhaDTO){
         Campanha campanha = new Campanha();
-        campanha.setCriador(usuarioRepository.getById(campanhaDTO.criadorId()));
+        campanha.setCriador(donorRepository.getById(campanhaDTO.criadorId()));
         campanha.setAtiva(campanhaDTO.ativa());
         campanha.setTitulo(campanhaDTO.titulo());
         campanha.setDescricao(campanhaDTO.descricao());
@@ -150,7 +150,7 @@ public class CampanhaServiceImpl implements CampanhaService{
         if(!campanhaRepository.existsById(id))
             throw new RuntimeException("Campanha de id: "+id+" não existe");
         Campanha c = campanhaRepository.getById(id);
-        User criador = usuarioRepository.getById(criadorId);
+        Donor criador = donorRepository.getById(criadorId);
         if(criador == null || criador.isDeleted())
             throw new CriadorInvalidoException("O criador informado é inválido");
         c.setCriador(criador);

@@ -4,20 +4,24 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.si.meAjude.models.UserDetailsImpl;
+import com.si.meAjude.models.User;
 import com.si.meAjude.service.JwtTokenService;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
+@Component
 public class JwtTokenServiceImpl implements JwtTokenService {
 
-    private static final String SECRET_KEY = "123";
+
+    private String SECRET_KEY = "123";
     private static final String ISSUER = "meAjude";
 
     @Override
-    public String generateToken(UserDetailsImpl user) {
+    public String generateToken(User user) {
         try {
             // Define o algoritmo HMAC SHA256 para criar a assinatura do token passando a chave secreta definida
             Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY);

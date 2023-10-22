@@ -9,7 +9,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -29,7 +28,7 @@ public class Donation {
     @ManyToOne
     @JoinColumn
     @NotNull
-    private User user;
+    private Donor donor;
 
     @ManyToOne
     @JoinColumn
