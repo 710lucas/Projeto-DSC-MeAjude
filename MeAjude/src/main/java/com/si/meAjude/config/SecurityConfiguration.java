@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -24,7 +25,8 @@ public class SecurityConfiguration {
     // Endpoints que não requerem autenticação para serem acessados
     public static final  String [] ENDPOINT_WITH_AUTHENTICATION_NOT_REQUIRED = {
         "/users/login",
-        "/users"
+        "/users",
+         "h2-console/**"
     };
 
     // Endpoints que só podem ser acessador por usuários com permissão de cliente
@@ -48,11 +50,11 @@ public class SecurityConfiguration {
         return httpSecurity.csrf(csrf -> csrf.disable() ) // Desativa a proteção contra CSRF
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Configura a política de criação de sessão como stateless
                 .authorizeHttpRequests(authorize -> authorize.requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_REQUIRED).permitAll()
-                        .requestMatchers("/h2-console/*").permitAll()
+                        .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll() // Permite o acesso aos recursos estáticos (ex: CSS, JS, imagens, etc.)
+                        .requestMatchers(ENDPOINT_WITH_AUTHENTICATION_NOT_REQUIRED).permitAll() // Permite o acesso aos endpoints que não requerem autenticação
                         .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_REQUIRED).authenticated()
                         .requestMatchers(ENDPOINTS_ADMIN).hasRole("ADMINISTRATOR") // Repare que não é necessário colocar "ROLE" antes do nome, como fizemos na definição das roles
-                        .requestMatchers(ENDPOINTS_CUSTOMER).hasRole("CUSTOMER")
-                        .anyRequest().denyAll()) // Qualquer outra requisição não permitida
+                        .anyRequest().permitAll()) // Qualquer outra requisição não permitida
                 .addFilterBefore(userAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
