@@ -1,14 +1,19 @@
-server:
-  port: 8081
-
 spring:
-  datasource:
-    url: jdbc:mysql://localhost/db_meajude?useTimezone=true&serverTimezone=UTC
-    username: root
-    password: 200622pmr
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
+  profiles:
+    active: h2
 
 
+#server:
+#  port: 8081
+#
+#spring:
+#  datasource:
+#    url: jdbc:mysql://localhost/db_meajude?useTimezone=true&serverTimezone=UTC
+#    username: root
+#    password: 200622pmr
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#
+#
