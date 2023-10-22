@@ -19,7 +19,7 @@ public class DonationByDateAndUserId implements DonationSearcher {
     private DonationRepository donationRepository;
 
     private Page<Donation> searchByDateAndUserId(Pageable peagle,LocalDate date, Long userId){
-        return donationRepository.findAllByDateAndUserId(peagle,date, userId);
+        return donationRepository.findAllByDateAndDonorId(peagle,date, userId);
     }
 
     @Override

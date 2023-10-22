@@ -17,7 +17,7 @@ public class DonationByUserId implements DonationSearcher {
     private DonationRepository donationRepository;
 
     private Page<Donation> searchByUserId(Pageable peagle, Long userId){
-        return donationRepository.findAllByUserId(peagle,userId);
+        return donationRepository.findAllByDonorId(peagle,userId);
     }
 
     @Override
