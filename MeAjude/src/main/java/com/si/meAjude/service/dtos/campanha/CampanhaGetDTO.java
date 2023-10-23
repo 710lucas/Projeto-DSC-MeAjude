@@ -3,7 +3,7 @@ package com.si.meAjude.service.dtos.campanha;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.si.meAjude.models.Campanha;
 import com.si.meAjude.models.Donation;
-import com.si.meAjude.service.dtos.doacao.DonationDTO;
+import com.si.meAjude.service.dtos.donation.DonationDTO;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

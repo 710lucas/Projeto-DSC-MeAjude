@@ -28,7 +28,7 @@ public class Donation {
     @ManyToOne
     @JoinColumn
     @NotNull
-    private Donor donor;
+    private User user;
 
     @ManyToOne
     @JoinColumn

@@ -3,11 +3,9 @@ package com.si.meAjude.controllers;
 
 import com.si.meAjude.exceptions.*;
 import com.si.meAjude.service.CampanhaService;
-import com.si.meAjude.service.dtos.campanha.AddDoacaoDTO;
 import com.si.meAjude.service.dtos.campanha.CampanhaDTO;
 import com.si.meAjude.service.dtos.campanha.CampanhaUpdateDTO;
 import com.si.meAjude.service.dtos.campanha.ListaCampanhasDTO;
-import com.si.meAjude.service.dtos.doacao.DonationDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

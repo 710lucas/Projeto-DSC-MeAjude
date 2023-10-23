@@ -2,8 +2,8 @@ package com.si.meAjude.controllers;
 
 import com.si.meAjude.models.User;
 import com.si.meAjude.repositories.UserRepository;
-import com.si.meAjude.service.dtos.user.CreateUserDTO;
 import com.si.meAjude.service.dtos.user.LoginUserDTO;
+import com.si.meAjude.service.dtos.user.UserSaveDTO;
 import com.si.meAjude.service.impl.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class AuthenticationController {
     @Autowired
     private TokenService tokenService;
 
-    @PostMapping("/login")
+    @PostMapping
     public ResponseEntity login(@RequestBody @Valid LoginUserDTO data){
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
@@ -35,14 +35,5 @@ public class AuthenticationController {
         var token = tokenService.generateToken((User) auth.getPrincipal());
 
         return new ResponseEntity("Token: " + token, org.springframework.http.HttpStatus.OK);
-    }
-
-    @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Valid CreateUserDTO createUserDTO){
-        if(this.repository.findByEmail(createUserDTO.email()) != null) return ResponseEntity.badRequest().build();
-        String encryptedPassword = new BCryptPasswordEncoder().encode(createUserDTO.password());
-        User newUser = new User(createUserDTO.email(), encryptedPassword, createUserDTO.role());
-        this.repository.save(newUser);
-        return ResponseEntity.ok().build();
     }
 }

@@ -3,6 +3,8 @@ package com.si.meAjude.models;
 import com.si.meAjude.models.enums.UserRole;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -38,12 +40,20 @@ public class User implements UserDetails {
 
     private UserRole role;
 
+    @NotBlank
+    @Column(length = 50)
+    private String name;
 
-    public User(String email, String password, UserRole role) {
-        this.email = email;
-        this.password = password;
-        this.role = role;
-    }
+    @NotBlank
+    @Column(length = 13, unique = true)
+    private String phone;
+
+    private boolean deleted;
+
+    @NotNull
+    @Embedded
+    private Document document;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

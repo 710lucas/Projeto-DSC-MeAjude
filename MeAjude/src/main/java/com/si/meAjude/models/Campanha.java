@@ -40,7 +40,7 @@ public class Campanha{
     private LocalDateTime dataInicio = LocalDateTime.now().plusMinutes(1);
     @ManyToOne
     @NotNull
-    private Donor criador;
+    private User criador;
 
     @OneToMany(mappedBy = "campaign")
     private List<Donation> doacoes = new ArrayList<>();

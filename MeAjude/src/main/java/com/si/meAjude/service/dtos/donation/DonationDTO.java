@@ -1,4 +1,4 @@
-package com.si.meAjude.service.dtos.doacao;
+package com.si.meAjude.service.dtos.donation;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.si.meAjude.models.Donation;
@@ -14,6 +14,6 @@ public record DonationDTO(
         LocalDate date,
         BigDecimal value) {
     public DonationDTO(Donation donation){
-        this(donation.getId(), donation.getDonor().getId(), donation.getCampaign().getId(), donation.getDate(), donation.getDonationValue());
+        this(donation.getId(), donation.getUser().getId(), donation.getCampaign().getId(), donation.getDate(), donation.getDonationValue());
     }
 }

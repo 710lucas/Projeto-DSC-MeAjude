@@ -9,5 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public interface UserRepository extends JpaRepository<User,Long> {
     Page<User> findAll(Pageable pageable);
+    Page<User> findAllByDeletedFalse(Pageable page);
     UserDetails findByEmail(String login);
 }

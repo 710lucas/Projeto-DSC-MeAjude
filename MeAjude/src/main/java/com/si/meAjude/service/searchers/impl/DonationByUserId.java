@@ -1,10 +1,10 @@
 package com.si.meAjude.service.searchers.impl;
 
 import com.si.meAjude.models.Donation;
+import com.si.meAjude.repositories.DonationRepository;
 import com.si.meAjude.service.searchers.dtos.DonationSearchContent;
 import com.si.meAjude.service.searchers.enums.DonationSearchCriterion;
 import com.si.meAjude.service.searchers.DonationSearcher;
-import com.si.meAjude.repositories.DonationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +17,7 @@ public class DonationByUserId implements DonationSearcher {
     private DonationRepository donationRepository;
 
     private Page<Donation> searchByUserId(Pageable peagle, Long userId){
-        return donationRepository.findAllByDonorId(peagle,userId);
+        return donationRepository.findAllByUserId(peagle,userId);
     }
 
     @Override
