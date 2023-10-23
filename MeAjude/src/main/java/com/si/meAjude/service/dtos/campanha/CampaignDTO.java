@@ -1,7 +1,7 @@
 package com.si.meAjude.service.dtos.campanha;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.si.meAjude.models.campaign;
+import com.si.meAjude.models.Campaign;
 import com.si.meAjude.models.Donation;
 
 import java.math.BigDecimal;
@@ -24,7 +24,7 @@ public record CampaignDTO(
          BigDecimal raisedMoney
 ){
 
-    public CampaignDTO(campaign campaign){
+    public CampaignDTO(Campaign campaign){
         this(campaign.isActive(),campaign.getTitle(), campaign.getDescription(), campaign.getGoal(),
                 campaign.getStartingDate(), campaign.getFinalDate(), campaign.isDeleted(),
                 campaign.getCreator().getId(), campaign.getDonations(), campaign.getRaisedMoney());
