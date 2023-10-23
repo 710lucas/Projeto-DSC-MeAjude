@@ -2,6 +2,7 @@ package com.si.meAjude.service.impl;
 
 import com.si.meAjude.models.User;
 import com.si.meAjude.models.enums.DocumentType;
+import com.si.meAjude.models.enums.UserRole;
 import com.si.meAjude.models.validators.CNPJValidator;
 import com.si.meAjude.models.validators.CPFValidator;
 import com.si.meAjude.models.validators.interfaces.DocumentValidator;
@@ -79,7 +80,7 @@ public class UserServiceImpl implements UserSerivce {
 
     private User getUser(Long id){
         User userr = userRepository.getById(id);
-        if(userr.isDeleted()) throw new EntityNotFoundException("Unable to find Donor with id "+ id);
+        if(userr.isDeleted()) throw new EntityNotFoundException("Unable to find User with id "+ id);
         return userr;
     }
 
@@ -87,7 +88,7 @@ public class UserServiceImpl implements UserSerivce {
     public boolean canAccessUser(Authentication authentication, Long userId) {
         if (authentication.getPrincipal() instanceof User) {
             User user = (User) authentication.getPrincipal();
-            return user.getId().equals(userId);
+            if(user.getId().equals(userId) || user.getRole().equals(UserRole.ADMIN)) return true;
         }
         return false;
     }
