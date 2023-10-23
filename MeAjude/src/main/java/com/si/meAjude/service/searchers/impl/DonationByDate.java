@@ -24,7 +24,7 @@ public class DonationByDate implements DonationSearcher {
 
     @Override
     public Page<Donation> search(Pageable pageable, DonationSearchContent donationContent) {
-        return searchByDate(pageable, donationContent.date());
+        return searchByDate(pageable, donationContent.getDate());
     }
 
     @Override

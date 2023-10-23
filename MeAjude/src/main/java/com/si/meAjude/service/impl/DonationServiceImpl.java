@@ -46,7 +46,7 @@ public class DonationServiceImpl implements DonationService {
 
     @Override
     public Page<DonationDTO> getAll(Pageable page,  DonationSearchContent searchContent) {
-        DonationSearcher donationSearcher = donationSearcherFactory.getSearcher(searchContent.criterion());
+        DonationSearcher donationSearcher = donationSearcherFactory.getSearcher(searchContent.getCriterion());
         return donationSearcher.search(page, searchContent).map(DonationDTO::new);
     }
 }

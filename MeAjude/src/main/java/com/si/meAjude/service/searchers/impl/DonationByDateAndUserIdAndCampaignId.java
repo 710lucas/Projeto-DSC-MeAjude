@@ -24,7 +24,7 @@ public class DonationByDateAndUserIdAndCampaignId implements DonationSearcher {
 
     @Override
     public Page<Donation> search(Pageable pageable, DonationSearchContent donationContent) {
-        return searchByDateAndUserIdAndCampaignId(pageable,donationContent.date(), donationContent.userId(), donationContent.campaignId());
+        return searchByDateAndUserIdAndCampaignId(pageable,donationContent.getDate(), donationContent.getUserId(), donationContent.getCampaignId());
     }
 
     @Override

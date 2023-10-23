@@ -22,7 +22,7 @@ public class DonationByUserIdAndCampaignId implements DonationSearcher {
 
     @Override
     public Page<Donation> search(Pageable pageable, DonationSearchContent donationContent) {
-        return searchByUserIdAndCampaignId(pageable, donationContent.userId(), donationContent.campaignId());
+        return searchByUserIdAndCampaignId(pageable, donationContent.getUserId(), donationContent.getCampaignId());
     }
 
     @Override

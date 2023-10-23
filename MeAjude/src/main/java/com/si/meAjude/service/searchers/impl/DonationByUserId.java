@@ -22,7 +22,7 @@ public class DonationByUserId implements DonationSearcher {
 
     @Override
     public Page<Donation> search(Pageable pageable, DonationSearchContent donationContent) {
-        return searchByUserId(pageable, donationContent.userId());
+        return searchByUserId(pageable, donationContent.getUserId());
     }
 
     @Override
