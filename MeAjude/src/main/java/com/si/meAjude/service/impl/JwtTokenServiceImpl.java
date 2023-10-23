@@ -13,7 +13,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 @Component
-public class TokenService implements JwtTokenService {
+public class JwtTokenServiceImpl implements JwtTokenService {
 
 
     private String SECRET_KEY = "123";
@@ -24,7 +24,7 @@ public class TokenService implements JwtTokenService {
         try{
             Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY);
             String token = JWT.create()
-                    .withIssuer("auth-api")
+                    .withIssuer(ISSUER)
                     .withSubject(user.getEmail())
                     .withExpiresAt(expirationDate())
                     .sign(algorithm);
@@ -38,7 +38,7 @@ public class TokenService implements JwtTokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY);
             return JWT.require(algorithm)
-                    .withIssuer("auth-api")
+                    .withIssuer(ISSUER)
                     .build()
                     .verify(token)
                     .getSubject();
