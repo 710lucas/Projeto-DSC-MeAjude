@@ -1,6 +1,5 @@
 package com.si.meAjude.controllers;
 
-import com.si.meAjude.models.Role;
 import com.si.meAjude.models.User;
 import com.si.meAjude.repositories.UserRepository;
 import com.si.meAjude.service.dtos.user.CreateUserDTO;
@@ -17,10 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("auth")
+@RequestMapping("/auth")
 public class AuthenticationController {
 
     @Autowired
