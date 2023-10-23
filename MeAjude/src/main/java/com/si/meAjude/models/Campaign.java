@@ -20,7 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
-public class campaign {
+public class Campaign {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

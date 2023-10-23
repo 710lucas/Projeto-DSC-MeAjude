@@ -33,7 +33,7 @@ public class Donation {
     @ManyToOne
     @JoinColumn
     @NotNull
-    private com.si.meAjude.models.campaign campaign;
+    private Campaign campaign;
 
     @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
     @JsonDeserialize(using = LocalDateDeserializer.class)
