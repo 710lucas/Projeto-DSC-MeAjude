@@ -1,8 +1,6 @@
 package com.si.meAjude.config;
 
-import com.si.meAjude.models.enums.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -23,15 +21,31 @@ public class SecurityConfiguration {
     @Autowired
     SecurityFilter securityFilter;
 
+
+    public static final String [] ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED_POST_REQUEST = {
+            "/auth", // Url que usaremos para fazer login
+            "/users" // Url que usaremos para criar um usuário
+    };
+
+    public static final String [] ENDPOINTS_WITH_AUTHENTICATION_REQUIRED = {
+            "/users/**"
+    };
+
+    public static final String [] ENDPOINTS_CUSTOMER = {
+            ""
+    };
+
+    public static final String [] ENDPOINTS_ADMIN_GET_REQUEST = {
+            "/users/**"
+    };
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return  httpSecurity
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.POST, "/auth").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/users").hasRole(UserRole.ADMIN.name())
+                        .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED_POST_REQUEST).permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

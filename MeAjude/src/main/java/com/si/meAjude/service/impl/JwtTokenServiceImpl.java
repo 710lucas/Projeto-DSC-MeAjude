@@ -43,7 +43,7 @@ public class JwtTokenServiceImpl implements JwtTokenService {
                     .verify(token)
                     .getSubject();
         } catch (JWTVerificationException exception){
-            return "";
+            return "error to validate token";
         }
     }
 
