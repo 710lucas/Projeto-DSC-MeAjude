@@ -13,6 +13,8 @@ import com.si.meAjude.service.dtos.user.UserUpdateDTO;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
@@ -79,6 +81,15 @@ public class UserServiceImpl implements UserSerivce {
         User userr = userRepository.getById(id);
         if(userr.isDeleted()) throw new EntityNotFoundException("Unable to find Donor with id "+ id);
         return userr;
+    }
+
+    @Override
+    public boolean canAccessUser(Authentication authentication, Long userId) {
+        if (authentication.getPrincipal() instanceof User) {
+            User user = (User) authentication.getPrincipal();
+            return user.getId().equals(userId);
+        }
+        return false;
     }
 
 }

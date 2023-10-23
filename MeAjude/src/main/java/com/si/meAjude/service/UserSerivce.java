@@ -5,6 +5,7 @@ import com.si.meAjude.service.dtos.user.UserSaveDTO;
 import com.si.meAjude.service.dtos.user.UserUpdateDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
 
 public interface UserSerivce {
 
@@ -18,4 +19,6 @@ public interface UserSerivce {
      UserDTO update(UserUpdateDTO updateDto);
 
      UserDTO logicDelete(Long id);
+
+     boolean canAccessUser(Authentication authentication, Long userId);
 }
