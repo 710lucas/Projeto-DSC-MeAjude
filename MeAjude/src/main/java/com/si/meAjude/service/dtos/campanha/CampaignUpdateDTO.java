@@ -5,20 +5,20 @@ import jakarta.annotation.Nullable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public record CampanhaUpdateDTO (
+public record CampaignUpdateDTO(
     @Nullable
     Long id,
     @Nullable
-    String titulo,
-    BigDecimal meta,
+    String title,
+    BigDecimal goal,
     @Nullable
-    Boolean ativa,
+    Boolean active,
     @Nullable
-    String descricao,
+    String description,
     @Nullable
-    LocalDateTime dataInicio,
+    LocalDateTime startingDate,
     @Nullable
-    LocalDateTime dataFinal,
+    LocalDateTime finalDate,
     @Nullable
-    Long criadorId
+    Long creatorId
 ){}
