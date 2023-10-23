@@ -1,6 +1,6 @@
 package com.si.meAjude.service.dtos.campanha;
 
-import com.si.meAjude.models.campaign;
+import com.si.meAjude.models.Campaign;
 import com.si.meAjude.models.comparators.DataComparator;
 import com.si.meAjude.models.comparators.TituloComparator;
 import com.si.meAjude.models.enums.CriterioEnum;
@@ -27,9 +27,9 @@ public class CampaignListDTO {
         this.campaigns.add(campanha);
     }
 
-    public CampaignListDTO(List<campaign> campanhas, CriterioEnum criterio){
+    public CampaignListDTO(List<Campaign> campanhas, CriterioEnum criterio){
         List<CampaignGetDTO> newCampanhas = new ArrayList<>();
-        for(campaign c : campanhas) {
+        for(Campaign c : campanhas) {
             if(c.isDeleted())
                 continue;
             switch (criterio){

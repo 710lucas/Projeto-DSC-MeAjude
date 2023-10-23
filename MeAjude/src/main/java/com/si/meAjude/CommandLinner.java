@@ -1,6 +1,6 @@
 package com.si.meAjude;
 
-import com.si.meAjude.models.campaign;
+import com.si.meAjude.models.Campaign;
 import com.si.meAjude.models.Document;
 import com.si.meAjude.models.User;
 import com.si.meAjude.models.enums.DocumentType;
@@ -36,7 +36,7 @@ public class CommandLinner implements CommandLineRunner {
         userTest.setDeleted(false);
         userTest.setDocument(new Document(DocumentType.CPF, "864.667.820-26", DocumentEntityType.INDIVIDUAL, new CPFValidator()));
 
-        campaign campaign = new campaign();
+        Campaign campaign = new Campaign();
         campaign.setGoal(BigDecimal.valueOf(1000));
         campaign.setCreator(userTest);
         campaign.setTitle("Campanha Teste");
