@@ -4,60 +4,36 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1cafb04e-43ab-4547-b80b-8f0d3053a11e" name="Changes" comment="adicionando listagem de campanhas baseada em criterios">
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/CommandLinner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/controllers/DonationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/controllers/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/Document.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/Donation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/enums/DocumentEntityType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/repositories/DonationRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/repositories/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/CampaignService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/DonationService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/UserSerivce.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/doacao/DonationDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/doacao/DonationSaveDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/documento/DocumentDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/usuario/UserDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/usuario/UserSaveDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/usuario/UserUpdateDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/impl/DonationServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/impl/UserSerivceImpl.java" afterDir="false" />
+    <list default="true" id="1cafb04e-43ab-4547-b80b-8f0d3053a11e" name="Changes" comment="revertendo mudanças de nomes">
+      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/exceptions/InvalidDateException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/exceptions/InvalidTitleException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/campaign.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/impl/CampaignServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/mvnw" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/controllers/CampanhaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/controllers/CampanhaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/controllers/DoacaoController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/controllers/UsuarioController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/exceptions/apiError/RestExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/exceptions/apiError/RestExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/Campanha.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/Campanha.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/Doacao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/Documento.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/DocumentoValidatorFactory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/enums/EntityType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/validators/CNPJValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/validators/CNPJValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/validators/CPFValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/validators/CPFValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/validators/interfaces/DocumentValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/validators/interfaces/DocumentValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/repositories/DoacaoRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/repositories/UsuarioRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/CampanhaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/CampanhaService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/DoacaoService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/UsuarioService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/campanha/CampanhaDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/campanha/CampanhaDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/campanha/CampanhaGetDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/campanha/CampanhaGetDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/campanha/CampanhaUpdateDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/campanha/CampanhaUpdateDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/doacao/DoacaoDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/doacao/DoacaoSaveDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/doacao/DoacaoUpdateDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/documento/DocumentoDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/usuario/UsuarioDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/usuario/UsuarioSaveDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/usuario/UsuarioUpdateDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/impl/CampanhaServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/impl/CampanhaServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/impl/DoacaoServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/impl/UsuarioServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/CommandLinner.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/CommandLinner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/controllers/CampanhaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/controllers/CampaignController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/exceptions/CriadorInvalidoException.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/exceptions/InvalidCreatorException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/exceptions/DataInvalida.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/exceptions/DescricaoInvalidaException.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/exceptions/InvalidDescriptionException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/exceptions/MetaInvalidaException.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/exceptions/InvalidGoalException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/exceptions/TituloInvalidoException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/Campanha.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/Donation.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/Donation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/comparators/DataComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/comparators/DataComparator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/comparators/TituloComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/comparators/TituloComparator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/repositories/CampanhaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/repositories/CampaignRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/CampaignService.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/CampaignService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/CampanhaService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/campanha/AddDoacaoDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/campanha/CampanhaDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/campanha/CampaignDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/campanha/CampanhaGetDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/campanha/CampaignGetDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/campanha/CampanhaUpdateDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/campanha/CampaignUpdateDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/campanha/ListaCampanhasDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/campanha/CampaignListDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/doacao/DonationDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/doacao/DonationDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/doacao/DonationSaveDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/doacao/DonationSaveDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/impl/CampanhaServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/impl/DonationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/impl/DonationServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,9 +85,9 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Merging 19-modificando-campanhaservice-e-campanhacontroller",
+    "git-widget-placeholder": "29-tradução-de-classes-da-campanha",
     "jdk.selected.JAVA_MODULE": "20",
-    "last_opened_file_path": "C:/Users/anderson.soares/IdeaProjects/Projeto-DSC-MeAjude",
+    "last_opened_file_path": "C:/Users/lucas/Documents/Projetos/2-7-composite-rede-710lucas",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -189,6 +165,10 @@
       <workItem from="1694649522355" duration="1174000" />
       <workItem from="1694718713572" duration="3549000" />
       <workItem from="1694732908200" duration="6198000" />
+      <workItem from="1697754021188" duration="128000" />
+      <workItem from="1697755016298" duration="10000" />
+      <workItem from="1697833569695" duration="132000" />
+      <workItem from="1698101727387" duration="1193000" />
     </task>
     <task id="LOCAL-00001" summary="Commit inicial com config do Spring">
       <option name="closed" value="true" />
@@ -246,7 +226,15 @@
       <option name="project" value="LOCAL" />
       <updated>1694739164299</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="revertendo mudanças de nomes">
+      <option name="closed" value="true" />
+      <created>1697737955726</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1697737955751</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -261,14 +249,15 @@
     <MESSAGE value="criação de um simples ExceptionHandler" />
     <MESSAGE value="adicionando service e controller simples" />
     <MESSAGE value="adicionando listagem de campanhas baseada em criterios" />
-    <option name="LAST_COMMIT_MESSAGE" value="adicionando listagem de campanhas baseada em criterios" />
+    <MESSAGE value="revertendo mudanças de nomes" />
+    <option name="LAST_COMMIT_MESSAGE" value="revertendo mudanças de nomes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/campanha/ListaCampanhasDTO.java</url>
-          <line>53</line>
+          <url>file://$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/campanha/CampaignListDTO.java</url>
+          <line>54</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
