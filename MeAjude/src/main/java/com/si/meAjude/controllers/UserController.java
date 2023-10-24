@@ -41,9 +41,9 @@ public class UserController {
     return userService.getAll(PageableUtil.getPageableWithSort(page, sortField, sortDirection));
     }
 
-    @PutMapping
-    public ResponseEntity<UserDTO> update(@RequestBody @Valid UserUpdateDTO userUpdateDTO){
-        return new ResponseEntity<>(userService.update(userUpdateDTO), HttpStatus.OK);
+    @PutMapping("/{id}")
+    public ResponseEntity<UserDTO> update(@RequestBody @Valid UserUpdateDTO userUpdateDTO, @PathVariable Long id){
+        return new ResponseEntity<>(userService.update(userUpdateDTO, id), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

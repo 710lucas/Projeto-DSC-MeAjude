@@ -55,8 +55,8 @@ public class UserServiceImpl implements UserSerivce {
 
     @Transactional
     @Override
-    public UserDTO update(UserUpdateDTO updateDto) {
-        User userLocated = getUser(updateDto.id());
+    public UserDTO update(UserUpdateDTO updateDto, Long id) {
+        User userLocated = getUser(id);
         User userUpdated = updateUser(updateDto, userLocated);
         return new UserDTO(userUpdated);
     }
@@ -83,14 +83,4 @@ public class UserServiceImpl implements UserSerivce {
         if(userr.isDeleted()) throw new EntityNotFoundException("Unable to find User with id "+ id);
         return userr;
     }
-
-    @Override
-    public boolean canAccessUser(Authentication authentication, Long userId) {
-        if (authentication.getPrincipal() instanceof User) {
-            User user = (User) authentication.getPrincipal();
-            if(user.getId().equals(userId) || user.getRole().equals(UserRole.ADMIN)) return true;
-        }
-        return false;
-    }
-
 }

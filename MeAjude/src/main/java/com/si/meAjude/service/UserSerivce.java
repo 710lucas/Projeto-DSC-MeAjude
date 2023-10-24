@@ -16,9 +16,7 @@ public interface UserSerivce {
 
      Page<UserDTO> getAll(Pageable pageable);
 
-     UserDTO update(UserUpdateDTO updateDto);
+     UserDTO update(UserUpdateDTO updateDto, Long id);
 
      UserDTO logicDelete(Long id);
-
-     boolean canAccessUser(Authentication authentication, Long userId);
 }
