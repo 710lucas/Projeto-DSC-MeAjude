@@ -42,14 +42,12 @@ public class UserController {
     }
 
     @PutMapping
-    public ResponseEntity<UserDTO> update(@RequestBody @Valid UserUpdateDTO updateDTO, Authentication authentication){
-        if(!userService.canAccessUser(authentication, updateDTO.id())) return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        return new ResponseEntity<>(userService.update(updateDTO), HttpStatus.OK);
+    public ResponseEntity<UserDTO> update(@RequestBody @Valid UserUpdateDTO userUpdateDTO){
+        return new ResponseEntity<>(userService.update(userUpdateDTO), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<UserDTO> logicDelete(@PathVariable Long id, Authentication authentication){
-        if(!userService.canAccessUser(authentication, id)) return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+    public ResponseEntity<UserDTO> logicDelete(@PathVariable Long id){
         return new ResponseEntity<>(userService.logicDelete(id), HttpStatus.OK);
     }
 }
