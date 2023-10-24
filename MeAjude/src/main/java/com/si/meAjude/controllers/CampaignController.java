@@ -1,19 +1,28 @@
 package com.si.meAjude.controllers;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.si.meAjude.exceptions.*;
+import com.si.meAjude.models.searchers.campaign.CampaignSearchCriterion;
+import com.si.meAjude.models.searchers.campaign.CampaignSearchContent;
 import com.si.meAjude.service.CampaignService;
 import com.si.meAjude.service.dtos.campanha.CampaignDTO;
 import com.si.meAjude.service.dtos.campanha.CampaignUpdateDTO;
-import com.si.meAjude.service.dtos.campanha.CampaignListDTO;
+import com.si.meAjude.util.PageableUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @RestController
-@RequestMapping("/campanhas")
+@RequestMapping("/campaign")
 public class CampaignController {
 
 
@@ -22,18 +31,33 @@ public class CampaignController {
 
 
     @PostMapping
-    public ResponseEntity<CampaignDTO> add(@RequestBody CampaignDTO campaign) throws InvalidDateException, InvalidTitleException, InvalidCreatorException, InvalidDescriptionException, InvalidGoalException {
-        return ResponseEntity.ok(campaignService.addCampaign(campaign));
+    @ResponseStatus(HttpStatus.CREATED)
+    public CampaignDTO add(@RequestBody CampaignDTO campaign) throws InvalidDateException, InvalidTitleException, InvalidCreatorException, InvalidDescriptionException, InvalidGoalException {
+        return campaignService.addCampaign(campaign);
     }
 
     @DeleteMapping
-    public ResponseEntity<CampaignDTO> remove(@RequestBody CampaignUpdateDTO campaign){
-        return ResponseEntity.ok(campaignService.removeCampaign(campaign.id()));
+    @ResponseStatus(HttpStatus.OK)
+    public CampaignDTO remove(@RequestBody CampaignUpdateDTO campaign){
+        return campaignService.removeCampaign(campaign.id());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<CampaignDTO> getById(@PathVariable String id){
-        return ResponseEntity.ok(campaignService.getCampaign(Long.parseLong(id)));
+    @GetMapping()
+    @ResponseStatus(HttpStatus.OK)
+    public Page<CampaignDTO> getById(
+            @PageableDefault(size = 10) Pageable page,
+            @RequestParam(name = "sortField", required = false, defaultValue = "finalDate") String sortField,
+            @RequestParam(name = "sortDirection", required = false, defaultValue = "asc") String sortDirection,
+            @RequestParam(name = "criterion", required = false, defaultValue = "ACTIVE_DATE") CampaignSearchCriterion criterion,
+            @RequestParam(name = "userId", required = false) Long userId,
+            @RequestParam(name = "goal", required = false, defaultValue = "0") BigDecimal goal,
+            @RequestParam(name = "active", required = false, defaultValue = "true") boolean active,
+            @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING) @RequestParam(name = "date", required = false) LocalDate initialDate){
+
+        CampaignSearchContent searchContent = new CampaignSearchContent(criterion, userId, initialDate, active, goal);
+        page = PageableUtil.getPageableWithSort(page, sortField, sortDirection);
+
+        return campaignService.getAll(page, searchContent);
     }
 
     @PutMapping()
@@ -42,10 +66,16 @@ public class CampaignController {
     }
 
 
-    @GetMapping()
-    public ResponseEntity<CampaignListDTO> listar(@RequestParam(name = "amount", required = false, defaultValue = "-1") String amount, @RequestParam(name = "filter", required = false) String filter) throws  CriterioInvalidoException {
-        return ResponseEntity.ok(campaignService.listCampaign(Optional.of(Long.parseLong(amount)), Optional.ofNullable(filter)));
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public CampaignDTO getById(@PathVariable Long id){
+        return campaignService.getCampaign(id);
     }
+
+//    @GetMapping()
+//    public ResponseEntity<CampaignListDTO> listar(@RequestParam(name = "amount", required = false, defaultValue = "-1") String amount, @RequestParam(name = "filter", required = false) String filter) throws  CriterioInvalidoException {
+//        return ResponseEntity.ok(campaignService.listCampaign(Optional.of(Long.parseLong(amount)), Optional.ofNullable(filter)));
+//    }
 
 
 

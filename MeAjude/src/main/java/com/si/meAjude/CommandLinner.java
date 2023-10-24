@@ -1,6 +1,6 @@
 package com.si.meAjude;
 
-import com.si.meAjude.models.campaign;
+import com.si.meAjude.models.Campaign;
 import com.si.meAjude.models.Document;
 import com.si.meAjude.models.User;
 import com.si.meAjude.models.enums.DocumentType;
@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Configuration
@@ -36,13 +37,14 @@ public class CommandLinner implements CommandLineRunner {
         userTest.setDeleted(false);
         userTest.setDocument(new Document(DocumentType.CPF, "864.667.820-26", DocumentEntityType.INDIVIDUAL, new CPFValidator()));
 
-        campaign campaign = new campaign();
+        Campaign campaign = new Campaign();
         campaign.setGoal(BigDecimal.valueOf(1000));
         campaign.setCreator(userTest);
         campaign.setTitle("Campanha Teste");
         campaign.setDescription("Campanha de teste");
         campaign.setDeleted(false);
-        campaign.setFinalDate(LocalDateTime.now().plusDays(2));
+        campaign.setActive(true);
+        campaign.setFinalDate(LocalDate.now().plusDays(2));
 
         userRepository.save(userTest);
         campaignRepository.save(campaign);

@@ -10,17 +10,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 
-@Entity(name = "CAMPANHAS")
+@Entity(name = "campaigns")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
-public class campaign {
+public class Campaign {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,9 +36,9 @@ public class campaign {
     @Positive
     private BigDecimal goal;
     @Future
-    private LocalDateTime finalDate;
+    private LocalDate finalDate;
     @FutureOrPresent
-    private LocalDateTime startingDate = LocalDateTime.now().plusMinutes(1);
+    private LocalDate startingDate = LocalDate.now();
     @ManyToOne
     @NotNull
     private User creator;

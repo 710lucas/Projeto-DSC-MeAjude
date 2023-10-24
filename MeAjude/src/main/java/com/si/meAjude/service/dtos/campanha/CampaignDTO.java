@@ -1,11 +1,11 @@
 package com.si.meAjude.service.dtos.campanha;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.si.meAjude.models.campaign;
+import com.si.meAjude.models.Campaign;
 import com.si.meAjude.models.Donation;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -15,19 +15,20 @@ public record CampaignDTO(
          String title,
          String description,
          BigDecimal goal,
-         LocalDateTime startingDate,
-         LocalDateTime finalDate,
+         LocalDate startingDate,
+         LocalDate finalDate,
          boolean deleted,
          Long creatorId,
          @JsonManagedReference
          List<Donation> donations,
-         BigDecimal raisedMoney
+         BigDecimal raisedMoney,
+         Long id
 ){
 
-    public CampaignDTO(campaign campaign){
+    public CampaignDTO(Campaign campaign){
         this(campaign.isActive(),campaign.getTitle(), campaign.getDescription(), campaign.getGoal(),
                 campaign.getStartingDate(), campaign.getFinalDate(), campaign.isDeleted(),
-                campaign.getCreator().getId(), campaign.getDonations(), campaign.getRaisedMoney());
+                campaign.getCreator().getId(), campaign.getDonations(), campaign.getRaisedMoney(), campaign.getId());
     }
 
 

@@ -1,9 +1,9 @@
 package com.si.meAjude.service.dtos.campanha;
 
-import com.si.meAjude.models.campaign;
+import com.si.meAjude.models.Campaign;
 import com.si.meAjude.models.comparators.DataComparator;
 import com.si.meAjude.models.comparators.TituloComparator;
-import com.si.meAjude.models.enums.CriterioEnum;
+import com.si.meAjude.models.searchers.campaign.CampaignSearchCriterion;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,21 +27,21 @@ public class CampaignListDTO {
         this.campaigns.add(campanha);
     }
 
-    public CampaignListDTO(List<campaign> campanhas, CriterioEnum criterio){
+    public CampaignListDTO(List<Campaign> campanhas, CampaignSearchCriterion criterio){
         List<CampaignGetDTO> newCampanhas = new ArrayList<>();
-        for(campaign c : campanhas) {
+        for(Campaign c : campanhas) {
             if(c.isDeleted())
                 continue;
             switch (criterio){
-                case ATIVAS_DATA, ATIVAS_TITULO -> {
+                case ACTIVE_DATE, ACTIVE_TITLE -> {
                     if(c.isActive())
                         newCampanhas.add(new CampaignGetDTO(c));
                 }
-                case ENCERRADAS_DATA -> {
+                case CLOSED_DATE -> {
                     if(!c.isActive())
                         newCampanhas.add(new CampaignGetDTO(c));
                 }
-                case META_ATINGIDA -> {
+                case GOAL_REACHED -> {
                     if(c.getRaisedMoney().compareTo(c.getGoal()) >= 0)
                         newCampanhas.add(new CampaignGetDTO(c));
                 }
@@ -51,8 +51,8 @@ public class CampaignListDTO {
 
         this.campaigns = newCampanhas;
         switch (criterio){
-            case ATIVAS_DATA, ENCERRADAS_DATA, META_ATINGIDA -> Collections.sort(this.campaigns, new DataComparator());
-            case ATIVAS_TITULO -> Collections.sort(this.campaigns, new TituloComparator());
+            case ACTIVE_DATE, CLOSED_DATE, GOAL_REACHED -> Collections.sort(this.campaigns, new DataComparator());
+            case ACTIVE_TITLE -> Collections.sort(this.campaigns, new TituloComparator());
         }
 
     }

@@ -3,7 +3,7 @@ package com.si.meAjude.service.dtos.campanha;
 import jakarta.annotation.Nullable;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public record CampaignUpdateDTO(
     @Nullable
@@ -16,9 +16,9 @@ public record CampaignUpdateDTO(
     @Nullable
     String description,
     @Nullable
-    LocalDateTime startingDate,
+    LocalDate startingDate,
     @Nullable
-    LocalDateTime finalDate,
+    LocalDate finalDate,
     @Nullable
     Long creatorId
 ){}
