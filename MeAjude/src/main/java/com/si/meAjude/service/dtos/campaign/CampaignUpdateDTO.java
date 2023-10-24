@@ -1,4 +1,4 @@
-package com.si.meAjude.service.dtos.campanha;
+package com.si.meAjude.service.dtos.campaign;
 
 import jakarta.annotation.Nullable;
 

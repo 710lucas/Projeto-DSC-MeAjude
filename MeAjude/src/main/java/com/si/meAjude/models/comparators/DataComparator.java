@@ -1,6 +1,6 @@
 package com.si.meAjude.models.comparators;
 
-import com.si.meAjude.service.dtos.campanha.CampaignGetDTO;
+import com.si.meAjude.service.dtos.campaign.CampaignGetDTO;
 
 import java.util.Comparator;
 

@@ -2,18 +2,14 @@ package com.si.meAjude.service;
 
 import com.si.meAjude.exceptions.*;
 import com.si.meAjude.models.searchers.campaign.CampaignSearchContent;
-import com.si.meAjude.models.searchers.donation.DonationSearchContent;
-import com.si.meAjude.service.dtos.campanha.CampaignDTO;
-import com.si.meAjude.service.dtos.campanha.CampaignUpdateDTO;
-import com.si.meAjude.service.dtos.campanha.CampaignListDTO;
+import com.si.meAjude.service.dtos.campaign.CampaignDTO;
+import com.si.meAjude.service.dtos.campaign.CampaignUpdateDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Service
 public interface CampaignService {

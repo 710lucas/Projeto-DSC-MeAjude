@@ -6,8 +6,8 @@ import com.si.meAjude.exceptions.*;
 import com.si.meAjude.models.searchers.campaign.CampaignSearchCriterion;
 import com.si.meAjude.models.searchers.campaign.CampaignSearchContent;
 import com.si.meAjude.service.CampaignService;
-import com.si.meAjude.service.dtos.campanha.CampaignDTO;
-import com.si.meAjude.service.dtos.campanha.CampaignUpdateDTO;
+import com.si.meAjude.service.dtos.campaign.CampaignDTO;
+import com.si.meAjude.service.dtos.campaign.CampaignUpdateDTO;
 import com.si.meAjude.util.PageableUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/campaign")

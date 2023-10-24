@@ -1,4 +1,4 @@
-package com.si.meAjude.service.dtos.campanha;
+package com.si.meAjude.service.dtos.campaign;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.si.meAjude.models.Campaign;
