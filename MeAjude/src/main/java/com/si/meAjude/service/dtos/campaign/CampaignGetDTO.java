@@ -1,4 +1,4 @@
-package com.si.meAjude.service.dtos.campanha;
+package com.si.meAjude.service.dtos.campaign;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.si.meAjude.models.Campaign;
@@ -6,7 +6,7 @@ import com.si.meAjude.models.Donation;
 import com.si.meAjude.service.dtos.doacao.DonationDTO;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +16,8 @@ public record CampaignGetDTO(
         String title,
         String description,
         BigDecimal goal,
-        LocalDateTime startingDate,
-        LocalDateTime finalDate,
+        LocalDate startingDate,
+        LocalDate finalDate,
         boolean deleted,
         Long creatorId,
         @JsonManagedReference

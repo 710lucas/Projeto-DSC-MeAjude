@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Configuration
@@ -42,7 +43,8 @@ public class CommandLinner implements CommandLineRunner {
         campaign.setTitle("Campanha Teste");
         campaign.setDescription("Campanha de teste");
         campaign.setDeleted(false);
-        campaign.setFinalDate(LocalDateTime.now().plusDays(2));
+        campaign.setActive(true);
+        campaign.setFinalDate(LocalDate.now().plusDays(2));
 
         userRepository.save(userTest);
         campaignRepository.save(campaign);

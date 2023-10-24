@@ -4,24 +4,24 @@ package com.si.meAjude.service.impl;
 import com.si.meAjude.exceptions.*;
 import com.si.meAjude.models.Campaign;
 import com.si.meAjude.models.User;
-import com.si.meAjude.models.enums.CriterioEnum;
+import com.si.meAjude.models.searchers.campaign.CampaignSearchContent;
+import com.si.meAjude.models.searchers.campaign.CampaignSearcher;
+import com.si.meAjude.models.searchers.campaign.CampaignSearcherFactory;
+import com.si.meAjude.models.searchers.donation.DonationSearchContent;
 import com.si.meAjude.repositories.CampaignRepository;
 import com.si.meAjude.repositories.DonationRepository;
 import com.si.meAjude.repositories.UserRepository;
 import com.si.meAjude.service.CampaignService;
-import com.si.meAjude.service.dtos.campanha.CampaignDTO;
-import com.si.meAjude.service.dtos.campanha.CampaignUpdateDTO;
-import com.si.meAjude.service.dtos.campanha.CampaignListDTO;
+import com.si.meAjude.service.dtos.campaign.CampaignDTO;
+import com.si.meAjude.service.dtos.campaign.CampaignUpdateDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CampaignServiceImpl implements CampaignService {
@@ -34,6 +34,9 @@ public class CampaignServiceImpl implements CampaignService {
 
     @Autowired
     private DonationRepository donationRepository;
+
+    @Autowired
+    CampaignSearcherFactory campaignSearcherFactory;
 
     public CampaignDTO save(CampaignDTO campaignDTO){
         Campaign campanha = new Campaign();
@@ -135,7 +138,7 @@ public class CampaignServiceImpl implements CampaignService {
     }
 
     @Override
-    public CampaignDTO changeFinalDate(LocalDateTime finalDate, long id) throws InvalidDateException {
+    public CampaignDTO changeFinalDate(LocalDate finalDate, long id) throws InvalidDateException {
         if(!campaignRepository.existsById(id))
             throw new RuntimeException("Campanha de id: "+id+" não existe");
         Campaign c = campaignRepository.getById(id);
@@ -167,25 +170,11 @@ public class CampaignServiceImpl implements CampaignService {
     }
 
     @Override
-    public CampaignListDTO listCampaign(Optional<Long> amount, Optional<String> filterString) throws CriterioInvalidoException {
-
-        CriterioEnum criterio = filterString.map(s -> CriterioEnum.valueOf(s.toUpperCase())).orElse(CriterioEnum.ATIVAS_DATA);
-
-        long quantidadeElementos = amount.orElse(campaignRepository.count());
-        if(quantidadeElementos == -1) quantidadeElementos = campaignRepository.count();
-        int quantidadePaginas = 1;
-        if(quantidadeElementos > Integer.MAX_VALUE) quantidadePaginas = (int)(quantidadeElementos/Integer.MAX_VALUE);
-
-        List<Campaign> campanhas = new ArrayList<>();
-
-        for(int i = 0; i<quantidadePaginas; i++){
-            PageRequest paginaAtual = PageRequest.of(i, (int)(quantidadeElementos/quantidadePaginas));
-            Page<Campaign> campanhasPagina = campaignRepository.findAll(paginaAtual);
-            campanhas.addAll(campanhasPagina.getContent());
-        }
-
-        return new CampaignListDTO(campanhas, criterio);
+    public Page<CampaignDTO> getAll(Pageable page, CampaignSearchContent searchContent){
+        CampaignSearcher searcher = campaignSearcherFactory.getSearcher(searchContent.criterion());
+        return searcher.search(page, searchContent).map(CampaignDTO::new);
     }
+
 
 
 }
