@@ -1,11 +1,11 @@
 package com.si.meAjude.service.impl;
 
 import com.si.meAjude.models.Donation;
+import com.si.meAjude.repositories.CampaignRepository;
 import com.si.meAjude.repositories.UserRepository;
-import com.si.meAjude.service.searchers.factorys.DonationSearcherFactory;
-import com.si.meAjude.service.searchers.dtos.DonationSearchContent;
-import com.si.meAjude.service.searchers.DonationSearcher;
-import com.si.meAjude.repositories.CampanhaRepository;
+import com.si.meAjude.service.searchers.donation.factorys.DonationSearcherFactory;
+import com.si.meAjude.service.searchers.donation.dtos.DonationSearchContent;
+import com.si.meAjude.service.searchers.donation.DonationSearcher;
 import com.si.meAjude.repositories.DonationRepository;
 import com.si.meAjude.service.DonationService;
 import com.si.meAjude.service.dtos.donation.DonationDTO;
@@ -25,7 +25,7 @@ public class DonationServiceImpl implements DonationService {
     private DonationRepository donationRepository;
 
     @Autowired
-    private CampanhaRepository campaignRepository;
+    private CampaignRepository campaignRepository;
 
     @Autowired
     DonationSearcherFactory donationSearcherFactory;

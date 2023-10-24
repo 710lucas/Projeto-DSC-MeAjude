@@ -1,39 +1,39 @@
 package com.si.meAjude.service;
 
 import com.si.meAjude.exceptions.*;
-import com.si.meAjude.service.dtos.campanha.CampanhaDTO;
-import com.si.meAjude.service.dtos.campanha.CampanhaUpdateDTO;
-import com.si.meAjude.service.dtos.campanha.ListaCampanhasDTO;
+import com.si.meAjude.service.dtos.campaign.CampaignDTO;
+import com.si.meAjude.service.dtos.campaign.CampaignUpdateDTO;
+import com.si.meAjude.service.searchers.campaign.CampaignSearchContent;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.Optional;
+import java.time.LocalDate;
 
 @Service
 public interface CampaignService {
 
-    CampanhaDTO removerCampanha(long id);
+    CampaignDTO removeCampaign(long id);
 
-    CampanhaDTO update(CampanhaUpdateDTO campanha) throws DataInvalida, MetaInvalidaException, DescricaoInvalidaException, TituloInvalidoException;
+    CampaignDTO update(CampaignUpdateDTO campaign) throws InvalidDateException, InvalidGoalException, InvalidDescriptionException, InvalidTitleException, InvalidCreatorException;
 
-    CampanhaDTO getCampanha(Long id);
+    CampaignDTO getCampaign(Long id);
 
-    CampanhaDTO mudarEstado(boolean estado, long id);
+    CampaignDTO changeState(boolean state, long id);
 
-    CampanhaDTO mudarTitulo(String titulo, long id) throws TituloInvalidoException;
+    CampaignDTO changeTitle(String title, long id) throws InvalidTitleException;
 
-    CampanhaDTO mudarDescricao(String descricao, long id) throws DescricaoInvalidaException;
+    CampaignDTO changeDescription(String description, long id) throws InvalidDescriptionException;
 
-    CampanhaDTO mudarMeta(BigDecimal meta, long id) throws MetaInvalidaException;
+    CampaignDTO changeGoal(BigDecimal goal, long id) throws InvalidGoalException;
 
-    CampanhaDTO mudarDataFinal(LocalDateTime dataFinal, long id) throws DataInvalida;
-    CampanhaDTO mudarCriador(long criador_id, long id) throws CriadorInvalidoException;
+    CampaignDTO changeFinalDate(LocalDate finalDate, long id) throws InvalidDateException;
+    CampaignDTO changeCreator(long creator_id, long id) throws InvalidCreatorException;
 
-    CampanhaDTO adicionarCampanha(CampanhaDTO dto) throws DataInvalida, TituloInvalidoException, CriadorInvalidoException, DescricaoInvalidaException, MetaInvalidaException;
+    CampaignDTO addCampaign(CampaignDTO dto) throws InvalidDateException, InvalidTitleException, InvalidCreatorException, InvalidDescriptionException, InvalidGoalException;
 
-    ListaCampanhasDTO listarCampanhas(Optional<Long> quantidade, Optional<String> criterioString) throws CriterioInvalidoException;
-
+    Page<CampaignDTO> getAll(Pageable page, CampaignSearchContent searchcontent);
 
 
 }

@@ -1,13 +1,11 @@
 package com.si.meAjude.models.comparators;
-
-import com.si.meAjude.service.dtos.campanha.CampanhaDTO;
-import com.si.meAjude.service.dtos.campanha.CampanhaGetDTO;
+import com.si.meAjude.service.dtos.campaign.CampaignGetDTO;
 
 import java.util.Comparator;
 
-public class TituloComparator implements Comparator<CampanhaGetDTO> {
+public class TituloComparator implements Comparator<CampaignGetDTO> {
     @Override
-    public int compare(CampanhaGetDTO o1, CampanhaGetDTO o2) {
-        return o1.titulo().toLowerCase().compareTo(o2.titulo().toLowerCase());
+    public int compare(CampaignGetDTO o1, CampaignGetDTO o2) {
+        return o1.title().toLowerCase().compareTo(o2.title().toLowerCase());
     }
 }

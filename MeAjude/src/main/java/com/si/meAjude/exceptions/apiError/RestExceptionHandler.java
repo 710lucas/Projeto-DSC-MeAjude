@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class RestExceptionHandler {
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ApiError> genericCatch(Exception exception){
+    public ResponseEntity<ApiError> exceptionGenerico(Exception exception){
         ApiError apiError = ApiError
                 .builder()
                 .timestamp(LocalDateTime.now())
