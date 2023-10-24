@@ -28,8 +28,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDTO> getById(@PathVariable Long id, Authentication authentication){
-        if(!userService.canAccessUser(authentication, id)) return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+    public ResponseEntity<UserDTO> getById(@PathVariable Long id){
         return new ResponseEntity<>(userService.getById(id), HttpStatus.OK);
     }
 
