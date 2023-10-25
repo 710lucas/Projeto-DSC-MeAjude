@@ -1,17 +1,16 @@
-package com.si.meAjude.config;
+package com.si.meAjude.config.interceptores.config;
 
+import com.si.meAjude.config.interceptores.UserInterceptorFilter;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class InterceptorConfig implements WebMvcConfigurer {
+public class UserInterceptorConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new UserInterceptor()).addPathPatterns("/users/{id}");
+        registry.addInterceptor(new UserInterceptorFilter()).addPathPatterns("/users/{id}");
     }
 
 }
