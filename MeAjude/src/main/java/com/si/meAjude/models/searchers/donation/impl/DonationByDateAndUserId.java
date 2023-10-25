@@ -5,7 +5,7 @@ import com.si.meAjude.models.searchers.donation.DonationSearchContent;
 import com.si.meAjude.models.searchers.donation.DonationSearchCriterion;
 import com.si.meAjude.models.searchers.donation.DonationSearcher;
 import com.si.meAjude.repositories.DonationRepository;
-import com.si.meAjude.service.dtos.doacao.DonationDTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

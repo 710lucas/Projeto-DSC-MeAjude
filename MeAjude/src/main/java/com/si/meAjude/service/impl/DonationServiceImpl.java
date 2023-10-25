@@ -3,7 +3,7 @@ package com.si.meAjude.service.impl;
 import com.si.meAjude.models.Donation;
 import com.si.meAjude.repositories.CampaignRepository;
 import com.si.meAjude.repositories.UserRepository;
-import com.si.meAjude.service.searchers.donation.factorys.DonationSearcherFactory;
+import com.si.meAjude.service.searchers.donation.factorys.DonationSearcherFactoryTwo;
 import com.si.meAjude.service.searchers.donation.dtos.DonationSearchContent;
 import com.si.meAjude.service.searchers.donation.DonationSearcher;
 import com.si.meAjude.repositories.DonationRepository;
@@ -28,7 +28,7 @@ public class DonationServiceImpl implements DonationService {
     private CampaignRepository campaignRepository;
 
     @Autowired
-    DonationSearcherFactory donationSearcherFactory;
+    DonationSearcherFactoryTwo donationSearcherFactoryTwo;
 
     @Autowired
     private UserRepository userRepository;
@@ -46,7 +46,7 @@ public class DonationServiceImpl implements DonationService {
 
     @Override
     public Page<DonationDTO> getAll(Pageable page,  DonationSearchContent searchContent) {
-        DonationSearcher donationSearcher = donationSearcherFactory.getSearcher(searchContent.getCriterion());
+        DonationSearcher donationSearcher = donationSearcherFactoryTwo.getSearcher(searchContent.getCriterion());
         return donationSearcher.search(page, searchContent).map(DonationDTO::new);
     }
 }

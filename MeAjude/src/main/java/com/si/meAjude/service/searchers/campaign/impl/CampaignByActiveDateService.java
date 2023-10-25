@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CampaignByActiveDate implements CampaignSearcher {
+public class CampaignByActiveDateService implements CampaignSearcher {
 
 
     @Autowired

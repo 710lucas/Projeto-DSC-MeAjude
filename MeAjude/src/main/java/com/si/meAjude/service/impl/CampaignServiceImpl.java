@@ -12,7 +12,7 @@ import com.si.meAjude.service.dtos.campaign.CampaignDTO;
 import com.si.meAjude.service.dtos.campaign.CampaignUpdateDTO;
 import com.si.meAjude.service.searchers.campaign.CampaignSearchContent;
 import com.si.meAjude.service.searchers.campaign.CampaignSearcher;
-import com.si.meAjude.service.searchers.campaign.CampaignSearcherFactory;
+import com.si.meAjude.service.searchers.campaign.CampaignSearcherFactoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Service
 public class CampaignServiceImpl implements CampaignService {
@@ -35,7 +34,7 @@ public class CampaignServiceImpl implements CampaignService {
     private DonationRepository donationRepository;
 
     @Autowired
-    CampaignSearcherFactory campaignSearcherFactory;
+    CampaignSearcherFactoryService campaignSearcherFactoryService;
 
     public CampaignDTO save(CampaignDTO campaignDTO){
         Campaign campanha = new Campaign();
@@ -170,7 +169,7 @@ public class CampaignServiceImpl implements CampaignService {
 
     @Override
     public Page<CampaignDTO> getAll(Pageable page, CampaignSearchContent searchContent){
-        CampaignSearcher searcher = campaignSearcherFactory.getSearcher(searchContent.criterion());
+        CampaignSearcher searcher = campaignSearcherFactoryService.getSearcher(searchContent.criterion());
         return searcher.search(page, searchContent).map(CampaignDTO::new);
     }
 

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 
 @Component
-public class CampaignByEndsBefore implements CampaignSearcher {
+public class CampaignByEndsBeforeService implements CampaignSearcher {
 
     @Autowired
     private CampaignRepository campaignRepository;

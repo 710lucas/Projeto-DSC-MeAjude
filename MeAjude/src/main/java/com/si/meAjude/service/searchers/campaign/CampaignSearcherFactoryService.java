@@ -7,11 +7,11 @@ import java.util.Map;
 import java.util.Set;
 
 @Component
-public class CampaignSearcherFactory {
+public class CampaignSearcherFactoryService {
 
     private Map<CampaignSearchCriterion, CampaignSearcher> searchers = new HashMap<>();
 
-    public CampaignSearcherFactory(Set<CampaignSearcher> searchers){
+    public CampaignSearcherFactoryService(Set<CampaignSearcher> searchers){
         searchers.forEach(searcher -> this.searchers.put(searcher.getCriterion(), searcher));
     }
 

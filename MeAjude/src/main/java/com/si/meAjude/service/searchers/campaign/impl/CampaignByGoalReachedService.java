@@ -10,23 +10,25 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+
 @Component
-public class CampaignByActiveTitle implements CampaignSearcher {
+public class CampaignByGoalReachedService implements CampaignSearcher {
 
     @Autowired
     private CampaignRepository campaignRepository;
 
-    private Page<Campaign> searchByActiveTitle(Pageable page, boolean active){
-        return campaignRepository.findAllByActiveOrderByTitleAsc(page, true);
+    private Page<Campaign> searchByGoalReached(Pageable page, BigDecimal value, boolean active){
+        return campaignRepository.findAllByRaisedMoneyGreaterThanAndActive(page, value, active);
     }
 
     @Override
-    public Page<Campaign> search(Pageable pageable, CampaignSearchContent campaignContent) {
-        return searchByActiveTitle(pageable, campaignContent.active());
+    public Page<Campaign> search(Pageable pageable, CampaignSearchContent campaignSearchContent) {
+        return searchByGoalReached(pageable,campaignSearchContent.goal(), campaignSearchContent.active());
     }
 
     @Override
     public CampaignSearchCriterion getCriterion() {
-        return CampaignSearchCriterion.ACTIVE_TITLE;
+        return CampaignSearchCriterion.GOAL_REACHED;
     }
 }

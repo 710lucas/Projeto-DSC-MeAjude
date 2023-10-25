@@ -8,11 +8,11 @@ import java.util.HashMap;
 import java.util.Set;
 
 @Component
-public class DonationSearcherFactory {
+public class DonationSearcherFactoryTwo {
 
     private HashMap<DonationSearchCriterion, DonationSearcher> searchers = new HashMap<>();
 
-    public DonationSearcherFactory(Set<DonationSearcher> searchers){
+    public DonationSearcherFactoryTwo(Set<DonationSearcher> searchers){
         searchers.forEach(searcher -> this.searchers.put(searcher.getCriterion(), searcher));
     }
 
