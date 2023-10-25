@@ -17,7 +17,5 @@ public record CampaignUpdateDTO(
     @Nullable
     String description,
     @Nullable
-    LocalDate startingDate,
-    @Nullable
     LocalDate finalDate
 ){}

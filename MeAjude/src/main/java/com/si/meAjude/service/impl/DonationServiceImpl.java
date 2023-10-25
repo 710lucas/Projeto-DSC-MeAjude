@@ -42,6 +42,7 @@ public class DonationServiceImpl implements DonationService {
         if(donation.getCampaign().getFinalDate().isBefore(donation.getDate())) throw new IllegalArgumentException("The campaign is already over");
         if(donation.getCampaign().getRaisedMoney().doubleValue() >= donation.getCampaign().getGoal().doubleValue()) throw new IllegalArgumentException("The campaign has already reached its goal");
         if(!donation.getCampaign().isActive()) throw new IllegalArgumentException("The campaign is deactivated");
+        if(donation.getDate().isBefore(donation.getCampaign().getStartingDate())) throw new IllegalArgumentException("The donation date is before the campaign start date");
         return new DonationDTO(donationRepository.save(donation));
     }
 

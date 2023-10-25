@@ -69,7 +69,6 @@ public class Campaign {
     @Transient
     private BigDecimal raisedMoney = BigDecimal.ZERO;
 
-    @NotNull
     private boolean deleted;
 
 

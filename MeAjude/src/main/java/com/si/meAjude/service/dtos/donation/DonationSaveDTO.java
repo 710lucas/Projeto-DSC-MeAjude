@@ -16,9 +16,6 @@ public record DonationSaveDTO(
         @NotNull
         Long campaignId,
         @NotNull
-        @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
-        LocalDate date,
-        @NotNull
         @Min(value = 1)
         BigDecimal value) {
 
@@ -26,7 +23,7 @@ public record DonationSaveDTO(
                 Donation donation = new Donation();
                 donation.setCampaign(campaignRepository.getById(campaignId));
                 donation.setUser(donorRepository.getById(userId));
-                donation.setDate(date);
+                donation.setDate(LocalDate.now());
                 donation.setDonationValue(value);
                 return donation;
         }

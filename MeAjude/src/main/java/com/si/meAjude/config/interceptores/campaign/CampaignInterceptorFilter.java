@@ -1,30 +1,29 @@
-package com.si.meAjude.config.interceptores.donation;
+package com.si.meAjude.config.interceptores.campaign;
 
-import com.si.meAjude.models.Donation;
 import com.si.meAjude.models.User;
 import com.si.meAjude.models.enums.UserRole;
-import com.si.meAjude.repositories.DonationRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Arrays;
 
+public class CampaignInterceptorFilter implements HandlerInterceptor {
 
-public class DonationInterceptorFilter implements HandlerInterceptor {
 
     // preHandle: Executed before actual handler is executed
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         User userFromRequest = getUserFromRequest(request);
         if(userFromRequest.getRole() == UserRole.ADMIN) return true;
-        if(hasUserIdInQuery(request)) if(userFromRequest.getId().equals(getUserIdInQuery(request))) return true;
+        if(isPostRequest(request)) return true;
+        if(isDeleteRequest(request) || isPutRequest(request)) if(hasOnlyIdInURL(request)) if(userFromRequest.getId().equals(getIdFromUrl(request))) return true;
+        if(isGetRequest(request) && hasOnlyIdInURL(request)) return true;
+        if(isGetRequest(request) && hasUserIdInQuery(request)) if(userFromRequest.getId().equals(getUserIdInQuery(request))) return true;
         return sendForbiddenResponseAndReturnFalse(response);
     }
 
@@ -36,6 +35,22 @@ public class DonationInterceptorFilter implements HandlerInterceptor {
     // afterCompletion: Executed after complete request is finished
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable Exception ex) throws Exception {
+    }
+
+        private boolean isGetRequest(HttpServletRequest request){
+        return request.getMethod().equals("GET");
+    }
+
+    private boolean isDeleteRequest(HttpServletRequest request){
+        return request.getMethod().equals("DELETE");
+    }
+
+    private boolean isPutRequest(HttpServletRequest request){
+        return request.getMethod().equals("PUT");
+    }
+
+    private boolean isPostRequest(HttpServletRequest request){
+        return request.getMethod().equals("POST");
     }
 
     private boolean sendForbiddenResponseAndReturnFalse(HttpServletResponse response) throws Exception {
@@ -84,4 +99,5 @@ public class DonationInterceptorFilter implements HandlerInterceptor {
         for(String s: requestURISplit) if(s.contains("userId")) return Long.parseLong(s.split("=")[1]);
         return null;
     }
+
 }

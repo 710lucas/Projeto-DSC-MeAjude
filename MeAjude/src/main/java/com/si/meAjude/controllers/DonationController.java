@@ -28,9 +28,10 @@ public class DonationController {
     DonationService donationService;
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public DonationDTO saveDonation(@RequestBody @Valid DonationSaveDTO dto) {
-        return donationService.save(dto);
+    public ResponseEntity<DonationDTO> saveDonation(@RequestBody @Valid DonationSaveDTO dto, Authentication authentication) {
+        User requestUser = (User) authentication.getPrincipal();
+        if(!requestUser.getId().equals(dto.userId())) return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        return new ResponseEntity<>(donationService.save(dto), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
