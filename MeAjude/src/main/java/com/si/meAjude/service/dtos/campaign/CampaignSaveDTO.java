@@ -15,12 +15,18 @@ import java.time.LocalDate;
 import java.util.List;
 
 public record CampaignSaveDTO(
+        @NotNull
         String title,
+        @NotNull
         String description,
+        @NotNull
         BigDecimal goal,
         @NotNull
         @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
+        @JsonDeserialize(using = LocalDateDeserializer.class)
+        @JsonSerialize(using = LocalDateSerializer.class)
         LocalDate finalDate,
+        @NotNull
         Long creatorId
 ){
 }

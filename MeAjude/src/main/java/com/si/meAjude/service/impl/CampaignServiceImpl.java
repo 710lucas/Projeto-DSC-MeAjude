@@ -49,6 +49,7 @@ public class CampaignServiceImpl implements CampaignService {
         campaign.setFinalDate(campaignDTO.finalDate());
         campaign.setActive(true);
         campaign.setDeleted(false);
+        campaign.setRaisedMoney(BigDecimal.ZERO);
         return new CampaignDTO(campaignRepository.save(campaign));
     }
 
@@ -79,7 +80,6 @@ public class CampaignServiceImpl implements CampaignService {
         if(updateDTO.goal() != null && !updateDTO.goal().equals(c.getGoal())) changeGoal(updateDTO.goal(), updateDTO.id());
         if(updateDTO.description() != null && !updateDTO.description().equals(c.getDescription())) changeDescription(updateDTO.description(), updateDTO.id());
         if(updateDTO.title() != null && !updateDTO.title().equals(c.getTitle())) changeTitle(updateDTO.title(), updateDTO.id());
-
         return new CampaignDTO(c);
     }
 
@@ -140,8 +140,4 @@ public class CampaignServiceImpl implements CampaignService {
         campaignRepository.save(c);
         return new CampaignDTO(c);
     }
-
-
-
-
 }

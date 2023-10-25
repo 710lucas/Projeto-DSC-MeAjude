@@ -1,6 +1,11 @@
 package com.si.meAjude.models;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.si.meAjude.exceptions.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -42,10 +47,14 @@ public class Campaign {
     @Positive
     private BigDecimal goal;
 
-    @Future
+    @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate finalDate;
 
-    @FutureOrPresent
+    @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate startingDate = LocalDate.now();
 
     @ManyToOne
