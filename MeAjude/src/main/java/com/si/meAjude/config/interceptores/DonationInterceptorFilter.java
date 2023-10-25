@@ -15,7 +15,7 @@ public class DonationInterceptorFilter implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         User userFromRequest = getUserFromRequest(request);
         if(userFromRequest.getRole() == UserRole.ADMIN) return true;
-        if(hasOnlyIdInRequest(request) && userFromRequest.getId().equals(getIdFromUrl(request))) return true;
+        if(hasOnlyIdInURL(request) && userFromRequest.getId().equals(getIdFromUrl(request))) return true;
         if(hasUserIdInQuery(request)) if(userFromRequest.getId().equals(getUserIdInQuery(request))) return true;
         return sendForbiddenResponseAndReturnFalse(response);
     }
@@ -25,7 +25,7 @@ public class DonationInterceptorFilter implements HandlerInterceptor {
         return false;
     }
 
-    private boolean hasOnlyIdInRequest(HttpServletRequest request){
+    private boolean hasOnlyIdInURL(HttpServletRequest request){
         String requestURI = request.getRequestURI();
         String[] requestURISplit = requestURI.split("/");
         if(requestURISplit.length != 3) return false;

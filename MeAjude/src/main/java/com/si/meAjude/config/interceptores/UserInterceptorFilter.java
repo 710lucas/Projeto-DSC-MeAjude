@@ -27,7 +27,18 @@ public class UserInterceptorFilter implements HandlerInterceptor {
     private boolean hasIdInRequest(HttpServletRequest request){
         String requestURI = request.getRequestURI();
         String[] requestURISplit = requestURI.split("/");
-        return requestURISplit.length > 2;
+        if(requestURISplit.length != 3) return false;
+        if(isStringLong(requestURISplit[2])) return true;
+        return false;
+    }
+
+    private boolean isStringLong(String s){
+        try{
+            Long.parseLong(s);
+            return true;
+        }catch (NumberFormatException e){
+            return false;
+        }
     }
 
     private Long getIdFromUrl(HttpServletRequest request){
