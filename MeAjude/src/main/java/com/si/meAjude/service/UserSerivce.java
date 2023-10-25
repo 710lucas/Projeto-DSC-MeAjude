@@ -1,22 +1,22 @@
 package com.si.meAjude.service;
 
-import com.si.meAjude.service.dtos.usuario.UserDTO;
-import com.si.meAjude.service.dtos.usuario.UserSaveDTO;
-import com.si.meAjude.service.dtos.usuario.UserUpdateDTO;
+import com.si.meAjude.service.dtos.user.UserDTO;
+import com.si.meAjude.service.dtos.user.UserSaveDTO;
+import com.si.meAjude.service.dtos.user.UserUpdateDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
 
 public interface UserSerivce {
 
 
-    public UserDTO save(UserSaveDTO dto);
+     UserDTO save(UserSaveDTO dto);
 
-    public UserDTO getById(Long id);
+     UserDTO getById(Long id);
 
-    public Page<UserDTO> getAll(Pageable pageable);
+     Page<UserDTO> getAll(Pageable pageable);
 
-    public UserDTO update(UserUpdateDTO updateDto);
+     UserDTO update(UserUpdateDTO updateDto, Long id);
 
-    public UserDTO logicDelete(Long id);
-
+     UserDTO logicDelete(Long id);
 }

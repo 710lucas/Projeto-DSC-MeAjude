@@ -1,4 +1,4 @@
-package com.si.meAjude.service.dtos.doacao;
+package com.si.meAjude.service.dtos.donation;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.si.meAjude.models.Donation;
@@ -22,10 +22,10 @@ public record DonationSaveDTO(
         @Min(value = 1)
         BigDecimal value) {
 
-        public Donation toDonation(CampaignRepository campaignRepository, UserRepository userRepository){
+        public Donation toDonation(CampaignRepository campaignRepository, UserRepository donorRepository){
                 Donation donation = new Donation();
                 donation.setCampaign(campaignRepository.getById(campaignId));
-                donation.setUser(userRepository.getById(userId));
+                donation.setUser(donorRepository.getById(userId));
                 donation.setDate(date);
                 donation.setDonationValue(value);
                 return donation;

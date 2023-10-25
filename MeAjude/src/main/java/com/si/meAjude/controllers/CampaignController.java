@@ -3,11 +3,11 @@ package com.si.meAjude.controllers;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.si.meAjude.exceptions.*;
-import com.si.meAjude.models.searchers.campaign.CampaignSearchCriterion;
-import com.si.meAjude.models.searchers.campaign.CampaignSearchContent;
 import com.si.meAjude.service.CampaignService;
 import com.si.meAjude.service.dtos.campaign.CampaignDTO;
 import com.si.meAjude.service.dtos.campaign.CampaignUpdateDTO;
+import com.si.meAjude.service.searchers.campaign.CampaignSearchContent;
+import com.si.meAjude.service.searchers.campaign.CampaignSearchCriterion;
 import com.si.meAjude.util.PageableUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -60,7 +60,7 @@ public class CampaignController {
     }
 
     @PutMapping()
-    public ResponseEntity<CampaignDTO> modificar(@RequestBody CampaignUpdateDTO campaign) throws InvalidDateException, InvalidTitleException, InvalidDescriptionException, InvalidGoalException, InvalidCreatorException {
+    public ResponseEntity<CampaignDTO> update(@RequestBody CampaignUpdateDTO campaign) throws InvalidDateException, InvalidTitleException, InvalidDescriptionException, InvalidGoalException, InvalidCreatorException {
         return ResponseEntity.ok(campaignService.update(campaign));
     }
 
@@ -70,13 +70,5 @@ public class CampaignController {
     public CampaignDTO getById(@PathVariable Long id){
         return campaignService.getCampaign(id);
     }
-
-//    @GetMapping()
-//    public ResponseEntity<CampaignListDTO> listar(@RequestParam(name = "amount", required = false, defaultValue = "-1") String amount, @RequestParam(name = "filter", required = false) String filter) throws  CriterioInvalidoException {
-//        return ResponseEntity.ok(campaignService.listCampaign(Optional.of(Long.parseLong(amount)), Optional.ofNullable(filter)));
-//    }
-
-
-
 
 }

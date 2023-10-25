@@ -1,4 +1,4 @@
-package com.si.meAjude.service.dtos.doacao;
+package com.si.meAjude.service.dtos.donation;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.si.meAjude.models.Donation;

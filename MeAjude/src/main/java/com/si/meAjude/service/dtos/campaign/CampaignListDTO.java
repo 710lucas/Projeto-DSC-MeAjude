@@ -3,7 +3,7 @@ package com.si.meAjude.service.dtos.campaign;
 import com.si.meAjude.models.Campaign;
 import com.si.meAjude.models.comparators.DataComparator;
 import com.si.meAjude.models.comparators.TituloComparator;
-import com.si.meAjude.models.searchers.campaign.CampaignSearchCriterion;
+import com.si.meAjude.service.searchers.campaign.CampaignSearchCriterion;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
