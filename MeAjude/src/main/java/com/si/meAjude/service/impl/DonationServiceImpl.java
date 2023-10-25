@@ -11,6 +11,7 @@ import com.si.meAjude.service.DonationService;
 import com.si.meAjude.service.dtos.donation.DonationDTO;
 import com.si.meAjude.service.dtos.donation.DonationSaveDTO;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,6 +37,11 @@ public class DonationServiceImpl implements DonationService {
     @Override
     public DonationDTO save(DonationSaveDTO donationDTO) {
         Donation donation = donationDTO.toDonation(campaignRepository, userRepository);
+        if(donation.getCampaign().isDeleted()) throw new EntityNotFoundException("Unable to find Campaign with id "+ donation.getCampaign().getId());
+        if(donation.getUser().isDeleted()) throw new EntityNotFoundException("Unable to find User with id "+ donation.getUser().getId());
+        if(donation.getCampaign().getFinalDate().isBefore(donation.getDate())) throw new IllegalArgumentException("The campaign is already over");
+        if(donation.getCampaign().getRaisedMoney().doubleValue() >= donation.getCampaign().getGoal().doubleValue()) throw new IllegalArgumentException("The campaign has already reached its goal");
+        if(!donation.getCampaign().isActive()) throw new IllegalArgumentException("The campaign is deactivated");
         return new DonationDTO(donationRepository.save(donation));
     }
 

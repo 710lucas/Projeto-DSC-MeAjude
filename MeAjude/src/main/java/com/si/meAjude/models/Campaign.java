@@ -47,11 +47,13 @@ public class Campaign {
     @Positive
     private BigDecimal goal;
 
+    @Future
     @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate finalDate;
 
+    @FutureOrPresent
     @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
@@ -72,9 +74,8 @@ public class Campaign {
 
 
     public void addDonation(Donation donation) throws InvalidDonationException {
-        if(donation == null)
-            throw new InvalidDonationException("The donation that was informed is invalid");
         donations.add(donation);
+        if(getRaisedMoney().doubleValue() >= goal.doubleValue()) active = false;
     }
 
     public Donation getDonation(Long id) throws InvalidDonationException {
