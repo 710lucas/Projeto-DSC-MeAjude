@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -33,6 +34,7 @@ public class User implements UserDetails {
 
     @Email
     @Column(unique = true, length = 50)
+    @Size(min = 5, max = 50)
     private String email;
 
     @Column
@@ -42,10 +44,12 @@ public class User implements UserDetails {
 
     @NotBlank
     @Column(length = 50)
+    @Size( max = 50)
     private String name;
 
     @NotBlank
     @Column(length = 13, unique = true)
+    @Size( max = 13)
     private String phone;
 
     private boolean deleted;
