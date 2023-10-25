@@ -5,24 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1cafb04e-43ab-4547-b80b-8f0d3053a11e" name="Changes" comment="mais um pouco de security">
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/config/SecurityFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/controllers/AuthenticationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/enums/UserRole.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/user/LoginResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/impl/AuthorizationServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/impl/TokenService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/config/SecurityConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/config/UserAuthenticationFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/controllers/UserController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/repositories/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/JwtTokenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/JwtTokenService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/user/CreateUserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/user/CreateUserDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/impl/JwtTokenServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/impl/UserDetailsImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/impl/UserDetailsServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/impl/UserService.java" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/searchers/campaign/CampaignSearchContent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/searchers/campaign/CampaignSearchCriterion.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/searchers/campaign/CampaignSearcher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/searchers/campaign/CampaignSearcherFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/searchers/campaign/impl/CampaignByActiveDate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/searchers/campaign/impl/CampaignByActiveTitle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/searchers/campaign/impl/CampaignByEndsBefore.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/searchers/campaign/impl/CampaignByGoalReached.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/searchers/donation/DonationSearchContent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/searchers/donation/DonationSearchCriterion.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/searchers/donation/DonationSearcher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/searchers/donation/DonationSearcherFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/searchers/donation/impl/DonationByCampaignId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/searchers/donation/impl/DonationByDate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/searchers/donation/impl/DonationByDateAndCampaignId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/searchers/donation/impl/DonationByDateAndUserId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/searchers/donation/impl/DonationByDateAndUserIdAndCampaignId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/searchers/donation/impl/DonationByUserId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/searchers/donation/impl/DonationByUserIdAndCampaignId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/searchers/donation/impl/DonationFindAll.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/mvnw" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,32 +70,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;20-configurar-springsecurity&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;20&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/anderson.soares/IdeaProjects/Projeto-DSC-MeAjude&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.42109853&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;66060408f0989f71c7d972b77ad8d040&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "Merging 20-configurar-springsecurity",
+    "jdk.selected.JAVA_MODULE": "20",
+    "last_opened_file_path": "C:/Users/anderson.soares/IdeaProjects/Projeto-DSC-MeAjude",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.42109853",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "spring.configuration.checksum": "66060408f0989f71c7d972b77ad8d040",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.si.meAjude.service.impl" />
