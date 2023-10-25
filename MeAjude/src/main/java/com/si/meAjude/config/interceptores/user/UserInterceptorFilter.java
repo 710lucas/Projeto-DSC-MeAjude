@@ -1,4 +1,4 @@
-package com.si.meAjude.config.interceptores;
+package com.si.meAjude.config.interceptores.user;
 
 import com.si.meAjude.models.User;
 import com.si.meAjude.models.enums.UserRole;
@@ -7,7 +7,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
 
 public class UserInterceptorFilter implements HandlerInterceptor {
 
@@ -15,7 +14,7 @@ public class UserInterceptorFilter implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         User userFromRequest = getUserFromRequest(request);
         if(userFromRequest.getRole() == UserRole.ADMIN) return true;
-        if(hasIdInRequest(request) && userFromRequest.getId().equals(getIdFromUrl(request))) return true;
+        if(hasIdInURL(request) && userFromRequest.getId().equals(getIdFromUrl(request))) return true;
         return sendForbiddenResponseAndReturnFalse(response);
     }
 
@@ -24,7 +23,7 @@ public class UserInterceptorFilter implements HandlerInterceptor {
         return (User) authentication.getPrincipal();
     }
 
-    private boolean hasIdInRequest(HttpServletRequest request){
+    private boolean hasIdInURL(HttpServletRequest request){
         String requestURI = request.getRequestURI();
         String[] requestURISplit = requestURI.split("/");
         if(requestURISplit.length != 3) return false;

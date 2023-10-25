@@ -19,8 +19,6 @@ public record CampaignDTO(
          LocalDate finalDate,
          boolean deleted,
          Long creatorId,
-         @JsonManagedReference
-         List<Donation> donations,
          BigDecimal raisedMoney,
          Long id
 ){
@@ -28,17 +26,7 @@ public record CampaignDTO(
     public CampaignDTO(Campaign campaign){
         this(campaign.isActive(),campaign.getTitle(), campaign.getDescription(), campaign.getGoal(),
                 campaign.getStartingDate(), campaign.getFinalDate(), campaign.isDeleted(),
-                campaign.getCreator().getId(), campaign.getDonations(), campaign.getRaisedMoney(), campaign.getId());
+                campaign.getCreator().getId(), campaign.getRaisedMoney(), campaign.getId());
     }
-
-
-
-//    private static List<Doacao> toModel(List<DoacaoDTO> dtos){
-//        List<Doacao> donations = new ArrayList<>();
-//        for(DoacaoDTO d : dtos)
-//            donations.add(new Doacao(d.));
-//    }
-
-
 }
 

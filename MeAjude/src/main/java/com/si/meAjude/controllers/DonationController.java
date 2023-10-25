@@ -34,7 +34,10 @@ public class DonationController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DonationDTO> getById(@PathVariable Long id) {
+    public ResponseEntity<DonationDTO> getById(@PathVariable Long id,  Authentication authentication){
+        User requestUser = (User) authentication.getPrincipal();
+        DonationDTO donationDTO = donationService.getById(id);
+        if(requestUser.getRole() != UserRole.ADMIN) if(!donationDTO.userId().equals(requestUser.getId())) return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         return new ResponseEntity<>(donationService.getById(id), HttpStatus.OK);
     }
 
@@ -45,13 +48,10 @@ public class DonationController {
             @RequestParam(name = "sortDirection", required = false, defaultValue = "asc") String sortDirection,
             @RequestParam(name = "userId", required = false) Long userId,
             @RequestParam(name = "campaignId", required = false) Long campaignId,
-            @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING) @RequestParam(name = "date", required = false)LocalDate date,
-            Authentication authentication){
+            @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING) @RequestParam(name = "date", required = false)LocalDate date){
 
         page = PageableUtil.getPageableWithSort(page, sortField, sortDirection);
-        User requestUser = (User) authentication.getPrincipal();
         DonationSearchContent searchContent = new DonationSearchContent(userId, campaignId, date, null);
-//        if (requestUser.getRole() != UserRole.ADMIN) if(userId == null || !userId.equals(requestUser.getId())) return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         return new ResponseEntity<>(donationService.getAll(page, searchContent), HttpStatus.OK);
     }
 }

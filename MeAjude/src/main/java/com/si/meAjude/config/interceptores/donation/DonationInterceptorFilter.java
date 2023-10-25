@@ -1,21 +1,27 @@
-package com.si.meAjude.config.interceptores;
+package com.si.meAjude.config.interceptores.donation;
 
+import com.si.meAjude.models.Donation;
 import com.si.meAjude.models.User;
 import com.si.meAjude.models.enums.UserRole;
+import com.si.meAjude.repositories.DonationRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import java.util.Arrays;
 
+
 public class DonationInterceptorFilter implements HandlerInterceptor {
+
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         User userFromRequest = getUserFromRequest(request);
         if(userFromRequest.getRole() == UserRole.ADMIN) return true;
-        if(hasOnlyIdInURL(request) && userFromRequest.getId().equals(getIdFromUrl(request))) return true;
         if(hasUserIdInQuery(request)) if(userFromRequest.getId().equals(getUserIdInQuery(request))) return true;
         return sendForbiddenResponseAndReturnFalse(response);
     }

@@ -24,21 +24,30 @@ import java.util.List;
 public class Campaign {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotNull
     private boolean active;
     @NotNull
-    @NotEmpty
+    @NotBlank
+    @Column(length = 50)
     private String title;
+
+    @NotNull
+    @NotBlank
+    @Column(length = 50)
     private String description;
+
     @Positive
     private BigDecimal goal;
+
     @Future
     private LocalDate finalDate;
+
     @FutureOrPresent
     private LocalDate startingDate = LocalDate.now();
+
     @ManyToOne
     @NotNull
     private User creator;
@@ -46,21 +55,30 @@ public class Campaign {
     @OneToMany(mappedBy = "campaign")
     private List<Donation> donations = new ArrayList<>();
 
+    @Transient
     private BigDecimal raisedMoney = BigDecimal.ZERO;
+
     @NotNull
     private boolean deleted;
 
 
-    public void addDonation(Donation donation) throws DoacaoInvalidaException {
+    public void addDonation(Donation donation) throws InvalidDonationException {
         if(donation == null)
-            throw new DoacaoInvalidaException("The donation that was informed is invalid");
+            throw new InvalidDonationException("The donation that was informed is invalid");
         donations.add(donation);
     }
 
-    public Donation getDonation(Long id) throws DoacaoInvalidaException {
+    public Donation getDonation(Long id) throws InvalidDonationException {
         for(Donation d : donations)
             if(d.getId() == id) return d;
-        throw new DoacaoInvalidaException("The id " + id + " is invalid");
+        throw new InvalidDonationException("The id " + id + " is invalid");
+    }
+
+    public BigDecimal getRaisedMoney() {
+        BigDecimal sum = BigDecimal.ZERO;
+        for(Donation d : donations)
+            sum = sum.add(d.getDonationValue());
+        return sum;
     }
 }
 

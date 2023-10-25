@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.si.meAjude.exceptions.*;
 import com.si.meAjude.service.CampaignService;
 import com.si.meAjude.service.dtos.campaign.CampaignDTO;
+import com.si.meAjude.service.dtos.campaign.CampaignSaveDTO;
 import com.si.meAjude.service.dtos.campaign.CampaignUpdateDTO;
 import com.si.meAjude.service.searchers.campaign.CampaignSearchContent;
 import com.si.meAjude.service.searchers.campaign.CampaignSearchCriterion;
@@ -31,39 +32,9 @@ public class CampaignController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CampaignDTO add(@RequestBody CampaignDTO campaign) throws InvalidDateException, InvalidTitleException, InvalidCreatorException, InvalidDescriptionException, InvalidGoalException {
-        return campaignService.addCampaign(campaign);
+    public CampaignDTO add(@RequestBody CampaignSaveDTO campaign) throws InvalidDateException, InvalidTitleException, InvalidCreatorException, InvalidDescriptionException, InvalidGoalException {
+        return campaignService.save(campaign);
     }
-
-    @DeleteMapping
-    @ResponseStatus(HttpStatus.OK)
-    public CampaignDTO remove(@RequestBody CampaignUpdateDTO campaign){
-        return campaignService.removeCampaign(campaign.id());
-    }
-
-    @GetMapping()
-    @ResponseStatus(HttpStatus.OK)
-    public Page<CampaignDTO> getById(
-            @PageableDefault(size = 10) Pageable page,
-            @RequestParam(name = "sortField", required = false, defaultValue = "finalDate") String sortField,
-            @RequestParam(name = "sortDirection", required = false, defaultValue = "asc") String sortDirection,
-            @RequestParam(name = "criterion", required = false, defaultValue = "ACTIVE_DATE") CampaignSearchCriterion criterion,
-            @RequestParam(name = "userId", required = false) Long userId,
-            @RequestParam(name = "goal", required = false, defaultValue = "0") BigDecimal goal,
-            @RequestParam(name = "active", required = false, defaultValue = "true") boolean active,
-            @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING) @RequestParam(name = "date", required = false) LocalDate initialDate){
-
-        CampaignSearchContent searchContent = new CampaignSearchContent(criterion, userId, initialDate, active, goal);
-        page = PageableUtil.getPageableWithSort(page, sortField, sortDirection);
-
-        return campaignService.getAll(page, searchContent);
-    }
-
-    @PutMapping()
-    public ResponseEntity<CampaignDTO> update(@RequestBody CampaignUpdateDTO campaign) throws InvalidDateException, InvalidTitleException, InvalidDescriptionException, InvalidGoalException, InvalidCreatorException {
-        return ResponseEntity.ok(campaignService.update(campaign));
-    }
-
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -71,4 +42,31 @@ public class CampaignController {
         return campaignService.getCampaign(id);
     }
 
+    @GetMapping()
+    @ResponseStatus(HttpStatus.OK)
+    public Page<CampaignDTO> getById(
+            @PageableDefault(size = 10) Pageable page,
+            @RequestParam(name = "sortField", required = false, defaultValue = "finalDate") String sortField,
+            @RequestParam(name = "sortDirection", required = false, defaultValue = "desc") String sortDirection,
+            @RequestParam(name = "criterion", required = false, defaultValue = "ACTIVE_DATE") CampaignSearchCriterion criterion,
+            @RequestParam(name = "userId", required = false) Long userId,
+            @RequestParam(name = "goal", required = false) BigDecimal goal,
+            @RequestParam(name = "active", required = false, defaultValue = "true") boolean active,
+            @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING) @RequestParam(name = "date", required = false) LocalDate initialDate){
+
+        CampaignSearchContent searchContent = new CampaignSearchContent(criterion, userId, initialDate, active, goal);
+        page = PageableUtil.getPageableWithSort(page, sortField, sortDirection);
+        return campaignService.getAll(page, searchContent);
+    }
+
+    @PutMapping
+    public ResponseEntity<CampaignDTO> update(@RequestBody CampaignUpdateDTO campaign) throws InvalidDateException, InvalidTitleException, InvalidDescriptionException, InvalidGoalException, InvalidCreatorException {
+        return ResponseEntity.ok(campaignService.update(campaign));
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public CampaignDTO remove(@PathVariable Long id){
+        return campaignService.logicRemoveCampaign(id);
+    }
 }

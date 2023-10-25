@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.springframework.format.annotation.NumberFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -38,12 +39,14 @@ public class User implements UserDetails {
     @Column
     private String password;
 
+    @NotNull
     private UserRole role;
 
     @NotBlank
     @Column(length = 50)
     private String name;
 
+    @NumberFormat
     @NotBlank
     @Column(length = 13, unique = true)
     private String phone;

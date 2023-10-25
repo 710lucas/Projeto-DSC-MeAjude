@@ -79,8 +79,8 @@ public class UserServiceImpl implements UserSerivce {
     }
 
     private User getUser(Long id){
-        User userr = userRepository.getById(id);
-        if(userr.isDeleted()) throw new EntityNotFoundException("Unable to find User with id "+ id);
-        return userr;
+        User user = userRepository.getById(id);
+        if(user.isDeleted()) throw new EntityNotFoundException("Unable to find User with id "+ id);
+        return user;
     }
 }
