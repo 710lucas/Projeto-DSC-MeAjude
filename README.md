@@ -13,7 +13,7 @@ Ele fornece uma API RESTful que permite criar, atualizar, ler e excluir (CRUD) i
 - Classes de Configuração e Servisos
 - Annotations E Annotations Personalizadas
 - Injeção de Depedencias.
-- Configurar e se Conectar com Banco de Dados (Como o H2 em Memoria (Para testes) e MySql )
+- Configurar e se Conectar com Banco de Dados (Como o H2 em Memoria  )
 - Mapeamento de Entidades JPA (EntityMenager)
 - JPA Repositories
 - Query e @Query
