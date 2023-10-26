@@ -13,22 +13,22 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 
 @Component
-public class DonationByDateAndUserIdAndCampaignIdTwo implements DonationSearcher {
+public class DonationByDateAndCampaignId implements DonationSearcher {
 
     @Autowired
-    DonationRepository donationRepository;
+    private DonationRepository donationRepository;
 
-    private Page<Donation> searchByDateAndUserIdAndCampaignId(Pageable peagle, LocalDate date, Long userId, Long campaignId){
-        return donationRepository.findAllByDateAndUserIdAndCampaignId(peagle,date, userId, campaignId);
+    private Page<Donation> searchByDateAndCampaignId(Pageable peagle, LocalDate date, Long campaignId){
+        return donationRepository.findAllByDateAndCampaignId(peagle,date, campaignId);
     }
 
     @Override
     public Page<Donation> search(Pageable pageable, DonationSearchContent donationContent) {
-        return searchByDateAndUserIdAndCampaignId(pageable,donationContent.getDate(), donationContent.getUserId(), donationContent.getCampaignId());
+        return searchByDateAndCampaignId(pageable,donationContent.getDate(), donationContent.getCampaignId());
     }
 
     @Override
     public DonationSearchCriterion getCriterion() {
-        return DonationSearchCriterion.DATE_AND_USER_ID_AND_CAMPAIGN_ID;
+        return DonationSearchCriterion.DATE_AND_CAMPAIGN_ID;
     }
 }

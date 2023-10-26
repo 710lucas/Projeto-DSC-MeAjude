@@ -6,8 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="1cafb04e-43ab-4547-b80b-8f0d3053a11e" name="Changes" comment="mais um pouco de security">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/h2testdb.mv.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/h2testdb.trace.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/controllers/DonationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/controllers/DonationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/comparators/DataComparator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/comparators/TituloComparator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/campaign/CampaignDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/campaign/CampaignDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/searchers/donation/impl/DonationByCampaignIdTwo.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/searchers/donation/impl/DonationByCampaignId.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/searchers/donation/impl/DonationByDateAndCampaignIdTwo.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/searchers/donation/impl/DonationByDateAndCampaignId.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/searchers/donation/impl/DonationByDateAndUserIdAndCampaignIdTwo.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/searchers/donation/impl/DonationByDateAndUserIdAndCampaignId.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/searchers/donation/impl/DonationByDateAndUserIdTwo.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/searchers/donation/impl/DonationByDateAndUserId.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/searchers/donation/impl/DonationByDateTwo.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/searchers/donation/impl/DonationByDate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/searchers/donation/impl/DonationByUserIdAndCampaignIdTwo.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/searchers/donation/impl/DonationByUserIdAndCampaignId.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/searchers/donation/impl/DonationByUserIdTwo.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/searchers/donation/impl/DonationByUserId.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/searchers/donation/impl/DonationFindAllTwo.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/searchers/donation/impl/DonationFindAll.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

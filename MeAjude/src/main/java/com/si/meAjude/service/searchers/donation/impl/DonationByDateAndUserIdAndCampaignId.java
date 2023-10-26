@@ -10,23 +10,25 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+
 @Component
-public class DonationByCampaignIdTwo implements DonationSearcher {
+public class DonationByDateAndUserIdAndCampaignId implements DonationSearcher {
 
     @Autowired
-    private DonationRepository donationRepository;
+    DonationRepository donationRepository;
 
-    private Page<Donation> searchByCampaignId(Pageable peagle, Long campaignId){
-        return donationRepository.findAllByCampaignId(peagle,campaignId);
+    private Page<Donation> searchByDateAndUserIdAndCampaignId(Pageable peagle, LocalDate date, Long userId, Long campaignId){
+        return donationRepository.findAllByDateAndUserIdAndCampaignId(peagle,date, userId, campaignId);
     }
 
     @Override
     public Page<Donation> search(Pageable pageable, DonationSearchContent donationContent) {
-        return searchByCampaignId(pageable, donationContent.getCampaignId());
+        return searchByDateAndUserIdAndCampaignId(pageable,donationContent.getDate(), donationContent.getUserId(), donationContent.getCampaignId());
     }
 
     @Override
     public DonationSearchCriterion getCriterion() {
-        return DonationSearchCriterion.CAMPAIGN_ID;
+        return DonationSearchCriterion.DATE_AND_USER_ID_AND_CAMPAIGN_ID;
     }
 }

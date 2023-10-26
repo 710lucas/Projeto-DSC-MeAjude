@@ -72,13 +72,17 @@ public class DonationController {
             @PageableDefault(size = 10) Pageable page,
             @RequestParam(name = "sortField", required = false, defaultValue = "date") String sortField,
             @RequestParam(name = "sortDirection", required = false, defaultValue = "desc") String sortDirection,
-            @RequestParam(name = "criterion") DonationSearchCriterion criterion,
+            @RequestParam(name = "criterion", required = false, defaultValue = "ALL") DonationSearchCriterion criterion,
             @RequestParam(name = "userId", required = false) Long userId,
             @RequestParam(name = "campaignId", required = false) Long campaignId,
-            @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING) @RequestParam(name = "date", required = false)LocalDate date){
-        User userFromRequest = getUserFromRequest();
-        if(userFromRequest.getRole() != UserRole.ADMIN && userId != null && userId != userFromRequest.getId()) return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        page = PageableUtil.getPageableWithSort(page, sortField, sortDirection);
+            @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING) @RequestParam(name = "date", required = false)LocalDate date,
+            @RequestHeader(value = "Authorization", required = false) String authorizationHeader){
+        if(authorizationHeader != null){
+            User userFromRequest = getUserFromRequest();
+            if(userFromRequest.getRole() != UserRole.ADMIN && userId != null && userId != userFromRequest.getId()) return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+        if(authorizationHeader == null && userId != null) return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            page = PageableUtil.getPageableWithSort(page, sortField, sortDirection);
         DonationSearchContent searchContent = new DonationSearchContent(criterion, userId, campaignId, date, null);
         return new ResponseEntity<>(donationService.getAll(page, searchContent), HttpStatus.OK);
     }

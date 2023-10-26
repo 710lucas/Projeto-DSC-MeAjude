@@ -29,7 +29,6 @@ public record CampaignDTO(
 
          @JsonFormat(pattern = "dd/MM/yyyy")
          LocalDate finalDate,
-         boolean deleted,
 
          Long creatorId,
 
@@ -40,7 +39,7 @@ public record CampaignDTO(
 
     public CampaignDTO(Campaign campaign){
         this(campaign.isActive(),campaign.getTitle(), campaign.getDescription(), campaign.getGoal(),
-                campaign.getStartingDate(), campaign.getFinalDate(), campaign.isDeleted(),
+                campaign.getStartingDate(), campaign.getFinalDate(),
                 campaign.getCreator().getId(), campaign.getRaisedMoney(), campaign.getId());
     }
 }
