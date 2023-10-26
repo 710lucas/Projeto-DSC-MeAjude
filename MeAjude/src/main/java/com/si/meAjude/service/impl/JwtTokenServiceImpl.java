@@ -26,6 +26,7 @@ public class JwtTokenServiceImpl implements JwtTokenService {
             String token = JWT.create()
                     .withIssuer(ISSUER)
                     .withSubject(user.getEmail())
+                    .withClaim("userid", user.getId())
                     .withExpiresAt(expirationDate())
                     .sign(algorithm);
             return token;

@@ -6,18 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1cafb04e-43ab-4547-b80b-8f0d3053a11e" name="Changes" comment="mais um pouco de security">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/config/SecurityConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/config/interceptores/campaign/CampaignInterceptorConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/config/interceptores/campaign/CampaignInterceptorFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/config/interceptores/donation/DonationInterceptorConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/config/interceptores/donation/DonationInterceptorFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/config/interceptores/user/UserInterceptorConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/config/interceptores/user/UserInterceptorFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/controllers/DonationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/controllers/DonationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/controllers/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/user/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/user/UserDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/impl/JwtTokenServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/impl/JwtTokenServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/searchers/donation/dtos/DonationSearchContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/searchers/donation/dtos/DonationSearchContent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/h2testdb.mv.db" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/h2testdb.trace.db" beforeDir="false" />
     </list>
