@@ -32,6 +32,6 @@ public class AuthenticationController {
 
         var token = jwtTokenServiceImpl.generateToken((User) auth.getPrincipal());
 
-        return new ResponseEntity("Token: " + token, org.springframework.http.HttpStatus.OK);
+        return new ResponseEntity("{\"token\":\""  + token+"\"}", org.springframework.http.HttpStatus.OK);
     }
 }
