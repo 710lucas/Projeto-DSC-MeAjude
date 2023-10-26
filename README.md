@@ -1,4 +1,6 @@
-# Meajude.com
+# Meajude.com - Plataforma de Doações
+
+![image](https://github.com/710lucas/Projeto-DSC-MeAjude/assets/105192228/51463d99-58c2-49fd-827d-3bd0e3a5a1f0)
 
 ## **SOBRE O PROJETO**
 
@@ -55,6 +57,7 @@ As seguintes tecnologias foram utilizadas durante o desenvolvimento do projeto:
 - ![Maven](https://img.shields.io/badge/Maven-3.8.3-blue?logo=apache-maven)
 - ![H2](https://img.shields.io/badge/H2-1.4.200-blue?logo=h2-database)
 
+---
 
 ## **LINKS PARA SWAGGER**
 
@@ -66,19 +69,33 @@ As seguintes tecnologias foram utilizadas durante o desenvolvimento do projeto:
 
 - **Springfox Swagger:** Framework que facilita a geração de documentação Swagger para APIs Spring Boot.
 
+---
 
-# Get in touch
+### Vídeo de Demonstração
 
- [![LinkedIn](https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/pedro-vinicius-8472351b7/)](https://www.linkedin.com/in/pedro-vinicius-8472351b7/)
- 
+Assista a uma demonstração completa da aplicação no YouTube:
 
-
-
-- <a href="mailto:pedrorochadias1001@gmail.com">
-  <img src="https://img.shields.io/badge/-Gmail-D14836?style=flat-square&logo=Gmail&logoColor=white" alt="Gmail">
-  </a>
-
+[![Vídeo de Demonstração](https://img.youtube.com/vi/SEU-CÓDIGO-DO-YOUTUBE/0.jpg)](https://www.youtube.com/watch?v=SEU-CÓDIGO-DO-YOUTUBE)
 
 ---
-  
+
+
+### Contato dos Desenvolvedores 📬
+
+Queremos ouvir de você! Sinta-se à vontade para entrar em contato com os membros da equipe:
+
+- **Pedro Vinícius**
+  - LinkedIn: [Pedro Vinícius](https://www.linkedin.com/in/pedro-vinicius-8472351b7/)
+  - E-mail: [pedrorochadias1001@gmail.com](mailto:pedrorochadias1001@gmail.com)
+
+- **Lucas Barbotin**
+  - LinkedIn: [Lucas Barbotin](https://www.linkedin.com/in/lucas-barbotin-3a4320254?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
+  - E-mail: [lucasperonicobarbotin@gmail.com](mailto:lucasperonicobarbotin@gmail.com)
+
+- **Anderson Soares**
+  - LinkedIn: [Anderson Soares](https://br.linkedin.com/in/anderson-soares-4b300027a)
+  - E-mail: [anderson.soares@dcx.ufpb.br](mailto:anderson.soares@dcx.ufpb.br)
+
+Sinta-se à vontade para nos enviar uma mensagem no LinkedIn ou por e-mail. Estamos ansiosos para ouvir suas perguntas, sugestões ou simplesmente para bater um papo!
+
 
