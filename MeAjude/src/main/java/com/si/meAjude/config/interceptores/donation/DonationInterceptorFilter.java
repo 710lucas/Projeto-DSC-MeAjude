@@ -1,23 +1,41 @@
-package com.si.meAjude.config.interceptores;
+package com.si.meAjude.config.interceptores.donation;
 
+import com.si.meAjude.models.Donation;
 import com.si.meAjude.models.User;
 import com.si.meAjude.models.enums.UserRole;
+import com.si.meAjude.repositories.DonationRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Arrays;
 
+
 public class DonationInterceptorFilter implements HandlerInterceptor {
+
+    // preHandle: Executed before actual handler is executed
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         User userFromRequest = getUserFromRequest(request);
         if(userFromRequest.getRole() == UserRole.ADMIN) return true;
-        if(hasOnlyIdInURL(request) && userFromRequest.getId().equals(getIdFromUrl(request))) return true;
         if(hasUserIdInQuery(request)) if(userFromRequest.getId().equals(getUserIdInQuery(request))) return true;
         return sendForbiddenResponseAndReturnFalse(response);
+    }
+
+    // postHandle: Executed after handler is executed, before view is resolved
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable ModelAndView modelAndView) throws Exception {
+    }
+
+    // afterCompletion: Executed after complete request is finished
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable Exception ex) throws Exception {
     }
 
     private boolean sendForbiddenResponseAndReturnFalse(HttpServletResponse response) throws Exception {

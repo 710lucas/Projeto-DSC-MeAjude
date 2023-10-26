@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -44,11 +45,13 @@ public class AuthenticationController {
             @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid LoginUserDTO data){
-        var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
-        var auth = this.authenticationManager.authenticate(usernamePassword);
-
-        var token = jwtTokenServiceImpl.generateToken((User) auth.getPrincipal());
-
-        return new ResponseEntity("Token: " + token, org.springframework.http.HttpStatus.OK);
+        String token = "";
+        try{
+            var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());        var auth = this.authenticationManager.authenticate(usernamePassword);
+            token = jwtTokenServiceImpl.generateToken((User) auth.getPrincipal());
+        }catch (Exception e){
+            throw new EntityNotFoundException("invalid email or password");
+        }
+        return new ResponseEntity("{\"token\":\""  + token+"\"}", org.springframework.http.HttpStatus.OK);
     }
 }

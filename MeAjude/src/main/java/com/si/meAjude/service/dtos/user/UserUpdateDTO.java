@@ -9,11 +9,10 @@ public record UserUpdateDTO(
         String name,
         String phone,
         String email,
-        String password,
-        UserRole role
+        String password
     ){
 
     public UserUpdateDTO(User user) {
-        this(user.getName(), user.getPhone(), user.getEmail(), user.getPassword(), user.getRole());
+        this(user.getName(), user.getPhone(), user.getEmail(), user.getPassword());
     }
 }

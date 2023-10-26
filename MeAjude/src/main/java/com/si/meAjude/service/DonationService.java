@@ -7,7 +7,7 @@ import com.si.meAjude.service.dtos.donation.DonationDTO;
 import com.si.meAjude.service.dtos.donation.DonationSaveDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
+import org.springframework.stereotype.Service;
 
 public interface DonationService {
      DonationDTO save (DonationSaveDTO doacao);

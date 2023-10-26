@@ -66,7 +66,6 @@ public class UserServiceImpl implements UserSerivce {
         if(userUpdateDTO.phone() != null && !userUpdateDTO.phone().isBlank()) user.setPhone(userUpdateDTO.phone());
         if(userUpdateDTO.email() != null && !userUpdateDTO.email().isBlank()) user.setEmail(userUpdateDTO.email());
         if(userUpdateDTO.password() != null && !userUpdateDTO.password().isBlank()) user.setPassword(userUpdateDTO.password());
-        if(userUpdateDTO.role() != null) user.setRole(userUpdateDTO.role());
         return user;
     }
 
@@ -79,8 +78,8 @@ public class UserServiceImpl implements UserSerivce {
     }
 
     private User getUser(Long id){
-        User userr = userRepository.getById(id);
-        if(userr.isDeleted()) throw new EntityNotFoundException("Unable to find User with id "+ id);
-        return userr;
+        User user = userRepository.getById(id);
+        if(user.isDeleted()) throw new EntityNotFoundException("Unable to find User with id "+ id);
+        return user;
     }
 }

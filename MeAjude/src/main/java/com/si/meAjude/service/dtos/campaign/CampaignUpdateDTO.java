@@ -10,15 +10,12 @@ public record CampaignUpdateDTO(
     Long id,
     @Nullable
     String title,
+    @Nullable
     BigDecimal goal,
     @Nullable
     Boolean active,
     @Nullable
     String description,
     @Nullable
-    LocalDate startingDate,
-    @Nullable
-    LocalDate finalDate,
-    @Nullable
-    Long creatorId
+    LocalDate finalDate
 ){}

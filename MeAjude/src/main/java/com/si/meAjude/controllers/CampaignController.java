@@ -3,8 +3,11 @@ package com.si.meAjude.controllers;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.si.meAjude.exceptions.*;
+import com.si.meAjude.models.User;
+import com.si.meAjude.models.enums.UserRole;
 import com.si.meAjude.service.CampaignService;
 import com.si.meAjude.service.dtos.campaign.CampaignDTO;
+import com.si.meAjude.service.dtos.campaign.CampaignSaveDTO;
 import com.si.meAjude.service.dtos.campaign.CampaignUpdateDTO;
 import com.si.meAjude.service.searchers.campaign.CampaignSearchContent;
 import com.si.meAjude.service.searchers.campaign.CampaignSearchCriterion;
@@ -22,6 +25,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -29,7 +33,7 @@ import java.time.LocalDate;
 
 @Tag(name = "Campaign", description = "Campaign management APIs")
 @RestController
-@RequestMapping("/campaign")
+@RequestMapping("/campaigns")
 public class CampaignController {
 
 
@@ -47,8 +51,10 @@ public class CampaignController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CampaignDTO add(@RequestBody CampaignDTO campaign) throws InvalidDateException, InvalidTitleException, InvalidCreatorException, InvalidDescriptionException, InvalidGoalException {
-        return campaignService.addCampaign(campaign);
+    public ResponseEntity<CampaignDTO> add(@RequestBody CampaignSaveDTO campaign, Authentication authentication) throws InvalidDateException, InvalidTitleException, InvalidCreatorException, InvalidDescriptionException, InvalidGoalException {
+        User userFromRequest = (User) authentication.getPrincipal();
+        if(!userFromRequest.getId().equals(campaign.creatorId())) return new ResponseEntity<CampaignDTO>(HttpStatus.FORBIDDEN);
+        return new ResponseEntity<CampaignDTO>(campaignService.save(campaign), HttpStatus.CREATED);
     }
 
     @Operation(
@@ -70,23 +76,31 @@ public class CampaignController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = { @Content(array = @ArraySchema(schema = @Schema(implementation = CampaignDTO.class)), mediaType = "application/json") }),
             @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
-    @GetMapping()
+    @GetMapping("/{id}")
+    public ResponseEntity<CampaignDTO> getById(@PathVariable Long id, Authentication authentication){
+        User user = (User) authentication.getPrincipal();
+        CampaignDTO campaignDTO = campaignService.getCampaign(id);
+        if(user.getRole() != UserRole.ADMIN && !campaignDTO.creatorId().equals(user.getId())) return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        return new ResponseEntity<>(campaignDTO, HttpStatus.OK);
+    }
+
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public Page<CampaignDTO> getById(
             @PageableDefault(size = 10) Pageable page,
             @RequestParam(name = "sortField", required = false, defaultValue = "finalDate") String sortField,
-            @RequestParam(name = "sortDirection", required = false, defaultValue = "asc") String sortDirection,
+            @RequestParam(name = "sortDirection", required = false, defaultValue = "desc") String sortDirection,
             @RequestParam(name = "criterion", required = false, defaultValue = "ACTIVE_DATE") CampaignSearchCriterion criterion,
             @RequestParam(name = "userId", required = false) Long userId,
-            @RequestParam(name = "goal", required = false, defaultValue = "0") BigDecimal goal,
+            @RequestParam(name = "goal", required = false) BigDecimal goal,
             @RequestParam(name = "active", required = false, defaultValue = "true") boolean active,
             @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING) @RequestParam(name = "date", required = false) LocalDate initialDate){
 
         CampaignSearchContent searchContent = new CampaignSearchContent(criterion, userId, initialDate, active, goal);
         page = PageableUtil.getPageableWithSort(page, sortField, sortDirection);
-
         return campaignService.getAll(page, searchContent);
     }
+
 
 
     @Operation(
@@ -96,10 +110,14 @@ public class CampaignController {
             @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = CampaignDTO.class), mediaType = "application/json") }),
             @ApiResponse(responseCode = "400", content = { @Content(schema = @Schema()) }),
             @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
-    @PutMapping()
+  
+
+    @PutMapping("/{id}")
+
     public ResponseEntity<CampaignDTO> update(@RequestBody CampaignUpdateDTO campaign) throws InvalidDateException, InvalidTitleException, InvalidDescriptionException, InvalidGoalException, InvalidCreatorException {
         return ResponseEntity.ok(campaignService.update(campaign));
     }
+
 
 
     @Operation(
@@ -109,10 +127,10 @@ public class CampaignController {
             @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = CampaignDTO.class), mediaType = "application/json") }),
             @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema()) }),
             @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
-    @GetMapping("/{id}")
+ 
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public CampaignDTO getById(@PathVariable Long id){
-        return campaignService.getCampaign(id);
+    public CampaignDTO remove(@PathVariable Long id){
+        return campaignService.logicRemoveCampaign(id);
     }
-
 }
