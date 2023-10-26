@@ -8,6 +8,12 @@ import com.si.meAjude.service.DonationService;
 import com.si.meAjude.service.dtos.donation.DonationDTO;
 import com.si.meAjude.service.dtos.donation.DonationSaveDTO;
 import com.si.meAjude.util.PageableUtil;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
+@Tag(name = "Donation", description = "Donation management APIs")
 @RestController
 @RequestMapping("/donations")
 public class DonationController {
@@ -27,6 +34,14 @@ public class DonationController {
     @Autowired
     DonationService donationService;
 
+
+    @Operation(
+            summary = "Create a New Donation",
+            description = "Create a new donation by providing the required information in the request body. Returns the created DonationDTO with details such as id, donor information, donation amount, and other attributes.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", content = { @Content(schema = @Schema(implementation = DonationDTO.class), mediaType = "application/json") }),
+            @ApiResponse(responseCode = "400", content = { @Content(schema = @Schema()) }),
+            @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
     @PostMapping
     public ResponseEntity<DonationDTO> saveDonation(@RequestBody @Valid DonationSaveDTO dto, Authentication authentication) {
         User requestUser = (User) authentication.getPrincipal();
@@ -34,6 +49,13 @@ public class DonationController {
         return new ResponseEntity<>(donationService.save(dto), HttpStatus.CREATED);
     }
 
+    @Operation(
+            summary = "Retrieve Donation by ID",
+            description = "Get detailed information about a donation by specifying its unique identifier. Returns a DonationDTO containing donation details such as id, donor information, donation amount, and other attributes.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = DonationDTO.class), mediaType = "application/json") }),
+            @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema()) }),
+            @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
     @GetMapping("/{id}")
     public ResponseEntity<DonationDTO> getById(@PathVariable Long id,  Authentication authentication){
         User requestUser = (User) authentication.getPrincipal();
@@ -41,6 +63,10 @@ public class DonationController {
         if(requestUser.getRole() != UserRole.ADMIN) if(!donationDTO.userId().equals(requestUser.getId())) return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         return new ResponseEntity<>(donationService.getById(id), HttpStatus.OK);
     }
+
+        @Operation(
+            summary = "Retrieve All Donations",
+            description = "Get a list of all donations. Returns a Page of DonationDTOs containing donation details such as id, donor information, donation amount, and other attributes.")
 
     @GetMapping
     public ResponseEntity<Page<DonationDTO>> getAll(
