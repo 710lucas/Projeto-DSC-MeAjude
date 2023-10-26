@@ -2,6 +2,7 @@ package com.si.meAjude.config.interceptores.campaign;
 
 import com.si.meAjude.models.User;
 import com.si.meAjude.models.enums.UserRole;
+import com.si.meAjude.service.dtos.campaign.CampaignSaveDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.lang.Nullable;
@@ -19,6 +20,7 @@ public class CampaignInterceptorFilter implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         User userFromRequest = getUserFromRequest(request);
+        if(isGetRequest(request)) return true;
         if(userFromRequest.getRole() == UserRole.ADMIN) return true;
         if(isPostRequest(request)) return true;
         if(isDeleteRequest(request) || isPutRequest(request)) if(hasOnlyIdInURL(request)) if(userFromRequest.getId().equals(getIdFromUrl(request))) return true;
@@ -30,6 +32,8 @@ public class CampaignInterceptorFilter implements HandlerInterceptor {
     // postHandle: Executed after handler is executed, before view is resolved
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable ModelAndView modelAndView) throws Exception {
+
+
     }
 
     // afterCompletion: Executed after complete request is finished

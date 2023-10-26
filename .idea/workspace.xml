@@ -5,11 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1cafb04e-43ab-4547-b80b-8f0d3053a11e" name="Changes" comment="mais um pouco de security">
+      <change afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/config/OpenApiConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/config/SecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/config/interceptores/campaign/CampaignInterceptorFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/config/interceptores/campaign/CampaignInterceptorFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/controllers/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/controllers/AuthenticationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/controllers/CampaignController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/controllers/CampaignController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/CampaignService.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/CampaignService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/campaign/CampaignUpdateDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/campaign/CampaignUpdateDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/impl/CampaignServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/impl/CampaignServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/controllers/DonationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/controllers/DonationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/models/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +68,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Merging main",
     "jdk.selected.JAVA_MODULE": "20",
     "last_opened_file_path": "C:/Users/anderson.soares/IdeaProjects/Projeto-DSC-MeAjude",
     "node.js.detected.package.eslint": "true",
