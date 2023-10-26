@@ -1,6 +1,5 @@
 package com.si.meAjude.controllers;
 
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.si.meAjude.exceptions.*;
 import com.si.meAjude.models.User;
@@ -67,7 +66,7 @@ public class CampaignController {
     @DeleteMapping
     @ResponseStatus(HttpStatus.OK)
     public CampaignDTO remove(@RequestBody CampaignUpdateDTO campaign){
-        return campaignService.removeCampaign(campaign.id());
+        return campaignService.logicRemoveCampaign(campaign.id());
     }
 
     @Operation(
