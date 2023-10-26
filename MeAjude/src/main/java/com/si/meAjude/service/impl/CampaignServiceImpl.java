@@ -15,6 +15,7 @@ import com.si.meAjude.service.searchers.campaign.CampaignSearchContent;
 import com.si.meAjude.service.searchers.campaign.CampaignSearcher;
 import com.si.meAjude.service.searchers.campaign.CampaignSearcherFactoryService;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -70,14 +71,14 @@ public class CampaignServiceImpl implements CampaignService {
         return searcher.search(page, searchContent).map(CampaignDTO::new);
     }
 
+    @Transactional
     @Override
     public CampaignDTO update(CampaignUpdateDTO updateDTO, Long id) throws InvalidDateException, InvalidGoalException, InvalidDescriptionException, InvalidTitleException, InvalidCreatorException {
 
         Campaign c = getCampaignInDateBase(id);
         if(!c.isActive()) throw new IllegalArgumentException("Camping is disabled, can´t edit it");
-        if(updateDTO.active() != null && updateDTO.active() == false && canCampaingDesable(id)) changeState(updateDTO.active(), id);
-        if(updateDTO.active() == true) changeState(updateDTO.active(), id);
-        if(updateDTO.deleted() != null) changeDeleted(updateDTO.deleted(), id);
+        if(updateDTO.active() != null) changeState(updateDTO.active(), id);
+        if(updateDTO.deleted() != null && canDeleteCampaign(id)) changeDeleted(updateDTO.deleted(), id);
         if(updateDTO.raisedMoney() != null) changeRaisedMoney(updateDTO.raisedMoney(),id);
         if(updateDTO.finalDate() != null && updateDTO.finalDate().isAfter(LocalDate.now())) changeFinalDate(updateDTO.finalDate(), id);
         if(updateDTO.goal() != null && updateDTO.goal().doubleValue() > 0) changeGoal(updateDTO.goal(), id);
@@ -100,7 +101,7 @@ public class CampaignServiceImpl implements CampaignService {
         return campaign;
     }
 
-    private boolean canCampaingDesable(Long id){
+    private boolean canDeleteCampaign(Long id){
         Campaign campaign = getCampaignInDateBase(id);
         return campaign.getDonations().isEmpty();
     }

@@ -27,6 +27,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -97,8 +98,12 @@ public class CampaignController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<CampaignDTO> update(@RequestBody CampaignUpdateDTO campaign, @PathVariable Long id) throws InvalidDateException, InvalidTitleException, InvalidDescriptionException, InvalidGoalException, InvalidCreatorException {
-        return ResponseEntity.ok(campaignService.update(campaign, id));
+    public ResponseEntity update(@RequestBody CampaignUpdateDTO campaign, @PathVariable Long id) throws InvalidDateException, InvalidTitleException, InvalidDescriptionException, InvalidGoalException, InvalidCreatorException {
+        User userFromRequest = getUserFromRequest();
+        CampaignDTO campaignDTO = campaignService.getCampaign(id);
+        if(userFromRequest.getRole() != UserRole.ADMIN && userFromRequest.getId() != campaignDTO.creatorId()) return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        campaignService.update(campaign, id);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     @Operation(
@@ -110,10 +115,17 @@ public class CampaignController {
             @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public CampaignDTO remove(@PathVariable Long id){
-        return campaignService.logicRemoveCampaign(id);
+    public ResponseEntity remove(@PathVariable Long id){
+        User userFromRequest = getUserFromRequest();
+        CampaignDTO campaignDTO = campaignService.getCampaign(id);
+        if(userFromRequest.getRole() != UserRole.ADMIN && userFromRequest.getId() != campaignDTO.creatorId()) return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        campaignService.logicRemoveCampaign(id);
+        return new ResponseEntity<>( HttpStatus.NO_CONTENT);
     }
 
+    private User getUserFromRequest(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return (User) authentication.getPrincipal();
+    }
 
 }

@@ -24,10 +24,21 @@ public class SecurityConfiguration {
     @Autowired
     SecurityFilter securityFilter;
 
+    private static final String[] ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED = {
+        "/v3/api-docs/**",
+        "/swagger-ui/**",
+        "/swagger-ui.html"
+    };
 
-    public static final String [] ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED_POST_REQUEST = {
-            "/auth", // Url que usaremos para fazer login
+
+    private static final String [] ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED_POST_REQUEST = {
+            "/auth/login", // Url que usaremos para fazer login
             "/users" // Url que usaremos para criar um usuário
+    };
+
+    private static final String [] ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED_GET_REQUEST = {
+            "/donations/**",
+            "/campaigns/**"
     };
 
 
@@ -38,10 +49,8 @@ public class SecurityConfiguration {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
-                        .requestMatchers("/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/campaigns/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/users/**").hasRole("ADMIN")
+                        .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED).permitAll()
+                        .requestMatchers(HttpMethod.GET, ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED_GET_REQUEST).permitAll()
                         .requestMatchers(HttpMethod.POST, ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED_POST_REQUEST).permitAll()
                         .anyRequest().authenticated()
                 )

@@ -47,10 +47,6 @@ public class JwtTokenServiceImpl implements JwtTokenService {
         }
     }
 
-
-
-
-
     private Instant creationDate() {
         return ZonedDateTime.now(ZoneId.of("America/Recife")).toInstant();
     }

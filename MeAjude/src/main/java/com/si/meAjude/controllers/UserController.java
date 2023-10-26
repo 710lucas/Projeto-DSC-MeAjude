@@ -1,5 +1,7 @@
 package com.si.meAjude.controllers;
 
+import com.si.meAjude.models.User;
+import com.si.meAjude.models.enums.UserRole;
 import com.si.meAjude.service.UserSerivce;
 import com.si.meAjude.service.dtos.user.UserDTO;
 import com.si.meAjude.service.dtos.user.UserSaveDTO;
@@ -21,6 +23,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
 
@@ -75,7 +78,7 @@ public class UserController {
             @PageableDefault(size = 10) Pageable page,
             @RequestParam(name = "sortField", required = false, defaultValue = "name") String sortField,
             @RequestParam(name = "sortDirection", required = false, defaultValue = "asc") String sortDirection) {
-    return userService.getAll(PageableUtil.getPageableWithSort(page, sortField, sortDirection));
+        return userService.getAll(PageableUtil.getPageableWithSort(page, sortField, sortDirection));
     }
 
     @Operation(
@@ -88,8 +91,10 @@ public class UserController {
             @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema()) }),
             @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
     @PutMapping("/{id}")
-    public ResponseEntity<UserDTO> update(@RequestBody @Valid UserUpdateDTO userUpdateDTO, @PathVariable Long id){
-        return new ResponseEntity<>(userService.update(userUpdateDTO, id), HttpStatus.OK);
+    public ResponseEntity update(@RequestBody @Valid UserUpdateDTO userUpdateDTO, @PathVariable Long id){
+        if(getUserFromRequest().getRole() != UserRole.ADMIN && !getUserFromRequest().getId().equals(id)) return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        userService.update(userUpdateDTO, id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 
@@ -103,6 +108,13 @@ public class UserController {
             @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
     @DeleteMapping("/{id}")
     public ResponseEntity<UserDTO> logicDelete(@PathVariable Long id){
-        return new ResponseEntity<>(userService.logicDelete(id), HttpStatus.OK);
+        if(getUserFromRequest().getRole() != UserRole.ADMIN && !getUserFromRequest().getId().equals(id)) return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        userService.logicDelete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    private User getUserFromRequest(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return (User) authentication.getPrincipal();
     }
 }

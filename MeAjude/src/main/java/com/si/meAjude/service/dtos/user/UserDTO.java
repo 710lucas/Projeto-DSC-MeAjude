@@ -6,14 +6,10 @@ import com.si.meAjude.service.dtos.document.DocumentDTO;
 
 public record UserDTO(
         Long id,
-        String email,
-        String name,
-        String phone,
-        boolean deleted,
-        DocumentDTO documentDTO,
-        UserRole role) {
+        String email
+) {
 
     public UserDTO(User user){
-        this(user.getId(), user.getEmail(), user.getName(), user.getPhone(), user.isDeleted(), new DocumentDTO(user.getDocument()), user.getRole());
+        this(user.getId(), user.getEmail());
     }
 }
