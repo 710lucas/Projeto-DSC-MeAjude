@@ -36,12 +36,12 @@ public class Campaign {
     private boolean active;
     @NotNull
     @NotBlank
-    @Column(length = 50)
+    @Column(length = 100)
     private String title;
 
     @NotNull
     @NotBlank
-    @Column(length = 50)
+    @Column(length = 1000)
     private String description;
 
     @Positive

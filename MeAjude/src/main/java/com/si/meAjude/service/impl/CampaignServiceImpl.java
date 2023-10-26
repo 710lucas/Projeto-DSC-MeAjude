@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -74,7 +75,7 @@ public class CampaignServiceImpl implements CampaignService {
     public CampaignDTO update(CampaignUpdateDTO updateDTO) throws InvalidDateException, InvalidGoalException, InvalidDescriptionException, InvalidTitleException, InvalidCreatorException {
 
         Campaign c = getCampaignInDateBase(updateDTO.id());
-
+        if(!c.isActive()) throw new IllegalArgumentException("Camping is disabled, can´t edit it");
         if(updateDTO.active() != null && updateDTO.active() != c.isActive()) changeState(updateDTO.active(), updateDTO.id());
         if(updateDTO.finalDate() != null && !updateDTO.finalDate().equals(c.getFinalDate())) changeFinalDate(updateDTO.finalDate(), updateDTO.id());
         if(updateDTO.goal() != null && !updateDTO.goal().equals(c.getGoal())) changeGoal(updateDTO.goal(), updateDTO.id());

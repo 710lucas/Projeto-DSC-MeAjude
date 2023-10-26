@@ -36,15 +36,10 @@ public class SecurityFilter extends OncePerRequestFilter{
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         var token = this.recoverToken(request);
         if(token != null){
-            try{
-                var login = jwtTokenServiceImpl.validateToken(token);
-                UserDetails user = userRepository.findByEmail(login);
-                var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-            }catch (Exception e){
-                throw new EntityNotFoundException(e.getMessage());
-            }
-
+            var login = jwtTokenServiceImpl.validateToken(token);
+            UserDetails user = userRepository.findByEmail(login);
+            var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authentication);
         }
         filterChain.doFilter(request, response);
     }
