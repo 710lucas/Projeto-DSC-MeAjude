@@ -17,7 +17,9 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -76,16 +78,14 @@ public class CampaignController {
             @ApiResponse(responseCode = "200", content = { @Content(array = @ArraySchema(schema = @Schema(implementation = CampaignDTO.class)), mediaType = "application/json") }),
             @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
     @GetMapping("/{id}")
-    public ResponseEntity<CampaignDTO> getById(@PathVariable Long id, Authentication authentication){
-        User user = (User) authentication.getPrincipal();
+    public ResponseEntity<CampaignDTO> getById(@PathVariable Long id){
         CampaignDTO campaignDTO = campaignService.getCampaign(id);
-        if(user.getRole() != UserRole.ADMIN && !campaignDTO.creatorId().equals(user.getId())) return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         return new ResponseEntity<>(campaignDTO, HttpStatus.OK);
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Page<CampaignDTO> getById(
+    public Page<CampaignDTO> getAll(
             @PageableDefault(size = 10) Pageable page,
             @RequestParam(name = "sortField", required = false, defaultValue = "finalDate") String sortField,
             @RequestParam(name = "sortDirection", required = false, defaultValue = "desc") String sortDirection,
