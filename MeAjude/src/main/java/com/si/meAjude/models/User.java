@@ -1,44 +1,94 @@
 package com.si.meAjude.models;
 
-
+import com.si.meAjude.models.enums.UserRole;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+
+import java.util.ArrayList;
+
+import java.util.Collection;
+import java.util.List;
+
 
 @Entity
+@Table(name = "users")
+@Builder
 @Data
-@Table(name="users")
-@AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class User {
-
+@ToString
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
-    @NotBlank
-    @Column(length = 50)
-    private String name;
 
     @Email
     @Column(unique = true, length = 50)
-    @NotBlank
+    @Size(min = 5, max = 50)
     private String email;
 
-    @NotBlank
-    @Column(length = 13, unique = true)
-    private String phone;
+    @Column
+    private String password;
+
+    @NotNull
+    private UserRole role;
 
     @NotBlank
-    private String password;
+    @Column(length = 50)
+    @Size( max = 50)
+    private String name;
+
+    @NumberFormat
+    @NotBlank
+    @Column(length = 13, unique = true)
+    @Size( max = 13)
+    private String phone;
 
     private boolean deleted;
 
     @NotNull
     @Embedded
     private Document document;
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

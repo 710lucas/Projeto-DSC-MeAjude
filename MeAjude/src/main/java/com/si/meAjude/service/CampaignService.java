@@ -1,39 +1,25 @@
 package com.si.meAjude.service;
 
 import com.si.meAjude.exceptions.*;
-import com.si.meAjude.service.dtos.campanha.CampanhaDTO;
-import com.si.meAjude.service.dtos.campanha.CampanhaUpdateDTO;
-import com.si.meAjude.service.dtos.campanha.ListaCampanhasDTO;
+import com.si.meAjude.service.dtos.campaign.CampaignDTO;
+import com.si.meAjude.service.dtos.campaign.CampaignSaveDTO;
+import com.si.meAjude.service.dtos.campaign.CampaignUpdateDTO;
+import com.si.meAjude.service.searchers.campaign.CampaignSearchContent;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Service
 public interface CampaignService {
 
-    CampanhaDTO removerCampanha(long id);
+    CampaignDTO save(CampaignSaveDTO dto) throws InvalidDateException, InvalidTitleException, InvalidCreatorException, InvalidDescriptionException, InvalidGoalException;
 
-    CampanhaDTO update(CampanhaUpdateDTO campanha) throws DataInvalida, MetaInvalidaException, DescricaoInvalidaException, TituloInvalidoException;
+    CampaignDTO getCampaign(Long id);
+    Page<CampaignDTO> getAll(Pageable page, CampaignSearchContent searchcontent);
 
-    CampanhaDTO getCampanha(Long id);
+    CampaignDTO logicRemoveCampaign(long id);
 
-    CampanhaDTO mudarEstado(boolean estado, long id);
-
-    CampanhaDTO mudarTitulo(String titulo, long id) throws TituloInvalidoException;
-
-    CampanhaDTO mudarDescricao(String descricao, long id) throws DescricaoInvalidaException;
-
-    CampanhaDTO mudarMeta(BigDecimal meta, long id) throws MetaInvalidaException;
-
-    CampanhaDTO mudarDataFinal(LocalDateTime dataFinal, long id) throws DataInvalida;
-    CampanhaDTO mudarCriador(long criador_id, long id) throws CriadorInvalidoException;
-
-    CampanhaDTO adicionarCampanha(CampanhaDTO dto) throws DataInvalida, TituloInvalidoException, CriadorInvalidoException, DescricaoInvalidaException, MetaInvalidaException;
-
-    ListaCampanhasDTO listarCampanhas(Optional<Long> quantidade, Optional<String> criterioString) throws CriterioInvalidoException;
-
+    CampaignDTO update(CampaignUpdateDTO campaign, Long id) throws InvalidDateException, InvalidGoalException, InvalidDescriptionException, InvalidTitleException, InvalidCreatorException;
 
 
 }
