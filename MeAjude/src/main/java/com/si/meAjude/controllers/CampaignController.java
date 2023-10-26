@@ -67,8 +67,8 @@ public class CampaignController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CampaignDTO> update(@RequestBody CampaignUpdateDTO campaign) throws InvalidDateException, InvalidTitleException, InvalidDescriptionException, InvalidGoalException, InvalidCreatorException {
-        return ResponseEntity.ok(campaignService.update(campaign));
+    public ResponseEntity<CampaignDTO> update(@RequestBody CampaignUpdateDTO campaign, @PathVariable Long id) throws InvalidDateException, InvalidTitleException, InvalidDescriptionException, InvalidGoalException, InvalidCreatorException {
+        return ResponseEntity.ok(campaignService.update(campaign, id));
     }
 
     @DeleteMapping("/{id}")

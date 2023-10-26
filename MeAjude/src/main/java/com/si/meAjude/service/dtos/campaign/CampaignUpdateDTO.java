@@ -7,15 +7,29 @@ import java.time.LocalDate;
 
 public record CampaignUpdateDTO(
     @Nullable
-    Long id,
+    Boolean active,
+
     @Nullable
     String title,
-    @Nullable
-    BigDecimal goal,
-    @Nullable
-    Boolean active,
+
     @Nullable
     String description,
+
     @Nullable
-    LocalDate finalDate
+    BigDecimal goal,
+
+    @Nullable
+    LocalDate finalDate,
+
+    @Nullable
+    LocalDate startingDate,
+
+    @Nullable
+    Long creatorId,
+
+    @Nullable
+    BigDecimal raisedMoney,
+
+    @Nullable
+    Boolean deleted
 ){}

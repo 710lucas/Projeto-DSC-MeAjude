@@ -19,7 +19,7 @@ public interface CampaignService {
 
     CampaignDTO logicRemoveCampaign(long id);
 
-    CampaignDTO update(CampaignUpdateDTO campaign) throws InvalidDateException, InvalidGoalException, InvalidDescriptionException, InvalidTitleException, InvalidCreatorException;
+    CampaignDTO update(CampaignUpdateDTO campaign, Long id) throws InvalidDateException, InvalidGoalException, InvalidDescriptionException, InvalidTitleException, InvalidCreatorException;
 
 
 }

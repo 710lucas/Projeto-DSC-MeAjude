@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -72,16 +71,44 @@ public class CampaignServiceImpl implements CampaignService {
     }
 
     @Override
-    public CampaignDTO update(CampaignUpdateDTO updateDTO) throws InvalidDateException, InvalidGoalException, InvalidDescriptionException, InvalidTitleException, InvalidCreatorException {
+    public CampaignDTO update(CampaignUpdateDTO updateDTO, Long id) throws InvalidDateException, InvalidGoalException, InvalidDescriptionException, InvalidTitleException, InvalidCreatorException {
 
-        Campaign c = getCampaignInDateBase(updateDTO.id());
+        Campaign c = getCampaignInDateBase(id);
         if(!c.isActive()) throw new IllegalArgumentException("Camping is disabled, can´t edit it");
-        if(updateDTO.active() != null && updateDTO.active() != c.isActive()) changeState(updateDTO.active(), updateDTO.id());
-        if(updateDTO.finalDate() != null && !updateDTO.finalDate().equals(c.getFinalDate())) changeFinalDate(updateDTO.finalDate(), updateDTO.id());
-        if(updateDTO.goal() != null && !updateDTO.goal().equals(c.getGoal())) changeGoal(updateDTO.goal(), updateDTO.id());
-        if(updateDTO.description() != null && !updateDTO.description().equals(c.getDescription())) changeDescription(updateDTO.description(), updateDTO.id());
-        if(updateDTO.title() != null && !updateDTO.title().equals(c.getTitle())) changeTitle(updateDTO.title(), updateDTO.id());
+        if(updateDTO.active() != null && updateDTO.active() == false && canCampaingDesable(id)) changeState(updateDTO.active(), id);
+        if(updateDTO.active() == true) changeState(updateDTO.active(), id);
+        if(updateDTO.deleted() != null) changeDeleted(updateDTO.deleted(), id);
+        if(updateDTO.raisedMoney() != null) changeRaisedMoney(updateDTO.raisedMoney(),id);
+        if(updateDTO.finalDate() != null && updateDTO.finalDate().isAfter(LocalDate.now())) changeFinalDate(updateDTO.finalDate(), id);
+        if(updateDTO.goal() != null && updateDTO.goal().doubleValue() > 0) changeGoal(updateDTO.goal(), id);
+        if(updateDTO.description() != null && !updateDTO.description().equals(c.getDescription())) changeDescription(updateDTO.description(), id);
+        if(updateDTO.title() != null && !updateDTO.title().equals(c.getTitle())) changeTitle(updateDTO.title(), id);
+        if(updateDTO.startingDate() != null && updateDTO.startingDate().isAfter(LocalDate.now())) changeStartingDate(updateDTO.startingDate(), id);
+        if(updateDTO.creatorId() != null) changeCreator(updateDTO.creatorId(), id);
         return new CampaignDTO(c);
+    }
+
+    private Campaign changeDeleted(Boolean deleted, Long id) {
+        Campaign campaign = getCampaignInDateBase(id);
+        campaign.setDeleted(deleted);
+        return campaign;
+    }
+
+    private Campaign changeRaisedMoney(BigDecimal bigDecimal, Long id) {
+        Campaign campaign = getCampaignInDateBase(id);
+        campaign.setRaisedMoney(bigDecimal);
+        return campaign;
+    }
+
+    private boolean canCampaingDesable(Long id){
+        Campaign campaign = getCampaignInDateBase(id);
+        return campaign.getDonations().isEmpty();
+    }
+
+    private Campaign changeStartingDate(LocalDate localDate, Long id) {
+        Campaign c = getCampaignInDateBase(id);
+        c.setStartingDate(localDate);
+        return c;
     }
 
     @Override
@@ -138,6 +165,14 @@ public class CampaignServiceImpl implements CampaignService {
         if(finalDate.isBefore(c.getStartingDate()) || finalDate.isEqual(c.getStartingDate()))
             throw new InvalidDateException("Invalid date!");
         c.setFinalDate(finalDate);
+        campaignRepository.save(c);
+        return new CampaignDTO(c);
+    }
+
+    private CampaignDTO changeCreator(long creatorId, long campaignId) throws InvalidCreatorException {
+        Campaign c = getCampaignInDateBase(campaignId);
+        User criador = getUserInDateBase(creatorId);
+        c.setCreator(criador);
         campaignRepository.save(c);
         return new CampaignDTO(c);
     }
