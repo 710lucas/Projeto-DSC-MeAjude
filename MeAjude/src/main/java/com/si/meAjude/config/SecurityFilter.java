@@ -2,6 +2,7 @@ package com.si.meAjude.config;
 
 import com.si.meAjude.repositories.UserRepository;
 import com.si.meAjude.service.impl.JwtTokenServiceImpl;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -41,7 +42,7 @@ public class SecurityFilter extends OncePerRequestFilter{
                 var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }catch (Exception e){
-
+                throw new EntityNotFoundException(e.getMessage());
             }
 
         }

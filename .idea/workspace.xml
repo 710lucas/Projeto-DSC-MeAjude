@@ -7,6 +7,11 @@
     <list default="true" id="1cafb04e-43ab-4547-b80b-8f0d3053a11e" name="Changes" comment="mais um pouco de security">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/config/SecurityFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/config/SecurityFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/controllers/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/controllers/AuthenticationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/user/UserUpdateDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/dtos/user/UserUpdateDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeAjude/src/main/java/com/si/meAjude/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/h2testdb.mv.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/h2testdb.trace.db" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -66,7 +66,6 @@ public class UserServiceImpl implements UserSerivce {
         if(userUpdateDTO.phone() != null && !userUpdateDTO.phone().isBlank()) user.setPhone(userUpdateDTO.phone());
         if(userUpdateDTO.email() != null && !userUpdateDTO.email().isBlank()) user.setEmail(userUpdateDTO.email());
         if(userUpdateDTO.password() != null && !userUpdateDTO.password().isBlank()) user.setPassword(userUpdateDTO.password());
-        if(userUpdateDTO.role() != null) user.setRole(userUpdateDTO.role());
         return user;
     }
 
