@@ -77,6 +77,13 @@ As seguintes tecnologias foram utilizadas durante o desenvolvimento do projeto:
 
 ---
 
+## **Link para video explicando sobre o sistema no youtube**
+
+- [Link do vídeo](https://youtu.be/z1TaX568dXA)
+
+---
+
+
 ## **Front Experimental**
 
 - Pensamos também em procurar integrar o sistema com um front end, buscando entender como aplicar o desenvolvimento da API em uma situação real
