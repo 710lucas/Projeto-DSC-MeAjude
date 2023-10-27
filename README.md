@@ -71,7 +71,7 @@ As seguintes tecnologias foram utilizadas durante o desenvolvimento do projeto:
 
 ---
 
-## **Front Experimental
+## **Front Experimental**
 
 - Pensamos também em procurar integrar o sistema com um front end, buscando entender como aplicar o desenvolvimento da API em uma situação real
   
