@@ -71,15 +71,23 @@ As seguintes tecnologias foram utilizadas durante o desenvolvimento do projeto:
 
 ---
 
+## **Link para o Railway**
+
+- Foi feito deploy da API no railway, que pode ser accessado [neste link](https://projeto-dsc-meajude-production.up.railway.app/)
+
+---
+
 ## **Front Experimental**
 
 - Pensamos também em procurar integrar o sistema com um front end, buscando entender como aplicar o desenvolvimento da API em uma situação real
   
 - O front é apenas algo experimental no momento e será melhorado ao longo do tempo, por enquanto ele apenas realiza as tarefas básicas
 
-- Para que ele possa se comunicar com a api, ela precisa estar rodando no endereço localhost:8081
+- Para que ele possa se comunicar com a api, ele usa o link do deploy feito no railway
 
 - [Clique aqui para acessar o front](https://710lucas.github.io/MeAjude-front/login)
+
+- [Clique aqui para ver o repositório no qual o front foi desenvolvido](https://github.com/710lucas/MeAjude-front)
 
 ---
 
